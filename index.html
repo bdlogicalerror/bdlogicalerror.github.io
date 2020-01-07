@@ -9,23 +9,29 @@
 </head>
 <body>
 <h1 id="msg">Hello</h1>
+<button onclick="search()">Search</button>
 <script>
     let msg = document.getElementById('msg');
-    navigator.bluetooth.requestDevice({
-        filters: [{
-            namePrefix: 'i'
-        }],
-        optionalServices: ['battery_service']
-    })
-        .then(device => {
-            msg.innerText = "Ok";
-            console.log('ok');
-            Q = device
+
+    function search() {
+        navigator.bluetooth.requestDevice({
+            filters: [{
+                namePrefix: 'i'
+            }],
+            optionalServices: ['battery_service']
         })
-        .catch(error => {
-            console.log(error);
-            msg.innerText = error;
-        });
+            .then(device => {
+                msg.innerText = "Ok";
+                console.log('ok');
+                Q = device
+            })
+            .catch(error => {
+                console.log(error);
+                msg.innerText = error;
+            });
+    }
+
+
 </script>
 </body>
 </html>
