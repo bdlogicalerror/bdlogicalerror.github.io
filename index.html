@@ -8,16 +8,24 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello</h1>
+<h1 id="msg">Hello</h1>
 <script>
+    let msg = document.getElementById('msg');
     navigator.bluetooth.requestDevice({
         filters: [{
             namePrefix: 'i'
         }],
         optionalServices: ['battery_service']
     })
-        .then(device => {console.log('ok'); Q = device })
-        .catch(error => { console.log(error); });
+        .then(device => {
+            msg.innerText = "Ok";
+            console.log('ok');
+            Q = device
+        })
+        .catch(error => {
+            console.log(error);
+            msg.innerText = error;
+        });
 </script>
 </body>
 </html>
