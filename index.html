@@ -32,7 +32,7 @@
                 msg.innerText = 'Battery percentage is ' + value.getUint8(0);
             })
             .catch(error => {
-               msg.innerText=msg;
+               msg.innerText=error;
             });
     }
 
