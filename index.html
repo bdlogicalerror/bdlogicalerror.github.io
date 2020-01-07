@@ -15,9 +15,7 @@
 
     function search() {
         navigator.bluetooth.requestDevice({
-            filters: [{
-                namePrefix: 'OPPO'
-            }],
+            acceptAllDevices: true,
             optionalServices: ['battery_service']
         })
             .then(device => {
