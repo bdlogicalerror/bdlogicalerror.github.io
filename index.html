@@ -14,27 +14,18 @@
     let msg = document.getElementById('msg');
 
     function search() {
-        navigator.bluetooth.requestDevice({filters: [{services: ['battery_service']}]})
-            .then(device => device.gatt.connect())
+        navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
+            .then(device => {
+                // Human-readable name of the device.
+                console.log(device.name);
+
+                // Attempts to connect to remote GATT Server.
+                return device.gatt.connect();
+            })
             .then(server => {
-                // Getting Battery Service...
-                return server.getPrimaryService('battery_service');
+                console.log(server)
             })
-            .then(service => {
-                // Getting Battery Level Characteristic...
-                return service.getCharacteristic('battery_level');
-            })
-            .then(characteristic => {
-                // Reading Battery Level...
-                return characteristic.readValue();
-            })
-            .then(value => {
-                msg.innerText = 'Battery percentage is ' + value.getUint8(0);
-            })
-            .catch(error => {
-               msg.innerText=error;
-               console.log(error.messsage)
-            });
+            .catch(error => { console.log(error); });
     }
 
 
