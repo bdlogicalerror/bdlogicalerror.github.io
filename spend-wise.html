@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Join Wallet - SpendWise</title>
+    <meta name="description" content="Collaborate on finances in real-time. Click to join my shared wallet.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Join my Shared Wallet on SpendWise">
+    <meta property="og:description" content="Track expenses together seamlessly.">
+    <meta property="og:image" content="https://play-lh.googleusercontent.com/EYBiIvpR1e90JlvqMWwOM5nE4-gAQgOY4g_KqgbWAAZ-yMNp__ex52VxFChqDyp9qawtHWlagpY-j9nxWSSt=w240-h480-rw">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        body { font-family: -apple-system, system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f8f9fa; text-align: center; }
+        .card { background: white; padding: 40px; border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); max-width: 360px; width: 90%; }
+        .profile-img { width: 110px; height: 110px; border-radius: 50%; margin-bottom: 20px; border: 4px solid #007AFF; object-fit: cover; }
+        h1 { font-size: 24px; color: #1a1a1a; margin: 0 0 10px 0; }
+        p { color: #666; margin-bottom: 30px; line-height: 1.6; }
+        .btn { display: inline-block; background: #007AFF; color: white !important; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; transition: transform 0.2s; }
+        .btn:active { transform: scale(0.96); }
+        .footer { margin-top: 30px; font-size: 14px; color: #999; }
+        a { color: #007AFF; text-decoration: none; font-weight: 500; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="https://googleusercontent.com/profile/picture/w240-h480-rw" class="profile-img" alt="User">
+        <h1>Wallet Invitation</h1>
+        <p>You've been invited to join a shared wallet on <strong>SpendWise</strong>.</p>
+        <a id="openBtn" href="#" class="btn">Open SpendWise</a>
+        <div class="footer">
+            Don't have the app? <a href="https://play.google.com/store/apps/details?id=com.bdlogicalerror.bd.spendwise.spend_wise">Get it on Play Store</a>
+        </div>
+    </div>
+
+    <script>
+        const STORE_URL = "https://play.google.com/store/apps/details?id=com.bdlogicalerror.bd.spendwise.spend_wise";
+        const urlParams = new URLSearchParams(window.location.search);
+        const wid = urlParams.get('wid');
+        const p = urlParams.get('p');
+
+        if (wid && p) {
+            const deepLink = `com.bdlogicalerror.spendwise://share?wid=${wid}&p=${p}`;
+            document.getElementById('openBtn').href = deepLink;
+            
+            // Auto-redirect
+            window.location.href = deepLink;
+            // Fallback
+            setTimeout(() => { window.location.href = STORE_URL; }, 3000);
+        } else {
+            window.location.href = STORE_URL;
+        }
+    </script>
+</body>
+</html>
