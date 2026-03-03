@@ -9,25 +9,16 @@
         /* ============================================
            AUTHENTIC WINDOWS XP LUNA THEME
            ============================================ */
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-user-select: none; }
         :root {
-            /* XP Luna Blue Theme */
             --xp-title-blue: #245DDA;
             --xp-title-blue-dark: #1A4AC0;
             --xp-title-blue-darker: #103090;
             --xp-taskbar-blue: #245DDA;
             --xp-taskbar-gradient: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%);
-            --xp-start-green: #3C8E3C;
-            --xp-start-green-light: #4BA64B;
-            --xp-start-green-dark: #2D6B2D;
+            --xp-start-green: #388E3C;
+            --xp-start-green-light: #4CAF50;
+            --xp-start-green-dark: #2E7D32;
             --xp-selection: #316AC5;
             --xp-window-bg: #FFFFFF;
             --xp-dialog-bg: #ECE9D8;
@@ -36,1154 +27,278 @@
             --xp-gray: #808080;
             --xp-gray-light: #E8E8E8;
             --xp-gray-dark: #A0A0A0;
+            --xp-green-felt: #228B22;
         }
-
-        @font-face {
-            font-family: 'XPFont';
-            src: local('Tahoma'), local('Trebuchet MS'), local('Verdana'), local('Segoe UI');
-        }
-
-        body {
-            font-family: 'XPFont', Tahoma, sans-serif;
-            font-size: 11px;
-            overflow: hidden;
-            background: #000;
-            height: 100vh;
-            width: 100vw;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; font-size: 11px; overflow: hidden; background: #000; height: 100vh; width: 100vw; }
 
         /* ============================================
            BOOT SEQUENCE
            ============================================ */
-        
-        #boot-sequence {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 999999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        #boot-sequence.hidden {
-            display: none;
-        }
-
-        /* BIOS Text */
-        #bios-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            color: #245DDA;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            padding: 30px;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        #bios-screen.hidden {
-            display: none;
-        }
-
-        .bios-line {
-            opacity: 0;
-            animation: biosFadeIn 0.1s forwards;
-        }
-
-        @keyframes biosFadeIn {
-            to { opacity: 1; }
-        }
-
-        /* XP Loading Screen */
-        #xp-loading {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #003399;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #xp-loading.visible {
-            display: flex;
-        }
-
-        #xp-logo {
-            width: 200px;
-            height: 120px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        #xp-logo-text {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 28px;
-            font-weight: bold;
-            color: #fff;
-            font-style: italic;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        #xp-loading-bar-container {
-            width: 400px;
-            height: 8px;
-            background: #000;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        #xp-loading-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #316AC5, #5A9CFF, #316AC5);
-            background-size: 200% 100%;
-            animation: loadingShimmer 1s linear infinite;
-        }
-
-        @keyframes loadingShimmer {
-            0% { background-position: 100% 0; }
-            100% { background-position: -100% 0; }
-        }
-
-        #loading-text {
-            color: #fff;
-            font-size: 12px;
-            margin-top: 15px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
+        #boot-sequence { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        #boot-sequence.hidden { display: none; }
+        #bios-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: #245DDA; font-family: 'Courier New', monospace; font-size: 14px; padding: 30px; line-height: 1.6; }
+        #bios-screen.hidden { display: none; }
+        .bios-line { opacity: 0; animation: biosFadeIn 0.05s forwards; }
+        @keyframes biosFadeIn { to { opacity: 1; } }
+        #xp-loading { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #003399 0%, #000066 100%); display: none; flex-direction: column; justify-content: center; align-items: center; }
+        #xp-loading.visible { display: flex; }
+        #xp-logo { width: 300px; height: 180px; position: relative; margin-bottom: 40px; }
+        .xp-logo-img { width: 100%; height: 100%; }
+        #xp-loading-bar-container { width: 400px; height: 10px; background: #000; border-radius: 5px; overflow: hidden; border: 1px solid #666; }
+        #xp-loading-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #316AC5, #5A9CFF, #316AC5); background-size: 200% 100%; animation: loadingShimmer 1s linear infinite; }
+        @keyframes loadingShimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+        #loading-text { color: #fff; font-size: 12px; margin-top: 15px; font-family: 'Tahoma', sans-serif; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 
         /* ============================================
-           MAIN DESKTOP CONTAINER
+           DESKTOP CONTAINER
            ============================================ */
-        
-        #desktop-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #003399;
-            overflow: hidden;
-        }
+        #desktop-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        #three-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        #desktop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background: url('user_input_files/bliss.jpg') no-repeat center center; background-size: cover; }
 
         /* ============================================
-           THREE.JS CRT EFFECT LAYER
+           DESKTOP ICONS
            ============================================ */
-        
-        #three-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        #three-canvas {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* CRT Overlay Effects */
-        .crt-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        .scanlines {
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.1),
-                rgba(0, 0, 0, 0.1) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-        }
-
-        .vignette {
-            background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
-        }
-
-        /* ============================================
-           DESKTOP
-           ============================================ */
-        
-        #desktop {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 30px);
-            background: url('https://upload.wikimedia.org/wikipedia/en/7/7d/Bliss.png') no-repeat center center;
-            background-size: cover;
-            z-index: 10;
-        }
-
-        #desktop::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,50,150,0.1) 0%, transparent 50%, rgba(0,50,150,0.15) 100%);
-        }
-
-        /* Desktop Icons Grid */
-        .desktop-icon {
-            position: absolute;
-            width: 76px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            padding: 4px;
-            border: 1px solid transparent;
-            border-radius: 2px;
-        }
-
-        .desktop-icon:hover {
-            background: rgba(49, 106, 197, 0.25);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .desktop-icon.selected {
-            background: rgba(49, 106, 197, 0.5);
-            border: 1px dotted #fff;
-        }
-
-        .desktop-icon .icon-wrapper {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 4px;
-        }
-
-        .desktop-icon .icon-img {
-            width: 48px;
-            height: 48px;
-            image-rendering: pixelated;
-            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
-        }
-
-        .desktop-icon .icon-label {
-            color: #fff;
-            text-align: center;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.8), -1px -1px 1px rgba(0,0,0,0.8), 1px -1px 1px rgba(0,0,0,0.8), -1px 1px 1px rgba(0,0,0,0.8);
-            font-size: 11px;
-            line-height: 1.2;
-            word-wrap: break-word;
-            max-width: 72px;
-            padding: 1px 2px;
-        }
-
-        .desktop-icon.selected .icon-label {
-            background: var(--xp-selection);
-            border-radius: 2px;
-        }
+        .desktop-icons { position: absolute; top: 20px; left: 20px; display: flex; flex-direction: column; gap: 15px; flex-wrap: wrap; height: calc(100% - 60px); align-content: flex-start; }
+        .desktop-icon { width: 75px; display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 5px; border: 1px solid transparent; border-radius: 3px; position: relative; }
+        .desktop-icon:hover { background: rgba(49, 106, 197, 0.3); border: 1px dotted #245DDA; }
+        .desktop-icon.selected { background: rgba(49, 106, 197, 0.5); border: 1px dotted #fff; }
+        .desktop-icon-img { width: 48px; height: 48px; image-rendering: pixelated; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); transition: transform 0.1s; }
+        .desktop-icon:hover .desktop-icon-img { transform: scale(1.05); }
+        .desktop-icon-label { color: #fff; font-size: 11px; text-align: center; margin-top: 5px; text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000; max-width: 70px; word-wrap: break-word; line-height: 1.2; }
+        .desktop-icon .badge { position: absolute; top: -5px; right: 5px; background: #e80000; color: #fff; font-size: 9px; padding: 1px 4px; border-radius: 3px; display: none; }
 
         /* ============================================
            TASKBAR
            ============================================ */
-        
-        #taskbar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background: var(--xp-taskbar-gradient);
-            border-top: 1px solid #5A8FD8;
-            display: flex;
-            align-items: center;
-            z-index: 10000;
-            box-shadow: 0 -1px 3px rgba(0,0,0,0.3);
-        }
-
-        /* Start Button */
-        #start-button {
-            width: 100px;
-            height: 30px;
-            background: linear-gradient(180deg, #4BA64B 0%, #3C8E3C 50%, #2D6B2D 100%);
-            border: none;
-            border-radius: 0 12px 12px 0;
-            color: #fff;
-            font-weight: bold;
-            font-size: 14px;
-            font-style: italic;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            padding-left: 8px;
-            margin-right: 5px;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        #start-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
-            pointer-events: none;
-        }
-
-        #start-button:hover {
-            background: linear-gradient(180deg, #5CB65C 0%, #4BA64B 50%, #3C8E3C 100%);
-        }
-
-        #start-button:active, #start-button.active {
-            background: linear-gradient(180deg, #3C8E3C 0%, #2D6B2D 100%);
-        }
-
-        #start-button .win-logo {
-            width: 22px;
-            height: 22px;
-            margin-right: 6px;
-        }
-
-        /* Taskbar Windows */
-        #taskbar-windows {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            height: 100%;
-            padding: 3px 0;
-            overflow: hidden;
-        }
-
-        .taskbar-item {
-            height: 24px;
-            min-width: 140px;
-            max-width: 180px;
-            flex: 1;
-            background: linear-gradient(180deg, #3A7DD8 0%, #2563C7 100%);
-            border: 1px solid #1E4B96;
-            border-radius: 3px;
-            display: flex;
-            align-items: center;
-            padding: 0 6px;
-            cursor: pointer;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
-            transition: all 0.1s;
-        }
-
-        .taskbar-item:hover {
-            background: linear-gradient(180deg, #4A8DE8 0%, #3573D7 100%);
-        }
-
-        .taskbar-item.active {
-            background: linear-gradient(180deg, #1A4AC0 0%, #103090 100%);
-            border-color: #0D1F5C;
-            box-shadow: inset 0 2px 3px rgba(0,0,0,0.3);
-        }
-
-        .taskbar-item.minimized {
-            opacity: 0.7;
-        }
-
-        .taskbar-item img {
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
-            flex-shrink: 0;
-        }
-
-        .taskbar-item .title {
-            color: #fff;
-            font-size: 11px;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        /* System Tray */
-        #system-tray {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0 10px;
-            height: 100%;
-            background: linear-gradient(180deg, #1A4AC0 0%, #103090 100%);
-            border-left: 1px solid #0D1F5C;
-            box-shadow: inset 1px 0 0 rgba(255,255,255,0.1);
-        }
-
-        .tray-icon {
-            width: 16px;
-            height: 16px;
-            opacity: 0.9;
-        }
-
-        #clock {
-            color: #fff;
-            font-size: 11px;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-            min-width: 60px;
-            text-align: center;
-        }
+        #taskbar { position: absolute; bottom: 0; left: 0; width: 100%; height: 35px; background: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%); z-index: 10000; display: flex; align-items: center; padding: 0 5px; border-top: 1px solid #5A9CFF; }
+        #start-button { display: flex; align-items: center; gap: 5px; padding: 3px 8px; background: linear-gradient(180deg, #4CAF50 0%, #388E3C 50%, #2E7D32 100%); border: 2px outset #8BC34A; cursor: pointer; margin-right: 10px; }
+        #start-button:hover { filter: brightness(1.1); }
+        #start-button:active { border-style: inset; }
+        #start-button img { width: 18px; height: 18px; }
+        #start-button span { color: #fff; font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px #000; }
+        .quick-launch { display: flex; gap: 3px; margin-right: 10px; padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.3); }
+        .quick-launch-icon { width: 22px; height: 22px; background: rgba(255,255,255,0.1); border: 1px outset rgba(255,255,255,0.2); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .quick-launch-icon:hover { background: rgba(255,255,255,0.2); }
+        .quick-launch-icon img { width: 16px; height: 16px; }
+        #taskbar-windows { flex: 1; display: flex; gap: 3px; overflow: hidden; }
+        .taskbar-window { display: flex; align-items: center; gap: 5px; padding: 2px 8px; background: linear-gradient(180deg, #7695DE 0%, #5A7AD5 50%, #4A6AC5 100%); border: 1px outset #9BB6E8; cursor: pointer; max-width: 180px; min-width: 80px; }
+        .taskbar-window:hover { filter: brightness(1.05); }
+        .taskbar-window.active { background: linear-gradient(180deg, #245DDA 0%, #1A4AC0 100%); border: 1px inset #5A9CFF; }
+        .taskbar-window-icon { width: 16px; height: 16px; }
+        .taskbar-window-title { color: #000; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .taskbar-window.active .taskbar-window-title { color: #fff; text-shadow: 1px 1px 1px #000; }
+        #system-tray { display: flex; align-items: center; gap: 10px; padding: 0 10px; background: linear-gradient(180deg, #1A4AC0 0%, #103090 100%); border-left: 1px solid #5A9CFF; height: 100%; }
+        .tray-icon { width: 16px; height: 16px; cursor: pointer; opacity: 0.9; }
+        #clock { color: #fff; font-size: 11px; text-shadow: 1px 1px 1px #000; padding: 3px 8px; background: rgba(0,0,0,0.2); border-radius: 3px; }
 
         /* ============================================
            START MENU
            ============================================ */
-        
-        #start-menu {
-            position: absolute;
-            bottom: 30px;
-            left: 0;
-            width: 380px;
-            background: linear-gradient(180deg, #3A8DD8 0%, #2563C7 50%, #1A4AC0 100%);
-            border: 2px solid #1E4B96;
-            border-radius: 6px 6px 0 0;
-            display: none;
-            z-index: 10001;
-            box-shadow: 3px -3px 15px rgba(0,0,0,0.4);
-            overflow: hidden;
-        }
-
-        #start-menu.visible {
-            display: block;
-            animation: menuSlideIn 0.15s ease-out;
-        }
-
-        @keyframes menuSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        #start-menu-header {
-            display: flex;
-            align-items: center;
-            padding: 8px 15px;
-            background: linear-gradient(180deg, #1A4AC0 0%, #103090 100%);
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-            font-style: italic;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        #user-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #5A9CFF 0%, #245DDA 50%, #1A4AC0 100%);
-            border: 2px solid #fff;
-            border-radius: 4px;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        #start-menu-body {
-            display: flex;
-            min-height: 280px;
-        }
-
-        #start-menu-left {
-            width: 190px;
-            padding: 8px 0;
-            background: #fff;
-        }
-
-        #start-menu-right {
-            width: 190px;
-            padding: 8px 0;
-            background: linear-gradient(180deg, #4A8DE8 0%, #3573D7 100%);
-            border-left: 1px solid #1E4B96;
-        }
-
-        .start-menu-item {
-            display: flex;
-            align-items: center;
-            padding: 6px 15px;
-            color: #000;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        #start-menu-right .start-menu-item {
-            color: #fff;
-        }
-
-        .start-menu-item:hover {
-            background: var(--xp-selection);
-            color: #fff;
-        }
-
-        #start-menu-right .start-menu-item:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .start-menu-item img {
-            width: 32px;
-            height: 32px;
-            margin-right: 10px;
-        }
-
-        #start-menu-right .start-menu-item img {
-            filter: brightness(0) invert(1);
-        }
-
-        .start-menu-item span {
-            text-shadow: none;
-        }
-
-        #start-menu-right .start-menu-item span {
-            text-shadow: 1px 1px(0,0 1px rgba,0,0.3);
-        }
-
-        .start-menu-separator {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.2), transparent);
-            margin: 4px 10px;
-        }
-
-        #start-menu-footer {
-            display: flex;
-            justify-content: flex-end;
-            padding: 8px;
-            background: linear-gradient(180deg, #D0D0D0 0%, #C0C0C0 100%);
-            border-top: 1px solid #A0A0A0;
-        }
-
-        .start-footer-btn {
-            padding: 4px 12px;
-            background: linear-gradient(180deg, #E8E8E8 0%, #D0D0D0 100%);
-            border: 1px solid #888;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 11px;
-            box-shadow: 0 1px 1px rgba(0,0,0,0.2);
-        }
-
-        .start-footer-btn:hover {
-            background: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);
-        }
+        #start-menu { position: absolute; bottom: 35px; left: 0; width: 400px; background: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%); z-index: 10001; display: none; border: 2px outset #5A9CFF; box-shadow: 2px -2px 10px rgba(0,0,0,0.3); }
+        #start-menu.visible { display: block; }
+        .start-menu-header { display: flex; align-items: center; gap: 10px; padding: 10px 15px; background: linear-gradient(90deg, #1A4AC0, #245DDA); border-bottom: 1px solid #103090; }
+        .user-avatar { width: 45px; height: 45px; background: linear-gradient(135deg, #4CAF50, #2E7D32); border: 2px outset #8BC34A; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff; font-weight: bold; }
+        .user-name { color: #fff; font-size: 14px; font-weight: bold; text-shadow: 1px 1px 1px #000; }
+        .start-menu-body { display: flex; }
+        .start-menu-left { width: 190px; padding: 10px 5px; background: linear-gradient(180deg, #245DDA, #1A4AC0); }
+        .start-menu-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; cursor: pointer; border: 1px solid transparent; margin-bottom: 2px; }
+        .start-menu-item:hover { background: rgba(255,255,255,0.15); border: 1px dotted #9BB6E8; }
+        .start-menu-item-icon { width: 32px; height: 32px; }
+        .start-menu-item-text { color: #fff; font-size: 11px; }
+        .start-menu-right { width: 210px; padding: 10px; background: #ECE9D8; border-left: 1px solid #A0A0A0; }
+        .start-menu-section { margin-bottom: 15px; }
+        .start-menu-section-title { color: #808080; font-size: 10px; text-transform: uppercase; margin-bottom: 5px; padding-left: 5px; }
+        .start-menu-link { display: flex; align-items: center; gap: 8px; padding: 5px 8px; cursor: pointer; color: #000; font-size: 11px; }
+        .start-menu-link:hover { background: var(--xp-selection); color: #fff; }
+        .start-menu-link-icon { width: 20px; height: 20px; }
+        .start-menu-divider { height: 1px; background: #A0A0A0; margin: 5px 0; }
+        .shut-down-btn { display: flex; align-items: center; gap: 8px; padding: 5px 8px; cursor: pointer; color: #000; font-size: 11px; background: linear-gradient(180deg, #ECE9D8, #D5D0C0); border: 1px outset #fff; }
+        .shut-down-btn:hover { background: linear-gradient(180deg, #D5D0C0, #C5C0B0); }
+        .shut-down-btn img { width: 20px; height: 20px; }
 
         /* ============================================
            WINDOWS
            ============================================ */
-        
-        .window {
-            position: absolute;
-            background: var(--xp-window-bg);
-            border: 3px solid var(--xp-title-blue);
-            border-radius: 8px 8px 0 0;
-            box-shadow: 3px 3px 15px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.5);
-            min-width: 320px;
-            min-height: 220px;
-            display: none;
-            overflow: hidden;
-        }
-
-        .window.visible {
-            display: block;
-            animation: windowOpen 0.2s ease-out;
-        }
-
-        @keyframes windowOpen {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .window.maximized {
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: calc(100% - 30px) !important;
-            border-radius: 0;
-            border-width: 0;
-        }
-
-        .window.maximized .window-titlebar {
-            border-radius: 0;
-        }
-
-        /* Title Bar */
-        .window-titlebar {
-            height: 28px;
-            background: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%);
-            padding: 0 5px;
-            display: flex;
-            align-items: center;
-            border-radius: 5px 5px 0 0;
-            cursor: move;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .window-titlebar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 100%);
-            pointer-events: none;
-        }
-
-        .window.inactive .window-titlebar {
-            background: linear-gradient(180deg, #A0A0A0 0%, #808080 50%, #606060 100%);
-        }
-
-        .window-titlebar .window-icon {
-            width: 18px;
-            height: 18px;
-            margin-right: 5px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .window-titlebar .window-title {
-            flex: 1;
-            color: #fff;
-            font-size: 12px;
-            font-weight: bold;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Window Controls */
-        .window-controls {
-            display: flex;
-            gap: 2px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .window-btn {
-            width: 21px;
-            height: 21px;
-            background: linear-gradient(180deg, #E8E8E8 0%, #D0D0D0 100%);
-            border: 1px solid #888;
-            border-radius: 3px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: #333;
-            box-shadow: 0 1px 1px rgba(0,0,0,0.2);
-        }
-
-        .window-btn:hover {
-            background: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);
-        }
-
-        .window-btn.close {
-            background: linear-gradient(180deg, #E85A5A 0%, #D03030 100%);
-            color: #fff;
-            border-color: #B02020;
-        }
-
-        .window-btn.close:hover {
-            background: linear-gradient(180deg, #FF6B6B 0%, #E84040 100%);
-        }
-
-        /* Menu Bar */
-        .window-menubar {
-            background: var(--xp-dialog-bg);
-            padding: 2px 0;
-            border-bottom: 1px solid #D4D0C8;
-            display: flex;
-        }
-
-        .menubar-item {
-            padding: 2px 10px;
-            color: #333;
-            cursor: pointer;
-            font-size: 11px;
-        }
-
-        .menubar-item:hover {
-            background: var(--xp-selection);
-            color: #fff;
-        }
-
-        /* Window Content */
-        .window-content {
-            padding: 0;
-            overflow: auto;
-            background: #fff;
-            height: calc(100% - 28px - 24px);
-        }
-
-        .window-content.padded {
-            padding: 15px;
-        }
+        .window { position: absolute; background: #ECE9D8; border: 3px outset #fff; box-shadow: 3px 3px 15px rgba(0,0,0,0.4); display: none; flex-direction: column; min-width: 200px; min-height: 150px; }
+        .window.visible { display: flex; }
+        .window-header { display: flex; align-items: center; justify-content: space-between; padding: 3px 5px; background: linear-gradient(180deg, #245DDA, #1A4AC0); cursor: move; }
+        .window-header.inactive { background: linear-gradient(180deg, #7695DE, #5A7AD5); }
+        .window-title { display: flex; align-items: center; gap: 5px; color: #fff; font-size: 12px; font-weight: bold; text-shadow: 1px 1px 1px #000; }
+        .window-title-icon { width: 16px; height: 16px; }
+        .window-controls { display: flex; gap: 2px; }
+        .window-btn { width: 21px; height: 21px; background: linear-gradient(180deg, #ECE9D8, #C5C0B0); border: 1px outset #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; font-weight: bold; color: #000; }
+        .window-btn:hover { filter: brightness(1.1); }
+        .window-btn:active { border-style: inset; }
+        .window-btn-close { background: linear-gradient(180deg, #FF6B6B, #E53935); color: #fff; }
+        .window-btn-close:hover { background: linear-gradient(180deg, #FF8A80, #EF5350); }
+        .window-menu { display: flex; background: #ECE9D8; border-bottom: 1px solid #A0A0A0; padding: 2px 5px; }
+        .window-menu-item { padding: 2px 8px; cursor: pointer; color: #000; font-size: 11px; }
+        .window-menu-item:hover { background: var(--xp-selection); color: #fff; }
+        .window-body { flex: 1; overflow: auto; background: #fff; position: relative; }
+        .window-statusbar { display: flex; align-items: center; padding: 2px 5px; background: #ECE9D8; border-top: 1px inset #A0A0A0; font-size: 10px; color: #808080; }
 
         /* ============================================
-           CONTENT STYLES
+           SHUTDOWN EFFECT
            ============================================ */
-        
-        /* Project Grid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 10px;
-            padding: 15px;
-        }
-
-        .project-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            border-radius: 3px;
-        }
-
-        .project-item:hover {
-            background: rgba(49, 106, 197, 0.15);
-            border: 1px dotted #316AC5;
-        }
-
-        .project-item .icon {
-            width: 56px;
-            height: 56px;
-            margin-bottom: 6px;
-        }
-
-        .project-item .name {
-            text-align: center;
-            font-size: 11px;
-            color: #333;
-            line-height: 1.3;
-        }
-
-        /* Skills List */
-        .skills-container {
-            padding: 0;
-        }
-
-        .skill-section {
-            border-bottom: 1px solid #D4D0C8;
-            padding: 12px 15px;
-        }
-
-        .skill-section:last-child {
-            border-bottom: none;
-        }
-
-        .skill-section h3 {
-            font-size: 13px;
-            color: #245DDA;
-            margin-bottom: 10px;
-            padding-bottom: 4px;
-            border-bottom: 1px solid #D4D0C8;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .skill-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-tag {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: #F5F5F5;
-            border: 1px solid #D4D0C8;
-            border-radius: 3px;
-            padding: 4px 10px;
-            font-size: 11px;
-        }
-
-        .skill-tag img {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* About Page */
-        .about-page {
-            padding: 20px;
-        }
-
-        .about-page h2 {
-            color: #245DDA;
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-
-        .about-page .subtitle {
-            color: #3C8E3C;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #245DDA;
-        }
-
-        .about-page p {
-            margin-bottom: 12px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .about-page .highlight {
-            color: #245DDA;
-            font-weight: bold;
-        }
-
-        .about-page ul {
-            list-style: none;
-            margin: 15px 0;
-        }
-
-        .about-page li {
-            padding: 6px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .about-page li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: #245DDA;
-            font-size: 8px;
-            top: 8px;
-        }
-
-        /* Notepad Style */
-        .notepad-content {
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            line-height: 1.5;
-            padding: 15px;
-            white-space: pre-wrap;
-            background: #fff;
-            color: #000;
-            min-height: 100%;
-        }
-
-        .notepad-content a {
-            color: #0000FF;
-            text-decoration: underline;
-        }
-
-        /* Command Prompt */
-        .cmd-content {
-            background: #000;
-            color: #CCC;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            padding: 10px;
-            min-height: 100%;
-        }
-
-        .cmd-line {
-            margin-bottom: 3px;
-        }
-
-        .cmd-prompt {
-            color: #FFF;
-            margin-right: 8px;
-        }
-
-        .cmd-input {
-            background: transparent;
-            border: none;
-            color: #FFF;
-            font-family: inherit;
-            font-size: inherit;
-            outline: none;
-            width: 300px;
-        }
-
-        /* Run Dialog */
-        .run-dialog {
-            width: 420px;
-            height: 140px;
-        }
-
-        .run-dialog .window-content {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 15px;
-            background: var(--xp-dialog-bg);
-        }
-
-        .run-dialog label {
-            font-size: 11px;
-            color: #333;
-        }
-
-        .run-dialog input[type="text"] {
-            width: 100%;
-            padding: 4px 8px;
-            border: 2px solid #7F9DB9;
-            border-radius: 2px;
-            font-family: Tahoma, sans-serif;
-            font-size: 12px;
-        }
-
-        .run-dialog input[type="text"]:focus {
-            outline: none;
-            border-color: #316AC5;
-        }
-
-        .run-dialog .buttons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-        }
-
-        .run-dialog button {
-            padding: 4px 20px;
-            background: linear-gradient(180deg, #E8E8E8 0%, #D0D0D0 100%);
-            border: 1px solid #888;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 11px;
-        }
-
-        .run-dialog button:hover {
-            background: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);
-        }
-
-        .run-dialog button.primary {
-            background: linear-gradient(180deg, #3A8DD8 0%, #2563C7 100%);
-            color: #fff;
-            border-color: #1A4AC0;
-        }
-
-        .run-dialog button.primary:hover {
-            background: linear-gradient(180deg, #4A9DE8 0%, #3573D7 100%);
-        }
+        #shutdown-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999998; display: none; opacity: 0; transition: opacity 0.5s; }
+        #shutdown-overlay.active { display: block; opacity: 1; }
+        .crt-shutdown { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.8) 100%); animation: crtFade 2s forwards; }
+        @keyframes crtFade { 0% { opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
 
         /* ============================================
-           SHUTDOWN SCREEN
+           ABOUT ME WINDOW CONTENT
            ============================================ */
-        
-        #shutdown-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            z-index: 999998;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+        .about-container { display: flex; height: 100%; }
+        .about-sidebar { width: 180px; background: linear-gradient(180deg, #316AC5, #245DDA); padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .about-avatar-large { width: 100px; height: 100px; background: linear-gradient(135deg, #4CAF50, #2E7D32); border: 3px outset #8BC34A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #fff; font-weight: bold; margin-bottom: 15px; }
+        .about-name { color: #fff; font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 5px; text-shadow: 1px 1px 1px #000; }
+        .about-title { color: #9BB6E8; font-size: 10px; text-align: center; }
+        .about-main { flex: 1; padding: 20px; overflow-y: auto; }
+        .about-section { margin-bottom: 20px; }
+        .about-section-title { font-size: 14px; font-weight: bold; color: #245DDA; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 2px solid #245DDA; }
+        .about-skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
+        .about-skill-tag { background: linear-gradient(180deg, #E8F5E9, #C8E6C9); border: 1px solid #4CAF50; padding: 5px 10px; border-radius: 3px; font-size: 10px; color: #2E7D32; text-align: center; }
+        .about-status { display: flex; align-items: center; gap: 8px; padding: 10px; background: #E8F5E9; border: 1px solid #4CAF50; border-radius: 5px; }
+        .status-dot { width: 10px; height: 10px; background: #4CAF50; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .about-timeline { position: relative; padding-left: 20px; }
+        .about-timeline::before { content: ''; position: absolute; left: 5px; top: 0; bottom: 0; width: 2px; background: #245DDA; }
+        .timeline-item { position: relative; margin-bottom: 15px; padding-left: 15px; }
+        .timeline-item::before { content: ''; position: absolute; left: -17px; top: 3px; width: 10px; height: 10px; background: #4CAF50; border: 2px solid #245DDA; border-radius: 50%; }
+        .timeline-year { font-weight: bold; color: #245DDA; font-size: 11px; }
+        .timeline-desc { color: #666; font-size: 10px; margin-top: 3px; }
 
-        #shutdown-screen.visible {
-            display: flex;
-            animation: shutdownSequence 3.5s forwards;
-        }
+        /* ============================================
+           RECYCLE BIN / EXPLORER
+           ============================================ */
+        .explorer-container { display: flex; height: 100%; }
+        .explorer-sidebar { width: 180px; background: linear-gradient(180deg, #7695DE, #5A7AD5); padding: 10px; }
+        .explorer-folder-tree { color: #fff; font-size: 11px; }
+        .explorer-folder { padding: 5px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .explorer-folder:hover { background: rgba(255,255,255,0.2); }
+        .explorer-folder-icon { width: 16px; height: 16px; }
+        .explorer-main { flex: 1; padding: 10px; background: #fff; }
+        .explorer-toolbar { display: flex; gap: 5px; padding: 5px; background: #ECE9D8; border-bottom: 1px solid #A0A0A0; margin: -10px -10px 10px -10px; }
+        .explorer-toolbar-btn { padding: 3px 8px; background: transparent; border: none; cursor: pointer; font-size: 10px; display: flex; align-items: center; gap: 3px; }
+        .explorer-toolbar-btn:hover { background: var(--xp-selection); color: #fff; }
+        .explorer-files { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px; padding: 10px; }
+        .explorer-file { display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 5px; }
+        .explorer-file:hover { background: rgba(49, 106, 197, 0.2); }
+        .explorer-file-icon { width: 48px; height: 48px; }
+        .explorer-file-name { color: #000; font-size: 10px; text-align: center; margin-top: 5px; max-width: 75px; word-wrap: break-word; }
 
-        @keyframes shutdownSequence {
-            0% { background: #000; }
-            20% { background: #003399; }
-            60% { background: #003399; }
-            100% { background: #000; opacity: 0; }
-        }
+        /* ============================================
+           TERMINAL / CMD WINDOW
+           ============================================ */
+        .cmd-container { background: #000; color: #fff; font-family: 'Courier New', monospace; font-size: 13px; padding: 10px; height: 100%; overflow-y: auto; }
+        .cmd-line { margin-bottom: 5px; display: flex; flex-wrap: wrap; }
+        .cmd-prompt { color: #fff; margin-right: 8px; }
+        .cmd-input { background: transparent; border: none; color: #fff; font-family: inherit; font-size: inherit; outline: none; flex: 1; }
+        .cmd-output { color: #fff; white-space: pre-wrap; margin-bottom: 10px; }
+        .cmd-output.error { color: #FF6B6B; }
+        .cmd-output.success { color: #4CAF50; }
+        .cmd-output.info { color: #5A9CFF; }
 
-        #shutdown-screen img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 30px;
-            animation: shutdownPulse 1s ease-in-out infinite;
-        }
+        /* ============================================
+           BROWSER WINDOW
+           ============================================ */
+        .browser-toolbar { display: flex; align-items: center; gap: 5px; padding: 5px; background: #ECE9D8; border-bottom: 1px solid #A0A0A0; }
+        .browser-back, .browser-forward { width: 25px; height: 25px; background: linear-gradient(180deg, #ECE9D8, #C5C0B0); border: 1px outset #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .browser-address { flex: 1; padding: 3px 8px; border: 1px inset #A0A0A0; font-size: 11px; }
+        .browser-go { padding: 3px 10px; background: linear-gradient(180deg, #ECE9D8, #C5C0B0); border: 1px outset #fff; cursor: pointer; font-size: 11px; }
+        .browser-content { flex: 1; background: #fff; overflow: auto; }
 
-        @keyframes shutdownPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(0.95); }
-        }
+        /* ============================================
+           MOBILE SIMULATOR
+           ============================================ */
+        .phone-simulator { display: flex; flex-direction: column; align-items: center; padding: 20px; background: #1a1a1a; height: 100%; overflow: auto; }
+        .phone-frame { position: relative; background: #000; border-radius: 30px; padding: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .phone-frame.iphone { border: 3px solid #333; }
+        .phone-frame.android { border: 3px solid #444; }
+        .phone-notch { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #000; border-radius: 10px; z-index: 10; }
+        .phone-screen { width: 200px; height: 380px; background: #fff; border-radius: 20px; overflow: hidden; position: relative; }
+        .phone-screen-content { width: 100%; height: 100%; overflow: auto; }
 
-        #shutdown-message {
-            color: #fff;
-            font-size: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            animation: blink 1s step-end infinite;
-        }
+        /* ============================================
+           SKILL RESUME WINDOW
+           ============================================ */
+        .skill-resume-container { padding: 20px; height: 100%; overflow: auto; background: linear-gradient(180deg, #fff, #f5f5f5); }
+        .skill-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid var(--xp-title-blue); }
+        .skill-logo-large { width: 60px; height: 60px; }
+        .skill-title { font-size: 20px; font-weight: bold; color: var(--xp-title-blue); }
+        .skill-subtitle { font-size: 12px; color: #666; }
+        .skill-level-bar { margin-bottom: 20px; }
+        .skill-level-label { font-size: 11px; color: #666; margin-bottom: 5px; }
+        .skill-level-track { height: 20px; background: #E8E8E8; border: 1px inset #A0A0A0; border-radius: 10px; overflow: hidden; }
+        .skill-level-fill { height: 100%; background: linear-gradient(90deg, #4CAF50, #8BC34A); border-radius: 10px; }
+        .skill-topics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .skill-topic { background: #E8F5E9; border: 1px solid #4CAF50; padding: 5px 12px; border-radius: 15px; font-size: 11px; color: #2E7D32; }
+        .skill-projects { margin-top: 20px; }
+        .skill-projects-title { font-size: 14px; font-weight: bold; color: var(--xp-title-blue); margin-bottom: 10px; }
+        .skill-project { padding: 10px; background: #f9f9f9; border: 1px solid #E0E0E0; margin-bottom: 10px; border-radius: 5px; }
+        .skill-project-name { font-weight: bold; font-size: 12px; color: #333; }
+        .skill-project-desc { font-size: 10px; color: #666; margin-top: 5px; }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
+        /* ============================================
+           MY PROJECTS WINDOW
+           ============================================ */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; padding: 15px; }
+        .project-card { display: flex; flex-direction: column; align-items: center; padding: 15px; background: #f9f9f9; border: 1px solid #E0E0E0; cursor: pointer; transition: all 0.2s; }
+        .project-card:hover { background: #E8F5E9; border-color: #4CAF50; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .project-icon { width: 48px; height: 48px; margin-bottom: 10px; }
+        .project-name { font-size: 11px; font-weight: bold; color: #333; text-align: center; }
+        .project-desc { font-size: 9px; color: #666; text-align: center; margin-top: 5px; }
+
+        /* ============================================
+           NOTEPAD WINDOW
+           ============================================ */
+        .notepad-container { display: flex; flex-direction: column; height: 100%; }
+        .notepad-toolbar { display: flex; gap: 10px; padding: 5px; background: #ECE9D8; border-bottom: 1px solid #A0A0A0; font-size: 10px; }
+        .notepad-toolbar-item { padding: 2px 5px; cursor: pointer; }
+        .notepad-toolbar-item:hover { background: var(--xp-selection); color: #fff; }
+        .notepad-content { flex: 1; padding: 10px; font-family: 'Courier New', monospace; font-size: 12px; background: #fff; color: #000; border: none; resize: none; outline: none; line-height: 1.5; }
+
+        /* ============================================
+           WELCOME SCREEN
+           ============================================ */
+        #welcome-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #003399, #000066); z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center; }
+        #welcome-screen.visible { display: flex; }
+        #welcome-screen.hidden { display: none; }
+        .welcome-user { display: flex; align-items: center; gap: 15px; padding: 20px 40px; background: linear-gradient(180deg, #7695DE, #5A7AD5); border: 2px outset #9BB6E8; cursor: pointer; margin-bottom: 30px; }
+        .welcome-user:hover { filter: brightness(1.1); }
+        .welcome-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, #4CAF50, #2E7D32); border: 2px outset #8BC34A; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #fff; font-weight: bold; }
+        .welcome-name { color: #fff; font-size: 18px; font-weight: bold; text-shadow: 1px 1px 1px #000; }
+        .welcome-hint { color: #9BB6E8; font-size: 12px; }
+
+        /* ============================================
+           THREE.JS CRT EFFECT
+           ============================================ */
+        .crt-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000; opacity: 0.15; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); }
 
         /* ============================================
            RESPONSIVE
            ============================================ */
-        
         @media (max-width: 768px) {
-            #desktop {
-                background-size: cover;
-            }
-
-            .desktop-icon {
-                width: 65px;
-            }
-
-            .desktop-icon .icon-img {
-                width: 40px;
-                height: 40px;
-            }
-
-            .desktop-icon .icon-label {
-                font-size: 10px;
-                max-width: 62px;
-            }
-
-            #start-menu {
-                width: 100%;
-                left: 0;
-            }
-
-            #start-menu-body {
-                flex-direction: column;
-            }
-
-            #start-menu-left, #start-menu-right {
-                width: 100%;
-            }
-
-            #start-menu-right {
-                border-left: none;
-                border-top: 1px solid #1E4B96;
-            }
-
-            .window {
-                width: 95% !important;
-                left: 2.5% !important;
-                top: 2% !important;
-                height: 94% !important;
-            }
-
-            .window.maximized {
-                width: 100% !important;
-                left: 0 !important;
-                top: 0 !important;
-                height: calc(100% - 30px) !important;
-            }
-
-            #taskbar-windows {
-                display: none;
-            }
-
-            #three-container {
-                display: none;
-            }
-
-            .crt-overlay {
-                display: none;
-            }
-        }
-
-        /* ============================================
-           SCROLLBAR STYLING
-           ============================================ */
-        
-        ::-webkit-scrollbar {
-            width: 16px;
-            height: 16px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #EFEFEF;
-            border: 1px solid #D4D0C8;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, #D4D0C8 0%, #E8E8E8 50%, #D4D0C8 100%);
-            border: 1px solid #A0A0A0;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(90deg, #C0C0C0 0%, #D8D8D8 50%, #C0C0C0 100%);
-        }
-
-        ::-webkit-scrollbar-button {
-            background: #D4D0C8;
-            border: 1px solid #A0A0A0;
+            .desktop-icons { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+            .window { width: 95% !important; left: 2.5% !important; top: 5% !important; }
+            .about-container { flex-direction: column; }
+            .about-sidebar { width: 100%; flex-direction: row; gap: 15px; }
         }
     </style>
 </head>
 <body>
-    <!-- ============================================
-         BOOT SEQUENCE
-         ============================================ -->
-    
+    <!-- Boot Sequence -->
     <div id="boot-sequence">
-        <!-- BIOS Screen -->
         <div id="bios-screen"></div>
-        
-        <!-- XP Loading Screen -->
         <div id="xp-loading">
-            <div id="xp-logo">
-                <svg viewBox="0 0 200 120">
-                    <rect x="20" y="30" width="60" height="60" rx="5" fill="#F35325"/>
-                    <rect x="90" y="30" width="60" height="60" rx="5" fill="#81BC06"/>
-                    <rect x="20" y="70" width="60" height="30" rx="5" fill="#05A6F0"/>
-                    <rect x="90" y="70" width="60" height="30" rx="5" fill="#FFBA08"/>
-                </svg>
-                <span id="xp-logo-text">Windows XP</span>
-            </div>
+            <svg class="xp-logo-img" viewBox="0 0 300 180">
+                <rect x="20" y="20" width="150" height="110" fill="#245DDA" rx="5"/>
+                <text x="95" y="75" fill="#fff" font-size="28" font-weight="bold" font-style="italic">Windows</text>
+                <text x="95" y="105" fill="#fff" font-size="36" font-weight="bold" font-style="italic">XP</text>
+                <circle cx="250" cy="80" r="40" fill="#4CAF50"/>
+                <path d="M235 80 L250 50 L265 80 L250 110 Z" fill="#fff"/>
+            </svg>
             <div id="xp-loading-bar-container">
                 <div id="xp-loading-bar"></div>
             </div>
@@ -1191,1324 +306,1209 @@
         </div>
     </div>
 
-    <!-- ============================================
-         SHUTDOWN SCREEN
-         ============================================ -->
-    
-    <div id="shutdown-screen">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="#245DDA">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-        </svg>
-        <div id="shutdown-message">Windows is shutting down...</div>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+        <div class="welcome-user" onclick="enterDesktop()">
+            <div class="welcome-avatar">M</div>
+            <div>
+                <div class="welcome-name">Mahmudul Hasan</div>
+                <div class="welcome-hint">Click to log on</div>
+            </div>
+        </div>
     </div>
 
-    <!-- ============================================
-         MAIN DESKTOP CONTAINER
-         ============================================ -->
-    
+    <!-- Desktop Container -->
     <div id="desktop-container">
-        <!-- Three.js Canvas -->
-        <div id="three-container">
-            <canvas id="three-canvas"></canvas>
-        </div>
-
-        <!-- CRT Overlay Effects -->
-        <div class="crt-overlay scanlines"></div>
-        <div class="crt-overlay vignette"></div>
+        <div id="three-container"></div>
 
         <!-- Desktop -->
-        <div id="desktop">
-            <!-- My Projects Icon -->
-            <div class="desktop-icon" data-action="projects" data-icon="folder" style="top: 20px; left: 20px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <defs>
-                            <linearGradient id="folderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#FFE082"/>
-                                <stop offset="100%" style="stop-color:#F0C95C"/>
-                            </linearGradient>
-                        </defs>
-                        <path fill="url(#folderGrad)" d="M4 10v30h40V18l-8-8H4z"/>
-                        <path fill="#E8B838" d="M36 18l-8-8v4l6 4h2v24h8V18h-8z"/>
-                    </svg>
-                </div>
-                <span class="icon-label">My Projects</span>
-            </div>
-
-            <!-- Technical Skills Icon -->
-            <div class="desktop-icon" data-action="skills" data-icon="computer" style="top: 110px; left: 20px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <rect fill="#7F9DB9" x="4" y="8" width="40" height="28" rx="2"/>
-                        <rect fill="#5B7A99" x="6" y="10" width="36" height="24"/>
-                        <rect fill="#1E3A5F" x="10" y="14" width="28" height="16"/>
-                        <rect fill="#7F9DB9" x="2" y="36" width="44" height="4" rx="1"/>
-                        <rect fill="#5B7A99" x="18" y="40" width="12" height="4"/>
-                    </svg>
-                </div>
-                <span class="icon-label">Technical Skills</span>
-            </div>
-
-            <!-- About Me Icon -->
-            <div class="desktop-icon" data-action="about" data-icon="user" style="top: 200px; left: 20px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <circle fill="#245DDA" cx="24" cy="16" r="12"/>
-                        <path fill="#1A4AC0" d="M24 4c-6.63 0-12 5.37-12 12s5.37 12 12 12 12-5.37 12-12S30.63 4 24 4zm0 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9z"/>
-                        <path fill="#F0C95C" d="M8 40c0 8.84 7.16 16 16 16s16-7.16 16-16h-4c0 6.63-5.37 12-12 12s-12-5.37-12-12H8z"/>
-                    </svg>
-                </div>
-                <span class="icon-label">About Me</span>
-            </div>
-
-            <!-- Recycle Bin Icon -->
-            <div class="desktop-icon" data-action="recycle" data-icon="trash" style="top: 290px; left: 20px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <path fill="#888" d="M12 8v4h2v28c0 1.66 1.34 3 3 3h16c1.66 0 3-1.34 3-3V12h2V8H12z"/>
-                        <path fill="#666" d="M14 4h20v2h-2v2h-2V6h-2v2h-2V6h-2v2h-2V6h-2v2h-2V6h-2v2h-2V4z"/>
-                        <path fill="#AAA" d="M15 15h18v26c0 1.1-.9 2-2 2H17c-1.1 0-2-.9-2-2V15z"/>
-                    </svg>
-                </div>
-                <span class="icon-label">Recycle Bin</span>
-            </div>
-
-            <!-- Skill Icons - Row 1 -->
-            <div class="desktop-icon" data-action="python" data-icon="skill" style="top: 20px; left: 120px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <circle fill="#3776AB" cx="24" cy="24" r="22"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">PY</text>
-                    </svg>
-                </div>
-                <span class="icon-label">Python</span>
-            </div>
-
-            <div class="desktop-icon" data-action="laravel" data-icon="skill" style="top: 110px; left: 120px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <circle fill="#FF2D20" cx="24" cy="24" r="22"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">L</text>
-                    </svg>
-                </div>
-                <span class="icon-label">Laravel</span>
-            </div>
-
-            <div class="desktop-icon" data-action="flutter" data-icon="skill" style="top: 200px; left: 120px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <circle fill="#02569B" cx="24" cy="24" r="22"/>
-                        <path fill="#fff" d="M12 15l12 9-12 9 12 6-12-6 0-12z"/>
-                    </svg>
-                </div>
-                <span class="icon-label">Flutter</span>
-            </div>
-
-            <!-- Skill Icons - Row 2 -->
-            <div class="desktop-icon" data-action="langchain" data-icon="skill" style="top: 20px; left: 220px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <circle fill="#1A1A2E" cx="24" cy="24" r="22"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">LC</text>
-                    </svg>
-                </div>
-                <span class="icon-label">LangChain</span>
-            </div>
-
-            <div class="desktop-icon" data-action="openai" data-icon="skill" style="top: 110px; left: 220px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <circle fill="#10A37F" cx="24" cy="24" r="22"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">GPT</text>
-                    </svg>
-                </div>
-                <span class="icon-label">OpenAI</span>
-            </div>
-
-            <div class="desktop-icon" data-action="huggingface" data-icon="skill" style="top: 200px; left: 220px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <circle fill="#FFD700" cx="24" cy="24" r="22"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#333" font-size="10" font-weight="bold">HF</text>
-                    </svg>
-                </div>
-                <span class="icon-label">Hugging Face</span>
-            </div>
-
-            <!-- Docker -->
-            <div class="desktop-icon" data-action="docker" data-icon="skill" style="top: 290px; left: 120px;">
-                <div class="icon-wrapper">
-                    <svg class="icon-img" viewBox="0 0 48 48">
-                        <circle fill="#2496ED" cx="24" cy="24" r="22"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">D</text>
-                    </svg>
-                </div>
-                <span class="icon-label">Docker</span>
-            </div>
+        <div id="desktop" onclick="desktopClick(event)">
+            <div class="desktop-icons" id="desktop-icons"></div>
         </div>
 
-        <!-- ============================================
-             TASKBAR
-             ============================================ -->
-        
+        <!-- Taskbar -->
         <div id="taskbar">
-            <button id="start-button">
-                <svg class="win-logo" viewBox="0 0 20 20">
-                    <rect fill="#F35325" width="9" height="9"/>
-                    <rect x="11" fill="#81BC06" width="9" height="9"/>
-                    <rect y="11" fill="#05A6F0" width="9" height="9"/>
-                    <rect x="11" y="11" fill="#FFBA08" width="9" height="9"/>
-                </svg>
-                start
-            </button>
-
+            <div id="start-button" onclick="toggleStartMenu()">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="2" width="9" height="9" fill="#4CAF50"/><rect x="2" y="13" width="9" height="9" fill="#2196F3"/><rect x="13" y="2" width="9" height="9" fill="#FF5722"/><rect x="13" y="13" width="9" height="9" fill="#FFC107"/></svg>
+                <span>start</span>
+            </div>
+            <div class="quick-launch">
+                <div class="quick-launch-icon" onclick="showDesktop()" title="Show Desktop">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><rect x="1" y="1" width="14" height="10" fill="#7695DE" stroke="#333" stroke-width="1"/><rect x="3" y="12" width="3" height="2" fill="#333"/><rect x="7" y="12" width="3" height="2" fill="#333"/><rect x="11" y="12" width="3" height="2" fill="#333"/></svg>
+                </div>
+            </div>
             <div id="taskbar-windows"></div>
-
             <div id="system-tray">
-                <svg class="tray-icon" viewBox="0 0 16 16" fill="#fff">
-                    <rect x="2" y="5" width="12" height="8" rx="1"/>
-                    <path d="M4 5V4a4 4 0 118 0v1" fill="none" stroke="#fff" stroke-width="1.5"/>
-                </svg>
-                <div id="clock">12:00 PM</div>
-            </div>
-        </div>
-
-        <!-- ============================================
-             START MENU
-             ============================================ -->
-        
-        <div id="start-menu">
-            <div id="start-menu-header">
-                <div id="user-avatar">👨‍💻</div>
-                <span>Mahmudul Hasan</span>
-            </div>
-            <div id="start-menu-body">
-                <div id="start-menu-left">
-                    <div class="start-menu-item" data-action="projects">
-                        <svg viewBox="0 0 32 32" width="32" height="32">
-                            <path fill="#F0C95C" d="M3 5v22h26V9l-6-4H3z"/>
-                        </svg>
-                        <span>My Projects</span>
-                    </div>
-                    <div class="start-menu-item" data-action="skills">
-                        <svg viewBox="0 0 32 32" width="32" height="32">
-                            <circle fill="#7F9DB9" cx="16" cy="14" r="10"/>
-                        </svg>
-                        <span>Technical Skills</span>
-                    </div>
-                    <div class="start-menu-item" data-action="about">
-                        <svg viewBox="0 0 32 32" width="32" height="32">
-                            <circle fill="#245DDA" cx="16" cy="11" r="8"/>
-                            <path fill="#F0C95C" d="M8 23c0 4.42 3.58 8 8 8s8-3.58 8-8H8z"/>
-                        </svg>
-                        <span>About Me</span>
-                    </div>
-                    <div class="start-menu-separator"></div>
-                    <div class="start-menu-item" data-action="run">
-                        <svg viewBox="0 0 32 32" width="32" height="32">
-                            <rect fill="#333" x="4" y="4" width="24" height="24" rx="2"/>
-                            <text x="16" y="20" text-anchor="middle" fill="#0f0" font-size="11">&gt;_</text>
-                        </svg>
-                        <span>Run...</span>
-                    </div>
-                </div>
-                <div id="start-menu-right">
-                    <div class="start-menu-item" data-action="contact">
-                        <svg viewBox="0 0 32 32" width="32" height="32">
-                            <rect fill="#245DDA" x="4" y="8" width="24" height="16" rx="2"/>
-                            <path fill="#fff" d="M6 10l10 6 10-6H6z"/>
-                        </svg>
-                        <span>Contact Me</span>
-                    </div>
-                    <div class="start-menu-separator"></div>
-                    <div class="start-menu-item">
-                        <svg viewBox="0 0 32 32" width="32" height="32">
-                            <circle fill="#333" cx="16" cy="16" r="10"/>
-                            <text x="16" y="20" text-anchor="middle" fill="#fff" font-size="12">?</text>
-                        </svg>
-                        <span>Help and Support</span>
-                    </div>
-                    <div class="start-menu-item">
-                        <svg viewBox="0 0 32 32" width="32" height="32">
-                            <rect fill="#245DDA" x="6" y="6" width="20" height="20" rx="2"/>
-                        </svg>
-                        <span>Security</span>
-                    </div>
-                    <div class="start-menu-separator"></div>
-                    <div class="start-menu-item" data-action="shutdown">
-                        <svg viewBox="0 0 32 32" width="32" height="32">
-                            <circle fill="#888" cx="16" cy="16" r="12"/>
-                            <path fill="#888" d="M16 6v10l6 3"/>
-                        </svg>
-                        <span>Shut Down</span>
-                    </div>
-                </div>
-            </div>
-            <div id="start-menu-footer">
-                <button class="start-footer-btn">Log Off</button>
-                <button class="start-footer-btn" data-action="shutdown-btn">Turn Off Computer</button>
+                <svg class="tray-icon" viewBox="0 0 16 16" title="Volume"><path d="M2 7v2h2l3 3V4L4 7H2zm13 0l-3 3v-6l3 3z" fill="#fff"/></svg>
+                <svg class="tray-icon" viewBox="0 0 16 16" title="Network"><rect x="1" y="6" width="3" height="6" fill="#4CAF50"/><rect x="5" y="3" width="3" height="9" fill="#4CAF50"/><rect x="9" y="1" width="3" height="11" fill="#4CAF50"/><rect x="13" y="4" width="2" height="8" fill="#4CAF50"/></svg>
+                <div id="clock"></div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================
-         WINDOWS
-         ============================================ -->
-
-    <!-- My Projects Window -->
-    <div class="window" id="win-projects" data-title="My Projects" style="width: 520px; height: 420px; top: 50px; left: 150px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <path fill="#F0C95C" d="M3 5v22h26V9l-6-4H3z"/>
-            </svg>
-            <span class="window-title">My Projects</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
+    <!-- Start Menu -->
+    <div id="start-menu">
+        <div class="start-menu-header">
+            <div class="user-avatar">M</div>
+            <div class="user-name">Mahmudul Hasan</div>
+        </div>
+        <div class="start-menu-body">
+            <div class="start-menu-left">
+                <div class="start-menu-item" onclick="openWindow('about')">
+                    <svg class="start-menu-item-icon" viewBox="0 0 32 32"><rect x="2" y="2" width="28" height="28" fill="#7695DE" rx="2"/><text x="10" y="22" fill="#fff" font-size="16" font-weight="bold">?</text></svg>
+                    <span class="start-menu-item-text">About Me</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('projects')">
+                    <svg class="start-menu-item-icon" viewBox="0 0 32 32"><path d="M4 8l12-4 12 4v16l-12 4-12-4V8z" fill="#FFA000"/><path d="M4 8l12-4 12 4v16l-12 4-12-4V8z" fill="none" stroke="#B06C00" stroke-width="1"/></svg>
+                    <span class="start-menu-item-text">My Projects</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('skills')">
+                    <svg class="start-menu-item-icon" viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" fill="#4CAF50" rx="2"/><text x="10" y="22" fill="#fff" font-size="14" font-weight="bold">JS</text></svg>
+                    <span class="start-menu-item-text">Technical Skills</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('contact')">
+                    <svg class="start-menu-item-icon" viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16" fill="#2196F3" rx="2"/><path d="M6 10l10 6 10-6" fill="none" stroke="#fff" stroke-width="2"/></svg>
+                    <span class="start-menu-item-text">Contact Me</span>
+                </div>
             </div>
-        </div>
-        <div class="window-menubar">
-            <span class="menubar-item">File</span>
-            <span class="menubar-item">Edit</span>
-            <span class="menubar-item">View</span>
-            <span class="menubar-item">Help</span>
-        </div>
-        <div class="window-content">
-            <div class="project-grid">
-                <div class="project-item" data-project="antigravity">
-                    <svg class="icon" viewBox="0 0 56 56">
-                        <circle fill="#EA4335" cx="28" cy="28" r="24"/>
-                        <text x="28" y="35" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">G</text>
-                    </svg>
-                    <span class="name">Google Antigravity</span>
+            <div class="start-menu-right">
+                <div class="start-menu-section">
+                    <div class="start-menu-section-title">Freelance Status</div>
+                    <div class="about-status" style="background:#E8F5E9; padding:8px; border-radius:5px;">
+                        <div class="status-dot"></div>
+                        <span style="color:#2E7D32; font-size:11px; font-weight:bold;">Open to Projects</span>
+                    </div>
                 </div>
-                <div class="project-item" data-project="spendwise">
-                    <svg class="icon" viewBox="0 0 56 56">
-                        <circle fill="#4CAF50" cx="28" cy="28" r="24"/>
-                        <text x="28" y="35" text-anchor="middle" fill="#fff" font-size="22" font-weight="bold">$</text>
-                    </svg>
-                    <span class="name">SpendWise</span>
-                </div>
-                <div class="project-item" data-project="cleaner">
-                    <svg class="icon" viewBox="0 0 56 56">
-                        <circle fill="#9C27B0" cx="28" cy="28" r="24"/>
-                        <text x="28" y="35" text-anchor="middle" fill="#fff" font-size="18">🧹</text>
-                    </svg>
-                    <span class="name">Android Cleaner</span>
+                <div class="start-menu-divider"></div>
+                <div class="shut-down-btn" onclick="shutdownComputer()">
+                    <svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="8" fill="none" stroke="#333" stroke-width="2"/><line x1="10" y1="6" x2="10" y2="10" stroke="#333" stroke-width="2"/><circle cx="10" cy="10" r="2" fill="#333"/></svg>
+                    <span>Shut Down</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Technical Skills Window -->
-    <div class="window" id="win-skills" data-title="Technical Skills - System Properties" style="width: 560px; height: 480px; top: 70px; left: 200px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <circle fill="#7F9DB9" cx="16" cy="14" r="10"/>
-            </svg>
-            <span class="window-title">Technical Skills - System Properties</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
-            </div>
-        </div>
-        <div class="window-menubar">
-            <span class="menubar-item">File</span>
-            <span class="menubar-item">Edit</span>
-            <span class="menubar-item">View</span>
-            <span class="menubar-item">Help</span>
-        </div>
-        <div class="window-content">
-            <div class="skills-container">
-                <div class="skill-section">
-                    <h3>
-                        <svg viewBox="0 0 20 20" width="18" height="18">
-                            <circle fill="#3776AB" cx="10" cy="10" r="9"/>
-                            <text x="10" y="14" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">PY</text>
-                        </svg>
-                        Backend Development
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-tag">
-                            <svg viewBox="0 0 24 24" width="18" height="18">
-                                <circle fill="#3776AB" cx="12" cy="12" r="10"/>
-                            </svg>
-                            Python (Django, Flask, FastAPI)
-                        </div>
-                        <div class="skill-tag">
-                            <svg viewBox="0 0 24 24" width="18" height="18">
-                                <circle fill="#FF2D20" cx="12" cy="12" r="10"/>
-                            </svg>
-                            Laravel (PHP)
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-section">
-                    <h3>
-                        <svg viewBox="0 0 20 20" width="18" height="18">
-                            <circle fill="#02569B" cx="10" cy="10" r="9"/>
-                            <path fill="#fff" d="M5 7l5 3-5 3 5 3-5-2.5 0-5z"/>
-                        </svg>
-                        Mobile Development
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-tag">
-                            <svg viewBox="0 0 24 24" width="18" height="18">
-                                <circle fill="#02569B" cx="12" cy="12" r="10"/>
-                            </svg>
-                            Flutter (with FVM)
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-section">
-                    <h3>
-                        <svg viewBox="0 0 20 20" width="18" height="18">
-                            <circle fill="#10A37F" cx="10" cy="10" r="9"/>
-                        </svg>
-                        AI & LLMs
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-tag">
-                            <svg viewBox="0 0 24 24" width="18" height="18">
-                                <circle fill="#1A1A2E" cx="12" cy="12" r="10"/>
-                            </svg>
-                            LangChain
-                        </div>
-                        <div class="skill-tag">
-                            <svg viewBox="0 0 24 24" width="18" height="18">
-                                <circle fill="#10A37F" cx="12" cy="12" r="10"/>
-                            </svg>
-                            OpenAI (GPT-4)
-                        </div>
-                        <div class="skill-tag">
-                            <svg viewBox="0 0 24 24" width="18" height="18">
-                                <circle fill="#FFD700" cx="12" cy="12" r="10"/>
-                            </svg>
-                            Hugging Face
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-section">
-                    <h3>
-                        <svg viewBox="0 0 20 20" width="18" height="18">
-                            <circle fill="#2496ED" cx="10" cy="10" r="9"/>
-                        </svg>
-                        DevOps
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-tag">
-                            <svg viewBox="0 0 24 24" width="18" height="18">
-                                <circle fill="#2496ED" cx="12" cy="12" r="10"/>
-                            </svg>
-                            Docker
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Shutdown Overlay -->
+    <div id="shutdown-overlay">
+        <div class="crt-shutdown"></div>
     </div>
 
-    <!-- About Me Window -->
-    <div class="window" id="win-about" data-title="About Me" style="width: 500px; height: 420px; top: 90px; left: 250px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <circle fill="#245DDA" cx="16" cy="11" r="8"/>
-            </svg>
-            <span class="window-title">About Me</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
-            </div>
-        </div>
-        <div class="window-menubar">
-            <span class="menubar-item">File</span>
-            <span class="menubar-item">Edit</span>
-            <span class="menubar-item">View</span>
-            <span class="menubar-item">Help</span>
-        </div>
-        <div class="window-content padded">
-            <div class="about-page">
-                <h2>Mahmudul Hasan</h2>
-                <p class="subtitle">Full-Stack Engineer & AI & Automation Specialist</p>
-                
-                <p>Welcome to my portfolio! I'm a passionate developer with expertise in building scalable web applications and intelligent automation solutions that push the boundaries of technology.</p>
-                
-                <p><span class="highlight">What I Do:</span></p>
-                <ul>
-                    <li>Build robust backend systems with <strong>Python</strong> and <strong>Laravel</strong></li>
-                    <li>Create beautiful cross-platform mobile apps with <strong>Flutter</strong></li>
-                    <li>Develop AI-powered applications using <strong>LangChain</strong> and <strong>OpenAI</strong></li>
-                    <li>Deploy containerized applications with <strong>Docker</strong></li>
-                    <li>Leverage <strong>Hugging Face</strong> models for cutting-edge ML solutions</li>
-                </ul>
-                
-                <p>I'm always excited to work on innovative projects that combine modern technology with creative solutions. Let's build something amazing together!</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Me - Notepad Window -->
-    <div class="window" id="win-contact" data-title="Contact Me - Notepad" style="width: 560px; height: 420px; top: 110px; left: 280px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <rect fill="#fff" x="4" y="4" width="24" height="24" stroke="#000" stroke-width="2"/>
-            </svg>
-            <span class="window-title">Contact Me - Notepad</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
-            </div>
-        </div>
-        <div class="window-menubar">
-            <span class="menubar-item">File</span>
-            <span class="menubar-item">Edit</span>
-            <span class="menubar-item">Format</span>
-            <span class="menubar-item">View</span>
-            <span class="menubar-item">Help</span>
-        </div>
-        <div class="window-content" style="padding: 0;">
-            <div class="notepad-content">════════════════════════════════════════
-    MAHMUDUL HASAN - CONTACT INFO
-════════════════════════════════════════
-
-📧 Email: mahmudul.hasan@example.com
-💻 GitHub: github.com/mahmudulhasan
-🔗 LinkedIn: linkedin.com/in/mahmudulhasan
-
-─────────────────────────────────────────────
-        ABOUT THIS PORTFOLIO
-─────────────────────────────────────────────
-
-This Windows XP themed portfolio showcases
-my work as a Full-Stack Engineer and
-AI & Automation Specialist.
-
-Skills:
-• Backend: Python, Laravel
-• Mobile: Flutter (FVM)  
-• AI/LLMs: LangChain, OpenAI, Hugging Face
-• DevOps: Docker
-
-Projects:
-• Google Antigravity - Automation Project
-• SpendWise - Expense Tracker App
-• Android Cleaner - Utility App
-
-─────────────────────────────────────────────
-       FEEL FREE TO REACH OUT!
-─────────────────────────────────────────────
-
-Let's collaborate on exciting projects! 🚀</div>
-        </div>
-    </div>
-
-    <!-- Run Dialog -->
-    <div class="window run-dialog" id="win-run" data-title="Run" style="width: 400px; height: 130px; top: 200px; left: 350px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <rect fill="#333" x="4" y="4" width="24" height="24" rx="2"/>
-            </svg>
-            <span class="window-title">Run</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
-            </div>
-        </div>
-        <div class="window-content">
-            <label>Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.</label>
-            <input type="text" id="run-input" placeholder="Open:">
-            <div class="buttons">
-                <button onclick="windowMgr.closeWindow('win-run')">Cancel</button>
-                <button class="primary" onclick="runCommand()">OK</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Command Prompt -->
-    <div class="window" id="win-cmd" data-title="Command Prompt" style="width: 600px; height: 400px; top: 150px; left: 300px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <rect fill="#000" x="4" y="4" width="24" height="24" rx="2"/>
-            </svg>
-            <span class="window-title">Command Prompt</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
-            </div>
-        </div>
-        <div class="window-content" style="padding: 0;">
-            <div class="cmd-content" id="cmd-output">
-                <div class="cmd-line">Microsoft Windows XP [Version 5.1.2600]</div>
-                <div class="cmd-line">(C) Copyright 1985-2001 Microsoft Corp.</div>
-                <br>
-                <div class="cmd-line">
-                    <span class="cmd-prompt">C:\Documents and Settings\Mahmudul></span>
-                    <input type="text" class="cmd-input" id="cmd-input" autofocus>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Project Detail Windows -->
-    <div class="window" id="win-antigravity" data-title="Google Antigravity" style="width: 480px; height: 380px; top: 100px; left: 200px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <circle fill="#EA4335" cx="16" cy="16" r="12"/>
-            </svg>
-            <span class="window-title">Google Antigravity</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
-            </div>
-        </div>
-        <div class="window-menubar">
-            <span class="menubar-item">File</span>
-            <span class="menubar-item">Edit</span>
-            <span class="menubar-item">View</span>
-            <span class="menubar-item">Help</span>
-        </div>
-        <div class="window-content padded">
-            <div class="about-page">
-                <h2>Google Antigravity</h2>
-                <p class="subtitle">Specialized Coding & Automation Project</p>
-                
-                <p>A cutting-edge automation project leveraging Google's APIs and advanced AI techniques to create intelligent workflows that revolutionize data processing.</p>
-                
-                <p><span class="highlight">Technologies Used:</span></p>
-                <ul>
-                    <li>Python (LangChain, OpenAI API)</li>
-                    <li>Google Cloud Platform</li>
-                    <li>Docker for deployment</li>
-                    <li>FastAPI for REST APIs</li>
-                </ul>
-                
-                <p><span class="highlight">Key Features:</span></p>
-                <ul>
-                    <li>Automated data processing pipelines</li>
-                    <li>AI-powered decision making</li>
-                    <li>Scalable microservices architecture</li>
-                    <li>Real-time analytics dashboard</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="window" id="win-spendwise" data-title="SpendWise" style="width: 480px; height: 380px; top: 120px; left: 220px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <circle fill="#4CAF50" cx="16" cy="16" r="12"/>
-            </svg>
-            <span class="window-title">SpendWise</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
-            </div>
-        </div>
-        <div class="window-menubar">
-            <span class="menubar-item">File</span>
-            <span class="menubar-item">Edit</span>
-            <span class="menubar-item">View</span>
-            <span class="menubar-item">Help</span>
-        </div>
-        <div class="window-content padded">
-            <div class="about-page">
-                <h2>SpendWise</h2>
-                <p class="subtitle">Mobile Expense Tracker</p>
-                
-                <p>A beautiful and intuitive mobile expense tracking application built with Flutter that helps users manage their finances effectively.</p>
-                
-                <p><span class="highlight">Technologies Used:</span></p>
-                <ul>
-                    <li>Flutter with FVM (Flutter Version Manager)</li>
-                    <li>SQLite for local storage</li>
-                    <li>Beautiful Material Design 3 UI</li>
-                    <li>Charts for data visualization</li>
-                </ul>
-                
-                <p><span class="highlight">Key Features:</span></p>
-                <ul>
-                    <li>Track daily expenses easily</li>
-                    <li>Visual analytics and pie charts</li>
-                    <li>Category-based organization</li>
-                    <li>Export to CSV for reports</li>
-                    <li>Budget tracking and alerts</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="window" id="win-cleaner" data-title="Android Cleaner" style="width: 480px; height: 380px; top: 140px; left: 240px;">
-        <div class="window-titlebar">
-            <svg class="window-icon" viewBox="0 0 32 32">
-                <circle fill="#9C27B0" cx="16" cy="16" r="12"/>
-            </svg>
-            <span class="window-title">Android Cleaner</span>
-            <div class="window-controls">
-                <button class="window-btn minimize">_</button>
-                <button class="window-btn maximize">□</button>
-                <button class="window-btn close">×</button>
-            </div>
-        </div>
-        <div class="window-menubar">
-            <span class="menubar-item">File</span>
-            <span class="menubar-item">Edit</span>
-            <span class="menubar-item">View</span>
-            <span class="menubar-item">Help</span>
-        </div>
-        <div class="window-content padded">
-            <div class="about-page">
-                <h2>Android Cleaner</h2>
-                <p class="subtitle">Utility Application</p>
-                
-                <p>A powerful Android utility application for cleaning junk files, optimizing performance, and managing storage on Android devices.</p>
-                
-                <p><span class="highlight">Technologies Used:</span></p>
-                <ul>
-                    <li>Android (Kotlin)</li>
-                    <li>Native Android APIs</li>
-                    <li>Material Design</li>
-                    <li>Background services</li>
-                </ul>
-                
-                <p><span class="highlight">Key Features:</span></p>
-                <ul>
-                    <li>Cache and junk file cleaning</li>
-                    <li>Storage analysis and management</li>
-                    <li>App manager (install/uninstall)</li>
-                    <li>Battery optimization tools</li>
-                    <li>Device information scanner</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <!-- Windows Container -->
+    <div id="windows-container"></div>
 
     <script>
         // ============================================
-        // WINDOW MANAGER CLASS
+        // DATA - SKILLS & ICONS
         // ============================================
-        
-        class WindowManager {
-            constructor() {
-                this.windows = [];
-                this.zIndex = 1000;
-                this.activeWindow = null;
+        const desktopIcons = [
+            { id: 'about', name: 'My Computer', type: 'system', icon: createComputerIcon() },
+            { id: 'projects', name: 'My Projects', type: 'folder', icon: createFolderIcon('#FFA000') },
+            { id: 'skills', name: 'Technical Skills', type: 'folder', icon: createSkillsIcon() },
+            { id: 'python', name: 'Python', type: 'skill', skill: 'python', icon: createPythonIcon() },
+            { id: 'laravel', name: 'Laravel', type: 'skill', skill: 'laravel', icon: createLaravelIcon() },
+            { id: 'flutter', name: 'Flutter', type: 'skill', skill: 'flutter', icon: createFlutterIcon() },
+            { id: 'react', name: 'React.js', type: 'skill', skill: 'react', icon: createReactIcon() },
+            { id: 'vue', name: 'Vue.js', type: 'skill', skill: 'vue', icon: createVueIcon() },
+            { id: 'php', name: 'PHP', type: 'skill', skill: 'php', icon: createPHPIcon() },
+            { id: 'javascript', name: 'JavaScript', type: 'skill', skill: 'javascript', icon: createJSIcon() },
+            { id: 'docker', name: 'Docker', type: 'skill', skill: 'docker', icon: createDockerIcon() },
+            { id: 'linux', name: 'Linux', type: 'skill', skill: 'linux', icon: createLinuxIcon() },
+            { id: 'mysql', name: 'MySQL', type: 'skill', skill: 'mysql', icon: createMySQLIcon() },
+            { id: 'nodejs', name: 'Node.js', type: 'skill', skill: 'nodejs', icon: createNodeIcon() },
+            { id: 'tailwind', name: 'Tailwind', type: 'skill', skill: 'tailwind', icon: createTailwindIcon() },
+            { id: 'recycle', name: 'Recycle Bin', type: 'system', icon: createRecycleIcon() }
+        ];
+
+        const skillsData = {
+            python: {
+                name: 'Python',
+                level: 95,
+                topics: ['Django', 'Flask', 'FastAPI', 'REST APIs', 'Automation', 'Data Analysis', 'Machine Learning', 'Web Scraping', 'Scripting', 'ORM', 'Async Programming', 'Testing'],
+                projects: ['Automation Scripts', 'REST API Development', 'Data Processing Tools', 'Web Scrapers', 'CLI Applications']
+            },
+            laravel: {
+                name: 'Laravel',
+                level: 92,
+                topics: ['Eloquent ORM', 'Blade Templates', 'Laravel Mix', 'REST APIs', 'Authentication', 'Middleware', 'Queues', 'Events', 'Migrations', 'Seeders', 'Localization', 'Testing'],
+                projects: ['E-commerce Platforms', 'CRM Systems', 'API Backends', 'CMS Development', 'SaaS Applications']
+            },
+            flutter: {
+                name: 'Flutter',
+                level: 94,
+                topics: ['Dart', 'State Management', 'BLoC Pattern', 'Provider', 'REST APIs', 'Firebase', 'Local Storage', 'Animations', 'Custom Widgets', 'Platform Channels', 'Testing', 'CI/CD'],
+                projects: ['SpendWise - Expense Tracker', 'Android Cleaner App', 'E-commerce Apps', 'Social Apps', 'Utility Apps']
+            },
+            react: {
+                name: 'React.js',
+                level: 90,
+                topics: ['Hooks', 'Context API', 'Redux', 'React Router', 'Next.js', 'SSR', 'TypeScript', 'Styled Components', 'Testing', 'Performance Optimization', 'API Integration', 'Form Handling'],
+                projects: ['Single Page Applications', 'Dashboard Systems', 'E-commerce Frontends', 'Portfolio Sites', 'Admin Panels']
+            },
+            vue: {
+                name: 'Vue.js',
+                level: 88,
+                topics: ['Vue 3', 'Composition API', 'Pinia', 'Vue Router', 'Vuex', 'Nuxt.js', 'Components', 'Directives', 'Animations', 'Testing', 'TypeScript', 'SSR'],
+                projects: ['Interactive Web Apps', 'Single Page Applications', 'Progressive Web Apps', 'Landing Pages', 'Admin Dashboards']
+            },
+            php: {
+                name: 'PHP',
+                level: 90,
+                topics: ['OOP', 'PDO', 'MVC', 'Laravel', 'WordPress', 'REST APIs', 'Sessions', 'Cookies', 'File Handling', 'Security', 'Composer', 'Testing'],
+                projects: ['Custom CMS', 'E-commerce Sites', 'API Development', 'WordPress Plugins', 'Web Applications']
+            },
+            javascript: {
+                name: 'JavaScript',
+                level: 95,
+                topics: ['ES6+', 'DOM Manipulation', 'Async/Await', 'Promises', 'Closures', 'Prototypes', 'Modules', 'TypeScript', 'Node.js', 'Express', 'Testing', 'Design Patterns'],
+                projects: ['Interactive Websites', 'Web Applications', 'Browser Extensions', 'Node.js Apps', 'Games']
+            },
+            docker: {
+                name: 'Docker',
+                level: 85,
+                topics: ['Containers', 'Images', 'Dockerfile', 'Docker Compose', 'Volumes', 'Networking', 'Multi-stage Builds', 'CI/CD Integration', 'Optimization', 'Security Best Practices', 'Swarm', 'Kubernetes Basics'],
+                projects: ['Containerization', 'DevOps Pipelines', 'Microservices', 'Development Environments', 'Production Deployments']
+            },
+            linux: {
+                name: 'Linux',
+                level: 88,
+                topics: ['Bash Scripting', 'System Administration', 'Server Setup', 'Nginx', 'Apache', 'SSL/TLS', 'Firewall', 'Cron Jobs', 'User Management', 'Permissions', 'Monitoring', 'Shell Commands'],
+                projects: ['Server Configuration', 'VPS Management', 'Deployment Automation', 'Monitoring Systems', 'Security Hardening']
+            },
+            mysql: {
+                name: 'MySQL',
+                level: 90,
+                topics: ['Query Optimization', 'Indexing', 'Stored Procedures', 'Triggers', 'Replication', 'Backup/Restore', 'Normalization', 'ERD Design', 'Transactions', 'Performance Tuning', 'Security', 'Migration'],
+                projects: ['Database Design', 'API Databases', 'E-commerce Databases', 'CRM Systems', 'Analytics Databases']
+            },
+            nodejs: {
+                name: 'Node.js',
+                level: 89,
+                topics: ['Express.js', 'REST APIs', 'WebSockets', 'File Streams', 'Authentication', 'Middleware', 'npm', 'Testing', 'Performance', 'Microservices', 'GraphQL', 'TypeScript'],
+                projects: ['API Servers', 'Real-time Apps', 'CLI Tools', 'Web Servers', 'Microservices']
+            },
+            tailwind: {
+                name: 'Tailwind CSS',
+                level: 93,
+                topics: ['Utility Classes', 'Custom Configuration', 'Responsive Design', 'Dark Mode', 'Forms', 'Typography', 'Animations', 'Components', ' JIT Compiler', 'Plugins', 'Purge', 'Integration'],
+                projects: ['Modern UI', 'Landing Pages', 'Dashboards', 'Mobile-First Designs', 'Custom Themes']
             }
+        };
 
-            openWindow(windowId, title = null) {
-                const windowEl = document.getElementById(windowId);
-                if (!windowEl) return;
+        const obsoleteSkills = [
+            { name: 'HTML4.html', icon: 'html' },
+            { name: 'Old_CSS.css', icon: 'css' },
+            { name: 'ES3_legacy.js', icon: 'js' },
+            { name: 'jQuery_v1.js', icon: 'jquery' },
+            { name: 'Table_Layout.html', icon: 'html' },
+            { name: 'IE6_Styles.css', icon: 'css' },
+            { name: 'Flash_Actionscript.as', icon: 'flash' },
+            { name: 'XMLHttpRequest.js', icon: 'js' }
+        ];
 
-                // Check if already open
-                if (!this.windows.includes(windowId)) {
-                    this.windows.push(windowId);
-                }
+        // ============================================
+        // ICON CREATION FUNCTIONS (SVG)
+        // ============================================
+        function createComputerIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="8" width="40" height="28" fill="#7695DE" stroke="#333" stroke-width="2" rx="2"/><rect x="6" y="10" width="36" height="22" fill="#1a1a1a"/><rect x="14" y="38" width="20" height="4" fill="#666"/><rect x="8" y="42" width="32" height="3" fill="#888"/></svg>`;
+        }
+        function createFolderIcon(color) {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><path d="M6 12l18-6 18 6v28l-18 6-18-6V12z" fill="${color}"/><path d="M6 12l18-6 18 6v28l-18 6-18-6V12z" fill="none" stroke="#333" stroke-width="1"/></svg>`;
+        }
+        function createSkillsIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#4CAF50" rx="4"/><circle cx="24" cy="18" r="6" fill="#fff"/><circle cx="14" cy="30" r="4" fill="#fff"/><circle cx="34" cy="30" r="4" fill="#fff"/><line x1="24" y1="24" x2="14" y2="26" stroke="#fff" stroke-width="2"/><line x1="24" y1="24" x2="34" y2="26" stroke="#fff" stroke-width="2"/></svg>`;
+        }
+        function createPythonIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><ellipse cx="24" cy="20" rx="14" ry="10" fill="#306998"/><ellipse cx="24" cy="28" rx="14" ry="10" fill="#FFD43B"/><path d="M15 20c2-4 8-5 9-5s7 1 9 5c2 4-2 7-4 7s-5-1-5-1s-1 2-4 2c-4 0-5-4-5-8z" fill="#306998"/><path d="M15 28c-2 4-8 5-9 5s-7-1-9-5c-2-4 2-7 4-7s5 1 5 1s1-2 4-2c4 0 5 4 5 8z" fill="#FFE873"/><text x="12" y="25" fill="#fff" font-size="8" font-weight="bold">Py</text></svg>`;
+        }
+        function createLaravelIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#FF5722" rx="8"/><text x="24" y="32" fill="#fff" font-size="20" font-weight="bold" text-anchor="middle">L</text></svg>`;
+        }
+        function createFlutterIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#02569B"/><circle cx="24" cy="24" r="16" fill="#0175C2"/><path d="M24 8 L24 40 M8 24 L40 24" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="8" fill="#40C4FF"/></svg>`;
+        }
+        function createReactIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#61DAFB"/><circle cx="12" cy="24" r="5" fill="#000"/><circle cx="36" cy="24" r="5" fill="#000"/><circle cx="24" cy="12" r="5" fill="#000"/><circle cx="24" cy="36" r="5" fill="#000"/><circle cx="17" cy="17" r="3" fill="#61DAFB"/><circle cx="31" cy="17" r="3" fill="#61DAFB"/><circle cx="17" cy="31" r="3" fill="#61DAFB"/><circle cx="31" cy="31" r="3" fill="#61DAFB"/></svg>`;
+        }
+        function createVueIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><path d="M24 4L4 24l10 20 10-16 10 16 10-20L24 4z" fill="#42B883"/><path d="M24 4l10 16-10 4-10-4L24 4z" fill="#35495E"/></svg>`;
+        }
+        function createPHPIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#777BB4" rx="4"/><text x="24" y="32" fill="#fff" font-size="24" font-weight="bold" text-anchor="middle">PHP</text></svg>`;
+        }
+        function createJSIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#F7DF1E" rx="4"/><text x="24" y="32" fill="#000" font-size="20" font-weight="bold" text-anchor="middle">JS</text></svg>`;
+        }
+        function createDockerIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#2496ED"/><path d="M24 8c-2 4-4 8-4 12s2 8 4 12c2-4 4-8 4-12s-2-8-4-12z" fill="#fff"/><path d="M18 14c2 2 4 4 4 6s-2 4-4 6c-2-2-4-4-4-6s2-4 4-6z" fill="#2496ED"/><path d="M30 14c-2 2-4 4-4 6s2 4 4 6c2-2 4-4 4-6s-2-4-4-6z" fill="#2496ED"/><circle cx="24" cy="24" r="4" fill="#fff"/></svg>`;
+        }
+        function createLinuxIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#FCC624"/><text x="24" y="30" fill="#333" font-size="16" font-weight="bold" text-anchor="middle">LIN</text></svg>`;
+        }
+        function createMySQLIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#00758F" rx="4"/><text x="24" y="32" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">MySQL</text></svg>`;
+        }
+        function createNodeIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#339933"/><text x="24" y="30" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">Node</text></svg>`;
+        }
+        function createTailwindIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#06B6D4" rx="4"/><path d="M12 36l8-12 8 12M20 24l8-12M28 24v12" stroke="#fff" stroke-width="3" fill="none"/></svg>`;
+        }
+        function createRecycleIcon() {
+            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><path d="M12 42c0-4 4-6 8-6h8c4 0 8 2 8 6H12z" fill="#888"/><path d="M16 38V20c0-2 2-4 4-4h8c2 0 4 2 4 4v18" fill="#666"/><rect x="20" y="12" width="8" height="6" fill="#aaa"/><path d="M10 18l4-8M24 18l4-8M38 18l-4-8" stroke="#888" stroke-width="2"/></svg>`;
+        }
 
-                // Show and focus
-                windowEl.classList.add('visible');
-                windowEl.classList.remove('maximized');
-                this.focusWindow(windowId);
-
-                // Add to taskbar
-                this.addToTaskbar(windowId, title || windowEl.dataset.title || windowId);
-            }
-
-            closeWindow(windowId) {
-                const windowEl = document.getElementById(windowId);
-                if (!windowEl) return;
-
-                windowEl.classList.remove('visible');
-                windowEl.classList.remove('maximized');
-
-                const index = this.windows.indexOf(windowId);
-                if (index > -1) this.windows.splice(index, 1);
-
-                this.removeFromTaskbar(windowId);
-
-                if (this.activeWindow === windowId) {
-                    this.activeWindow = this.windows.length > 0 ? this.windows[this.windows.length - 1] : null;
-                    if (this.activeWindow) this.focusWindow(this.activeWindow);
-                }
-            }
-
-            focusWindow(windowId) {
-                const windowEl = document.getElementById(windowId);
-                if (!windowEl) return;
-
-                this.zIndex++;
-                windowEl.style.zIndex = this.zIndex;
-
-                // Update all windows
-                document.querySelectorAll('.window').forEach(win => {
-                    win.classList.remove('active');
-                });
-                windowEl.classList.add('active');
-
-                // Update taskbar
-                document.querySelectorAll('.taskbar-item').forEach(item => {
-                    item.classList.remove('active', 'minimized');
-                    if (item.dataset.window === windowId) {
-                        item.classList.add('active');
-                    }
-                });
-
-                this.activeWindow = windowId;
-            }
-
-            minimizeWindow(windowId) {
-                const windowEl = document.getElementById(windowId);
-                if (!windowEl) return;
-
-                windowEl.classList.remove('visible');
-
-                document.querySelectorAll('.taskbar-item').forEach(item => {
-                    if (item.dataset.window === windowId) {
-                        item.classList.add('minimized');
-                        item.classList.remove('active');
-                    }
-                });
-            }
-
-            restoreWindow(windowId) {
-                const windowEl = document.getElementById(windowId);
-                if (!windowEl) return;
-
-                windowEl.classList.add('visible');
-                this.focusWindow(windowId);
-
-                document.querySelectorAll('.taskbar-item').forEach(item => {
-                    if (item.dataset.window === windowId) {
-                        item.classList.remove('minimized');
-                        item.classList.add('active');
-                    }
-                });
-            }
-
-            toggleWindow(windowId) {
-                const windowEl = document.getElementById(windowId);
-                if (!windowEl) return;
-
-                if (windowEl.classList.contains('visible') && this.activeWindow === windowId) {
-                    this.minimizeWindow(windowId);
-                } else if (windowEl.classList.contains('visible')) {
-                    this.focusWindow(windowId);
-                } else {
-                    this.openWindow(windowId);
-                }
-            }
-
-            maximizeWindow(windowId) {
-                const windowEl = document.getElementById(windowId);
-                if (!windowEl) return;
-                windowEl.classList.toggle('maximized');
-            }
-
-            addToTaskbar(windowId, title) {
-                const container = document.getElementById('taskbar-windows');
-                if (document.querySelector(`.taskbar-item[data-window="${windowId}"]`)) return;
-
-                const windowEl = document.getElementById(windowId);
-                const iconSvg = windowEl.querySelector('.window-icon')?.outerHTML || '';
-
-                const item = document.createElement('div');
-                item.className = 'taskbar-item active';
-                item.dataset.window = windowId;
-                item.innerHTML = iconSvg + `<span class="title">${title}</span>`;
-
-                item.addEventListener('click', () => this.toggleWindow(windowId));
-
-                container.appendChild(item);
-            }
-
-            removeFromTaskbar(windowId) {
-                const item = document.querySelector(`.taskbar-item[data-window="${windowId}"]`);
-                if (item) item.remove();
-            }
+        function createFileIcon(type) {
+            const icons = {
+                html: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#E44D26" rx="2"/><text x="24" y="32" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">HTML</text></svg>`,
+                css: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#264DE4" rx="2"/><text x="24" y="32" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">CSS</text></svg>`,
+                js: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#F7DF1E" rx="2"/><text x="24" y="32" fill="#000" font-size="14" font-weight="bold" text-anchor="middle">JS</text></svg>`,
+                jquery: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#0769AD" rx="2"/><text x="24" y="32" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">jQ</text></svg>`,
+                flash: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#FF0000" rx="2"/><path d="M16 14l16 10-16 10V14z" fill="#fff"/></svg>`
+            };
+            return icons[type] || icons['html'];
         }
 
         // ============================================
-        // DRAG MANAGER
+        // STATE MANAGEMENT
         // ============================================
-        
-        class DragManager {
-            constructor(windowManager) {
-                this.wm = windowManager;
-                this.draggedWindow = null;
-                this.dragOffsetX = 0;
-                this.dragOffsetY = 0;
-                this.init();
-            }
+        let windowZIndex = 1000;
+        let activeWindowId = null;
+        let windows = {};
+        let dragState = { isDragging: false, windowId: null, offsetX: 0, offsetY: 0 };
 
-            init() {
-                document.addEventListener('mousedown', e => this.onMouseDown(e));
-                document.addEventListener('mousemove', e => this.onMouseMove(e));
-                document.addEventListener('mouseup', e => this.onMouseUp(e));
-            }
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        function init() {
+            renderDesktopIcons();
+            startBootSequence();
+            updateClock();
+            setInterval(updateClock, 1000);
+            initThreeJS();
+        }
 
-            onMouseDown(e) {
-                const titlebar = e.target.closest('.window-titlebar');
-                if (!titlebar) return;
+        function renderDesktopIcons() {
+            const container = document.getElementById('desktop-icons');
+            container.innerHTML = '';
+            desktopIcons.forEach((icon, index) => {
+                const div = document.createElement('div');
+                div.className = 'desktop-icon';
+                div.id = `icon-${icon.id}`;
+                div.style.position = 'relative';
+                div.style.left = '0';
+                div.style.top = '0';
+                div.innerHTML = `${icon.icon}<div class="desktop-icon-label">${icon.name}</div>`;
+                div.ondblclick = () => openWindow(icon.id);
+                div.onclick = (e) => selectIcon(icon.id, e);
+                container.appendChild(div);
+            });
+            makeIconsDraggable();
+        }
 
-                const windowEl = titlebar.closest('.window');
-                if (!windowEl || !windowEl.classList.contains('visible')) return;
-                if (windowEl.classList.contains('maximized')) return;
+        function makeIconsDraggable() {
+            const icons = document.querySelectorAll('.desktop-icon');
+            icons.forEach(icon => {
+                let isDragging = false;
+                let startX, startY, initialX, initialY;
 
-                this.wm.focusWindow(windowEl.id);
+                icon.onmousedown = (e) => {
+                    if (e.button !== 0) return;
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    initialX = icon.offsetLeft;
+                    initialY = icon.offsetTop;
+                    icon.style.zIndex = 1000;
+                };
 
-                const rect = windowEl.getBoundingClientRect();
-                this.draggedWindow = windowEl;
-                this.dragOffsetX = e.clientX - rect.left;
-                this.dragOffsetY = e.clientY - rect.top;
-            }
+                document.onmousemove = (e) => {
+                    if (!isDragging) return;
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+                    icon.style.left = `${Math.max(0, initialX + dx)}px`;
+                    icon.style.top = `${Math.max(0, initialY + dy)}px`;
+                };
 
-            onMouseMove(e) {
-                if (!this.draggedWindow) return;
-                e.preventDefault();
-
-                const x = e.clientX - this.dragOffsetX;
-                const y = e.clientY - this.dragOffsetY;
-                const maxX = window.innerWidth - 100;
-                const maxY = window.innerHeight - 50;
-
-                this.draggedWindow.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
-                this.draggedWindow.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
-            }
-
-            onMouseUp() {
-                this.draggedWindow = null;
-            }
+                document.onmouseup = () => {
+                    isDragging = false;
+                };
+            });
         }
 
         // ============================================
         // BOOT SEQUENCE
         // ============================================
-        
-        class BootSequence {
-            constructor() {
-                this.biosScreen = document.getElementById('bios-screen');
-                this.xpLoading = document.getElementById('xp-loading');
-                this.bootSequence = document.getElementById('boot-sequence');
-                this.messages = [
-                    'BIOS Date 01/15/01 14:22:51 Ver: 08.00.12',
-                    'CPU: Intel(R) Pentium(R) III Processor 800MHz',
-                    'Memory Test: 262144K OK',
-                    'Detecting HDD Primary Master... ST340014A',
-                    'Detecting HDD Primary Slave... None',
-                    'Detecting HDD Secondary Master... None',
-                    'Detecting HDD Secondary Slave... CD-ROM',
-                    '',
-                    'Press DEL to enter SETUP',
-                    '05/15/2021-MSI-7519-6A81VG4C-00',
-                    '',
-                    'Loading Windows XP...'
-                ];
+        async function startBootSequence() {
+            const biosScreen = document.getElementById('bios-screen');
+            const biosLines = [
+                'PhoenixBIOS 4.0 Release 6.0.5',
+                'Copyright 1985-2001 Phoenix Technologies Ltd.',
+                '',
+                'CPU: AMD Ryzen 9 5900X @ 3.0GHz',
+                'Memory Test: 16384MB OK',
+                '',
+                'Detecting hardware...',
+                '... Found CD-ROM',
+                '... Found Keyboard',
+                '... Found Mouse',
+                '',
+                'Press DEL to enter SETUP',
+                '01/15/2026-MCP78-6A61AG0EC-00',
+                '',
+                'Award Plug and Play BIOS Extension v1.0',
+                'Copyright (C) 1995-2001, Award Software, Inc.',
+                '',
+                'Starting Windows XP...'
+            ];
+
+            for (const line of biosLines) {
+                const p = document.createElement('div');
+                p.className = 'bios-line';
+                p.textContent = line;
+                biosScreen.appendChild(p);
+                await sleep(100);
             }
 
-            async start() {
-                // BIOS sequence
-                for (const msg of this.messages) {
-                    const line = document.createElement('div');
-                    line.className = 'bios-line';
-                    line.textContent = msg;
-                    this.biosScreen.appendChild(line);
-                    await this.delay(msg ? 200 : 100);
-                }
+            await sleep(1000);
+            biosScreen.classList.add('hidden');
+            document.getElementById('xp-loading').classList.add('visible');
 
-                await this.delay(500);
-
-                // Switch to XP loading
-                this.biosScreen.classList.add('hidden');
-                this.xpLoading.classList.add('visible');
-
-                // Animate loading bar
-                const loadingBar = document.getElementById('xp-loading-bar');
-                loadingBar.style.width = '100%';
-
-                await this.delay(2500);
-
-                // Hide boot sequence
-                this.bootSequence.classList.add('hidden');
+            const loadingBar = document.getElementById('xp-loading-bar');
+            for (let i = 0; i <= 100; i += 2) {
+                loadingBar.style.width = i + '%';
+                await sleep(30);
             }
 
-            delay(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
+            await sleep(500);
+            document.getElementById('boot-sequence').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.add('visible');
         }
 
-        // ============================================
-        // THREE.JS CRT EFFECT
-        // ============================================
-        
-        class CRTEffect {
-            constructor() {
-                this.init();
-            }
+        function enterDesktop() {
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.remove('visible');
+        }
 
-            init() {
-                const canvas = document.getElementById('three-canvas');
-                const container = document.getElementById('three-container');
-                
-                // Check mobile
-                if (window.innerWidth <= 768) {
-                    canvas.style.display = 'none';
-                    return;
-                }
-
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.z = 5;
-
-                const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-                // Create floating particles
-                const geometry = new THREE.BufferGeometry();
-                const count = 80;
-                const positions = new Float32Array(count * 3);
-
-                for (let i = 0; i < count * 3; i += 3) {
-                    positions[i] = (Math.random() - 0.5) * 12;
-                    positions[i + 1] = (Math.random() - 0.5) * 12;
-                    positions[i + 2] = (Math.random() - 0.5) * 8;
-                }
-
-                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-                const material = new THREE.PointsMaterial({
-                    color: 0x245DDA,
-                    size: 0.03,
-                    transparent: true,
-                    opacity: 0.5,
-                    sizeAttenuation: true
-                });
-
-                const particles = new THREE.Points(geometry, material);
-                scene.add(particles);
-
-                // Add subtle glow
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-                scene.add(ambientLight);
-
-                const animate = () => {
-                    if (window.innerWidth <= 768) return;
-                    requestAnimationFrame(animate);
-
-                    particles.rotation.x += 0.0003;
-                    particles.rotation.y += 0.0005;
-
-                    renderer.render(scene, camera);
-                };
-
-                animate();
-
-                window.addEventListener('resize', () => {
-                    if (window.innerWidth <= 768) {
-                        canvas.style.display = 'none';
-                        return;
-                    }
-                    canvas.style.display = 'block';
-                    camera.aspect = window.innerWidth / window.innerHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                });
-            }
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
 
         // ============================================
         // CLOCK
         // ============================================
-        
-        class Clock {
-            constructor() {
-                this.element = document.getElementById('clock');
-                this.update();
-                setInterval(() => this.update(), 1000);
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const displayHours = hours % 12 || 12;
+            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('clock').textContent = `${displayHours}:${displayMinutes} ${ampm}`;
+        }
+
+        // ============================================
+        // DESKTOP & START MENU
+        // ============================================
+        function desktopClick(e) {
+            if (e.target.id === 'desktop') {
+                document.querySelectorAll('.desktop-icon').forEach(icon => icon.classList.remove('selected'));
+                closeStartMenu();
+            }
+        }
+
+        function selectIcon(id, e) {
+            e.stopPropagation();
+            document.querySelectorAll('.desktop-icon').forEach(icon => icon.classList.remove('selected'));
+            document.getElementById(`icon-${id}`).classList.add('selected');
+        }
+
+        function toggleStartMenu() {
+            const menu = document.getElementById('start-menu');
+            menu.classList.toggle('visible');
+        }
+
+        function closeStartMenu() {
+            document.getElementById('start-menu').classList.remove('visible');
+        }
+
+        function showDesktop() {
+            Object.values(windows).forEach(w => {
+                if (w) w.style.display = 'none';
+            });
+            document.querySelectorAll('.taskbar-window').forEach(tw => tw.classList.remove('active'));
+            activeWindowId = null;
+        }
+
+        // ============================================
+        // WINDOW MANAGEMENT
+        // ============================================
+        function createWindow(id, title, width, height, contentFn) {
+            if (windows[id]) {
+                focusWindow(id);
+                return;
             }
 
-            update() {
-                const now = new Date();
-                let hours = now.getHours();
-                const minutes = now.getMinutes().toString().padStart(2, '0');
-                const ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12 || 12;
-                this.element.textContent = `${hours}:${minutes} ${ampm}`;
+            const zIndex = ++windowZIndex;
+            const win = document.createElement('div');
+            win.className = 'window';
+            win.id = `window-${id}`;
+            win.style.width = width + 'px';
+            win.style.height = height + 'px';
+            win.style.left = 100 + (Object.keys(windows).length * 30) + 'px';
+            win.style.top = 50 + (Object.keys(windows).length * 30) + 'px';
+            win.style.zIndex = zIndex;
+
+            const iconSvg = getWindowIcon(id);
+
+            win.innerHTML = `
+                <div class="window-header" onmousedown="startDrag(event, '${id}')">
+                    <div class="window-title">
+                        <span class="window-title-icon">${iconSvg}</span>
+                        <span>${title}</span>
+                    </div>
+                    <div class="window-controls">
+                        <div class="window-btn" onclick="minimizeWindow('${id}')">_</div>
+                        <div class="window-btn" onclick="maximizeWindow('${id}')">□</div>
+                        <div class="window-btn window-btn-close" onclick="closeWindow('${id}')">X</div>
+                    </div>
+                </div>
+                <div class="window-body" id="window-body-${id}"></div>
+            `;
+
+            document.getElementById('windows-container').appendChild(win);
+            windows[id] = win;
+
+            const body = document.getElementById(`window-body-${id}`);
+            contentFn(body);
+
+            win.style.display = 'flex';
+            activeWindowId = id;
+            updateTaskbar(id);
+            closeStartMenu();
+        }
+
+        function getWindowIcon(id) {
+            const iconMap = {
+                'about': createComputerIcon(),
+                'projects': createFolderIcon('#FFA000'),
+                'skills': createSkillsIcon(),
+                'python': createPythonIcon(),
+                'laravel': createLaravelIcon(),
+                'flutter': createFlutterIcon(),
+                'react': createReactIcon(),
+                'vue': createVueIcon(),
+                'php': createPHPIcon(),
+                'javascript': createJSIcon(),
+                'docker': createDockerIcon(),
+                'linux': createLinuxIcon(),
+                'mysql': createMySQLIcon(),
+                'nodejs': createNodeIcon(),
+                'tailwind': createTailwindIcon(),
+                'recycle': createRecycleIcon(),
+                'contact': `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="2" y="4" width="12" height="8" fill="#2196F3" rx="1"/><path d="M3 5l5 3 5-3" fill="none" stroke="#fff" stroke-width="1"/></svg>`
+            };
+            return iconMap[id] || iconMap['about'];
+        }
+
+        function focusWindow(id) {
+            const win = windows[id];
+            if (!win) return;
+
+            win.style.zIndex = ++windowZIndex;
+            win.querySelector('.window-header').classList.remove('inactive');
+
+            Object.keys(windows).forEach(key => {
+                if (key !== id && windows[key]) {
+                    windows[key].querySelector('.window-header').classList.add('inactive');
+                }
+            });
+
+            activeWindowId = id;
+            document.querySelectorAll('.taskbar-window').forEach(tw => tw.classList.remove('active'));
+            document.getElementById(`taskbar-${id}`)?.classList.add('active');
+        }
+
+        function closeWindow(id) {
+            const win = windows[id];
+            if (win) {
+                win.remove();
+                delete windows[id];
+                document.getElementById(`taskbar-${id}`)?.remove();
+
+                if (activeWindowId === id) {
+                    activeWindowId = null;
+                }
             }
+        }
+
+        function minimizeWindow(id) {
+            const win = windows[id];
+            if (win) {
+                win.style.display = 'none';
+                document.getElementById(`taskbar-${id}`)?.classList.remove('active');
+            }
+        }
+
+        function maximizeWindow(id) {
+            const win = windows[id];
+            if (win) {
+                if (win.dataset.maximized === 'true') {
+                    win.style.width = win.dataset.prevWidth;
+                    win.style.height = win.dataset.prevHeight;
+                    win.style.left = win.dataset.prevLeft;
+                    win.style.top = win.dataset.prevTop;
+                    win.dataset.maximized = 'false';
+                } else {
+                    win.dataset.prevWidth = win.style.width;
+                    win.dataset.prevHeight = win.style.height;
+                    win.dataset.prevLeft = win.style.left;
+                    win.dataset.prevTop = win.style.top;
+                    win.style.width = '100%';
+                    win.style.height = 'calc(100% - 35px)';
+                    win.style.left = '0';
+                    win.style.top = '0';
+                    win.dataset.maximized = 'true';
+                }
+            }
+        }
+
+        function updateTaskbar(id) {
+            const taskbar = document.getElementById('taskbar-windows');
+            const existing = document.getElementById(`taskbar-${id}`);
+            if (existing) return;
+
+            const tab = document.createElement('div');
+            tab.className = 'taskbar-window active';
+            tab.id = `taskbar-${id}`;
+            tab.innerHTML = `
+                <span class="taskbar-window-icon">${getWindowIcon(id)}</span>
+                <span class="taskbar-window-title">${getWindowTitle(id)}</span>
+            `;
+            tab.onclick = () => {
+                const win = windows[id];
+                if (win.style.display === 'none') {
+                    win.style.display = 'flex';
+                    focusWindow(id);
+                } else if (activeWindowId === id) {
+                    minimizeWindow(id);
+                } else {
+                    focusWindow(id);
+                }
+            };
+            taskbar.appendChild(tab);
+        }
+
+        function getWindowTitle(id) {
+            const titles = {
+                'about': 'My Computer',
+                'projects': 'My Projects',
+                'skills': 'Technical Skills',
+                'python': 'Python - Advanced',
+                'laravel': 'Laravel - Expert',
+                'flutter': 'Flutter - Mobile Apps',
+                'react': 'React.js - Frontend',
+                'vue': 'Vue.js - Frontend',
+                'php': 'PHP - Backend',
+                'javascript': 'JavaScript - Full Stack',
+                'docker': 'Docker - DevOps',
+                'linux': 'Linux - Server Admin',
+                'mysql': 'MySQL - Database',
+                'nodejs': 'Node.js - Backend',
+                'tailwind': 'Tailwind CSS - Styling',
+                'recycle': 'Recycle Bin',
+                'contact': 'Contact Me'
+            };
+            return titles[id] || 'Window';
+        }
+
+        // ============================================
+        // DRAG FUNCTIONALITY
+        // ============================================
+        function startDrag(e, id) {
+            if (e.target.classList.contains('window-btn')) return;
+            focusWindow(id);
+
+            const win = windows[id];
+            const rect = win.getBoundingClientRect();
+
+            dragState = {
+                isDragging: true,
+                windowId: id,
+                offsetX: e.clientX - rect.left,
+                offsetY: e.clientY - rect.top
+            };
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (!dragState.isDragging) return;
+            const win = windows[dragState.windowId];
+            if (!win || win.dataset.maximized === 'true') return;
+
+            let x = e.clientX - dragState.offsetX;
+            let y = e.clientY - dragState.offsetY;
+
+            win.style.left = x + 'px';
+            win.style.top = y + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            dragState.isDragging = false;
+        });
+
+        // ============================================
+        // WINDOW CONTENT FUNCTIONS
+        // ============================================
+        function openWindow(id) {
+            switch(id) {
+                case 'about':
+                    createWindow('about', 'My Computer', 700, 500, renderAboutMe);
+                    break;
+                case 'projects':
+                    createWindow('projects', 'My Projects', 600, 450, renderProjects);
+                    break;
+                case 'skills':
+                    createWindow('skills', 'Technical Skills', 650, 500, renderSkillsMenu);
+                    break;
+                case 'python':
+                    createWindow('python', 'Python - Senior Developer', 650, 550, (body) => renderSkillResume(body, 'python'));
+                    break;
+                case 'laravel':
+                    createWindow('laravel', 'Laravel - Expert', 650, 550, (body) => renderSkillResume(body, 'laravel'));
+                    break;
+                case 'flutter':
+                    createWindow('flutter', 'Flutter - Mobile Development', 900, 650, renderFlutterSimulator);
+                    break;
+                case 'react':
+                    createWindow('react', 'React.js - Frontend Expert', 700, 550, (body) => renderSkillResume(body, 'react'));
+                    break;
+                case 'vue':
+                    createWindow('vue', 'Vue.js - Frontend Developer', 650, 550, (body) => renderSkillResume(body, 'vue'));
+                    break;
+                case 'php':
+                    createWindow('php', 'PHP - Backend Developer', 650, 550, (body) => renderSkillResume(body, 'php'));
+                    break;
+                case 'javascript':
+                    createWindow('javascript', 'JavaScript - Full Stack', 650, 550, (body) => renderSkillResume(body, 'javascript'));
+                    break;
+                case 'docker':
+                    createWindow('docker', 'Docker - DevOps', 700, 500, renderDockerTerminal);
+                    break;
+                case 'linux':
+                    createWindow('linux', 'Linux Server Administration', 700, 500, renderLinuxTerminal);
+                    break;
+                case 'mysql':
+                    createWindow('mysql', 'MySQL - Database Expert', 650, 550, (body) => renderSkillResume(body, 'mysql'));
+                    break;
+                case 'nodejs':
+                    createWindow('nodejs', 'Node.js - Backend Developer', 650, 550, (body) => renderSkillResume(body, 'nodejs'));
+                    break;
+                case 'tailwind':
+                    createWindow('tailwind', 'Tailwind CSS - Styling', 650, 550, (body) => renderSkillResume(body, 'tailwind'));
+                    break;
+                case 'recycle':
+                    createWindow('recycle', 'Recycle Bin', 700, 450, renderRecycleBin);
+                    break;
+                case 'contact':
+                    createWindow('contact', 'Contact Me - Notepad', 500, 400, renderContact);
+                    break;
+            }
+        }
+
+        // ============================================
+        // CONTENT RENDERERS
+        // ============================================
+        function renderAboutMe(body) {
+            body.innerHTML = `
+                <div class="about-container">
+                    <div class="about-sidebar">
+                        <div class="about-avatar-large">M</div>
+                        <div class="about-name">Mahmudul Hasan</div>
+                        <div class="about-title">Senior Full Stack Developer</div>
+                        <div style="margin-top:15px;">
+                            <div class="about-status">
+                                <div class="status-dot"></div>
+                                <span>Open to Projects</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-main">
+                        <div class="about-section">
+                            <div class="about-section-title">Professional Summary</div>
+                            <p style="font-size:12px; line-height:1.6; color:#333;">
+                                Senior Full Stack Developer with extensive experience in building scalable web and mobile applications.
+                                Passionate about DSA, clean architecture, and delivering high-quality solutions.
+                                Specialized in Flutter for mobile, Laravel/Python for backend, and modern JavaScript frameworks.
+                            </p>
+                        </div>
+                        <div class="about-section">
+                            <div class="about-section-title">Core Skills</div>
+                            <div class="about-skills-grid">
+                                <div class="about-skill-tag">Flutter</div>
+                                <div class="about-skill-tag">Dart</div>
+                                <div class="about-skill-tag">PHP</div>
+                                <div class="about-skill-tag">JavaScript</div>
+                                <div class="about-skill-tag">Alpine.js</div>
+                                <div class="about-skill-tag">Vue.js</div>
+                                <div class="about-skill-tag">React.js</div>
+                                <div class="about-skill-tag">Laravel</div>
+                                <div class="about-skill-tag">Tailwind CSS</div>
+                                <div class="about-skill-tag">API Dev</div>
+                                <div class="about-skill-tag">MySQL</div>
+                                <div class="about-skill-tag">System Architecture</div>
+                            </div>
+                        </div>
+                        <div class="about-section">
+                            <div class="about-section-title">Experience Timeline</div>
+                            <div class="about-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2009 - 2012</div>
+                                    <div class="timeline-desc">Started with VB6, developed desktop applications</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2013 - 2015</div>
+                                    <div class="timeline-desc">Transitioned to PHP & MySQL web development</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2016 - 2018</div>
+                                    <div class="timeline-desc">Learned Laravel framework, built enterprise apps</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2019 - 2021</div>
+                                    <div class="timeline-desc">Mastered JavaScript, React.js, Vue.js</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2022 - Present</div>
+                                    <div class="timeline-desc">Flutter mobile development, AI integration</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderProjects(body) {
+            const projects = [
+                { name: 'Google Antigravity', desc: 'Specialized automation project', icon: '🚀' },
+                { name: 'SpendWise', desc: 'Mobile expense tracker', icon: '💰' },
+                { name: 'Android Cleaner', desc: 'Utility application', icon: '🧹' },
+                { name: 'VB6 Inventory System', desc: 'Legacy desktop app (2009)', icon: '📦' },
+                { name: 'E-Commerce Platform', desc: 'Laravel + React', icon: '🛒' },
+                { name: 'AI Chatbot', desc: 'LangChain + OpenAI', icon: '🤖' }
+            ];
+
+            body.innerHTML = `
+                <div class="projects-grid">
+                    ${projects.map(p => `
+                        <div class="project-card" onclick="alert('Opening ${p.name}...')">
+                            <div class="project-icon" style="font-size:36px;">${p.icon}</div>
+                            <div class="project-name">${p.name}</div>
+                            <div class="project-desc">${p.desc}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderSkillsMenu(body) {
+            const skills = Object.keys(skillsData);
+            body.innerHTML = `
+                <div style="padding:20px;">
+                    <h3 style="color:#245DDA; margin-bottom:15px;">Select a Skill to View Details</h3>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:15px;">
+                        ${skills.map(s => `
+                            <div style="background:#f5f5f5; padding:15px; border:1px solid #ddd; cursor:pointer; text-align:center; border-radius:8px; transition:all 0.2s;"
+                                onmouseover="this.style.background='#E8F5E9'; this.style.borderColor='#4CAF50';"
+                                onmouseout="this.style.background='#f5f5f5'; this.style.borderColor='#ddd';"
+                                onclick="openWindow('${s}')">
+                                <div style="width:50px; height:50px; margin:0 auto 10px;">${getSkillIcon(s)}</div>
+                                <div style="font-weight:bold; color:#333; font-size:12px;">${skillsData[s].name}</div>
+                                <div style="color:#666; font-size:10px; margin-top:5px;">Level: ${skillsData[s].level}%</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function getSkillIcon(skill) {
+            const icons = {
+                python: createPythonIcon(),
+                laravel: createLaravelIcon(),
+                flutter: createFlutterIcon(),
+                react: createReactIcon(),
+                vue: createVueIcon(),
+                php: createPHPIcon(),
+                javascript: createJSIcon(),
+                docker: createDockerIcon(),
+                linux: createLinuxIcon(),
+                mysql: createMySQLIcon(),
+                nodejs: createNodeIcon(),
+                tailwind: createTailwindIcon()
+            };
+            return icons[skill] || '';
+        }
+
+        function renderSkillResume(body, skill) {
+            const data = skillsData[skill];
+            if (!data) return;
+
+            body.innerHTML = `
+                <div class="skill-resume-container">
+                    <div class="skill-header">
+                        ${getSkillIcon(skill)}
+                        <div>
+                            <div class="skill-title">${data.name} Developer</div>
+                            <div class="skill-subtitle">Senior Level - ${data.level}% Proficiency</div>
+                        </div>
+                    </div>
+                    <div class="skill-level-bar">
+                        <div class="skill-level-label">Skill Proficiency</div>
+                        <div class="skill-level-track">
+                            <div class="skill-level-fill" style="width:${data.level}%"></div>
+                        </div>
+                    </div>
+                    <div class="about-section">
+                        <div class="about-section-title">In-Depth Topics</div>
+                        <div class="skill-topics">
+                            ${data.topics.map(t => `<span class="skill-topic">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="skill-projects">
+                        <div class="skill-projects-title">Related Projects</div>
+                        ${data.projects.map(p => `
+                            <div class="skill-project">
+                                <div class="skill-project-name">${p}</div>
+                                <div class="skill-project-desc">Built using ${data.name}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFlutterSimulator(body) {
+            body.innerHTML = `
+                <div style="display:flex; gap:30px; padding:20px; background:#2d2d2d; height:100%; overflow:auto; justify-content:center;">
+                    <div class="phone-simulator">
+                        <div style="color:#fff; margin-bottom:10px; font-size:12px;">Android Simulator</div>
+                        <div class="phone-frame android">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen">
+                                <div class="phone-screen-content" id="android-screen">
+                                    <div style="background:linear-gradient(135deg, #02569B, #0175C2); height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; padding:20px;">
+                                        <svg width="60" height="60" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#fff"/><path d="M24 8 L24 40 M8 24 L40 24" stroke="#02569B" stroke-width="3"/></svg>
+                                        <div style="font-size:14px; font-weight:bold; margin-top:10px;">Flutter Portfolio</div>
+                                        <div style="font-size:10px; opacity:0.8;">By Mahmudul Hasan</div>
+                                        <div style="margin-top:30px; font-size:10px;">Loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="phone-simulator">
+                        <div style="color:#fff; margin-bottom:10px; font-size:12px;">iPhone Simulator</div>
+                        <div class="phone-frame iphone">
+                            <div class="phone-notch" style="width:60px;"></div>
+                            <div class="phone-screen">
+                                <div class="phone-screen-content" id="iphone-screen">
+                                    <div style="background:linear-gradient(135deg, #000, #333); height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; padding:20px;">
+                                        <svg width="60" height="60" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#fff"/><path d="M24 8 L24 40 M8 24 L40 24" stroke="#000" stroke-width="3"/></svg>
+                                        <div style="font-size:14px; font-weight:bold; margin-top:10px;">Flutter Portfolio</div>
+                                        <div style="font-size:10px; opacity:0.8;">By Mahmudul Hasan</div>
+                                        <div style="margin-top:30px; font-size:10px;">Loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            setTimeout(() => {
+                document.getElementById('android-screen').innerHTML = renderFlutterApp();
+                document.getElementById('iphone-screen').innerHTML = renderFlutterApp();
+            }, 2000);
+        }
+
+        function renderFlutterApp() {
+            return `
+                <div style="background:#fff; height:100%; padding:15px;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+                        <div style="width:40px; height:40px; background:linear-gradient(135deg, #02569B, #0175C2); border-radius:10px; display:flex; align-items:center; justify-content:center;">
+                            <span style="color:#fff; font-weight:bold;">M</span>
+                        </div>
+                        <div>
+                            <div style="font-weight:bold; font-size:14px;">Mahmudul Hasan</div>
+                            <div style="color:#666; font-size:10px;">Senior Developer</div>
+                        </div>
+                    </div>
+                    <div style="font-size:12px; color:#333; line-height:1.6;">
+                        <p><strong>Skills:</strong></p>
+                        <p>• Flutter & Dart</p>
+                        <p>• State Management (BLoC, Provider)</p>
+                        <p>• REST APIs & Firebase</p>
+                        <p>• Custom Widgets</p>
+                        <p style="margin-top:15px;"><strong>Projects:</strong></p>
+                        <p>• SpendWise - Expense Tracker</p>
+                        <p>• Android Cleaner</p>
+                        <p>• E-commerce Apps</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDockerTerminal(body) {
+            body.innerHTML = `
+                <div class="cmd-container" id="docker-cmd">
+                    <div class="cmd-output">Docker version 24.0.7</div>
+                    <div class="cmd-output">Starting Mahmudul's Development Environment...</div>
+                    <div class="cmd-output">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                    <div class="cmd-output">CONTAINER LIST:</div>
+                    <div class="cmd-output info">  CONTAINER ID  IMAGE          STATUS       PORTS</div>
+                    <div class="cmd-output">  abc123def   laravel-app    Running      80->8000</div>
+                    <div class="cmd-output">  def456ghi   mysql:8.0      Running      3306->3306</div>
+                    <div class="cmd-output">  ghi789jkl   redis:alpine   Running      6379->6379</div>
+                    <div class="cmd-output">  jkl012mno   nginx:alpine   Running      443->443</div>
+                    <div class="cmd-output">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                    <div class="cmd-output">Type 'help' for available commands</div>
+                    <div class="cmd-line">
+                        <span class="cmd-prompt">root@mahmudul:~$ </span>
+                        <input type="text" class="cmd-input" id="docker-input" placeholder="Type command..." autofocus>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('docker-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const cmd = e.target.value;
+                    const output = document.getElementById('docker-cmd');
+                    output.innerHTML += `<div class="cmd-line"><span class="cmd-prompt">root@mahmudul:~$ </span>${cmd}</div>`;
+                    output.innerHTML += `<div class="cmd-output">${executeDockerCommand(cmd)}</div>`;
+                    output.innerHTML += `<div class="cmd-line"><span class="cmd-prompt">root@mahmudul:~$ </span><input type="text" class="cmd-input" id="docker-input" placeholder="Type command..." autofocus></div>`;
+                    document.getElementById('docker-input').addEventListener('keypress', arguments.callee);
+                    output.scrollTop = output.scrollHeight;
+                }
+            });
+        }
+
+        function executeDockerCommand(cmd) {
+            const commands = {
+                'help': 'Available: docker ps, docker images, docker-compose up, docker exec, docker logs',
+                'docker ps': 'CONTAINER ID  IMAGE          STATUS\nabc123def   laravel-app    Running',
+                'docker images': 'REPOSITORY    TAG      SIZE\nlaravel      latest   1.2GB\nmysql        8.0      500MB',
+                'ls': 'app/  database/  docker/  tests/',
+                'pwd': '/home/mahmudul/projects',
+                'whoami': 'mahmudul-hasan'
+            };
+            return commands[cmd] || `bash: ${cmd}: command not found`;
+        }
+
+        function renderLinuxTerminal(body) {
+            body.innerHTML = `
+                <div class="cmd-container" id="linux-cmd">
+                    <div class="cmd-output">Linux mahmudul-server 5.15.0-generic</div>
+                    <div class="cmd-output">Welcome to Ubuntu 22.04 LTS</div>
+                    <div class="cmd-output">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                    <div class="cmd-output info">System Information:</div>
+                    <div class="cmd-output">  OS: Ubuntu 22.04 LTS</div>
+                    <div class="cmd-output">  CPU: AMD Ryzen 9</div>
+                    <div class="cmd-output">  RAM: 32GB</div>
+                    <div class="cmd-output">  Uptime: 45 days, 3 hours</div>
+                    <div class="cmd-output">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                    <div class="cmd-output">Services Running:</div>
+                    <div class="cmd-output success">  ✓ Nginx - Web Server</div>
+                    <div class="cmd-output success">  ✓ MySQL 8.0 - Database</div>
+                    <div class="cmd-output success">  ✓ PHP-FPM 8.2</div>
+                    <div class="cmd-output success">  ✓ Redis - Cache</div>
+                    <div class="cmd-line">
+                        <span class="cmd-prompt">mahmudul@server:~$ </span>
+                        <input type="text" class="cmd-input" id="linux-input" placeholder="Type command..." autofocus>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('linux-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const cmd = e.target.value;
+                    const output = document.getElementById('linux-cmd');
+                    output.innerHTML += `<div class="cmd-line"><span class="cmd-prompt">mahmudul@server:~$ </span>${cmd}</div>`;
+                    output.innerHTML += `<div class="cmd-output">${executeLinuxCommand(cmd)}</div>`;
+                    output.innerHTML += `<div class="cmd-line"><span class="cmd-prompt">mahmudul@server:~$ </span><input type="text" class="cmd-input" id="linux-input" placeholder="Type command..." autofocus></div>`;
+                    document.getElementById('linux-input').addEventListener('keypress', arguments.callee);
+                    output.scrollTop = output.scrollHeight;
+                }
+            });
+        }
+
+        function executeLinuxCommand(cmd) {
+            const commands = {
+                'help': 'Available: ls, pwd, whoami, uname, top, df, free, systemctl status',
+                'ls': 'projects/  backups/  config/  logs/',
+                'pwd': '/home/mahmudul',
+                'whoami': 'mahmudul',
+                'uname -a': 'Linux mahmudul-server 5.15.0-generic #1 SMP x86_64 GNU/Linux',
+                'df -h': 'Filesystem      Size  Used  Avail  Use%\n/dev/sda1       100G   45G   55G  45%',
+                'free -h': '              total  used  free\nMem:            32Gi  12Gi  20Gi',
+                'uptime': ' 12:30:20 up 45 days, 3:22, 2 users'
+            };
+            return commands[cmd] || `bash: ${cmd}: command not found`;
+        }
+
+        function renderRecycleBin(body) {
+            body.innerHTML = `
+                <div class="explorer-container">
+                    <div class="explorer-sidebar">
+                        <div class="explorer-folder-tree">
+                            <div class="explorer-folder">
+                                <svg class="explorer-folder-icon" viewBox="0 0 16 16"><path d="M1 4v8c0 1 1 2 2 2h10c1 0 2-1 2-2V4" fill="#FFA000"/></svg>
+                                <span>Desktop</span>
+                            </div>
+                            <div class="explorer-folder" style="background:rgba(255,255,255,0.2);">
+                                <svg class="explorer-folder-icon" viewBox="0 0 16 16"><path d="M1 4v8c0 1 1 2 2 2h10c1 0 2-1 2-2V4" fill="#888"/></svg>
+                                <span>Recycle Bin</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="explorer-main">
+                        <div style="font-size:12px; color:#666; margin-bottom:15px; padding:10px; background:#f5f5f5; border-radius:5px;">
+                            <strong>Legacy/Obsolete Skills</strong><br>
+                            <span style="font-size:10px;">These technologies are outdated and no longer in active use</span>
+                        </div>
+                        <div class="explorer-files">
+                            ${obsoleteSkills.map(s => `
+                                <div class="explorer-file" onclick="alert('Opening ${s.name}...')">
+                                    ${createFileIcon(s.icon)}
+                                    <div class="explorer-file-name">${s.name}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderContact(body) {
+            body.innerHTML = `
+                <div class="notepad-container">
+                    <div class="notepad-toolbar">
+                        <div class="notepad-toolbar-item">File</div>
+                        <div class="notepad-toolbar-item">Edit</div>
+                        <div class="notepad-toolbar-item">Format</div>
+                        <div class="notepad-toolbar-item">View</div>
+                        <div class="notepad-toolbar-item">Help</div>
+                    </div>
+                    <textarea class="notepad-content" readonly>
+CONTACT INFORMATION
+====================
+
+Name: Mahmudul Hasan
+Title: Senior Full Stack Developer
+Location: Available Globally (Remote)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TECHNICAL SKILLS:
+• Frontend: Flutter, React.js, Vue.js, JavaScript, Tailwind CSS
+• Backend: Python, PHP, Laravel, Node.js
+• Database: MySQL, PostgreSQL
+• DevOps: Docker, Linux, AWS
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CURRENT STATUS: Open to New Projects
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONTACT METHODS:
+• Email: Contact via GitHub
+• GitHub: github.com/mahmudul-hasan
+• LinkedIn: Available on Request
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Feel free to reach out for:
+• Freelance Projects
+• Full-time Opportunities
+• Contract Work
+• Technical Consulting
+
+Thank you for viewing my portfolio!
+                    </textarea>
+                </div>
+            `;
         }
 
         // ============================================
         // SHUTDOWN
         // ============================================
-        
-        function shutdown() {
-            const screen = document.getElementById('shutdown-screen');
-            screen.classList.add('visible');
-            
+        function shutdownComputer() {
+            closeStartMenu();
+            const overlay = document.getElementById('shutdown-overlay');
+            overlay.classList.add('active');
+
             setTimeout(() => {
-                location.reload();
-            }, 4000);
+                overlay.style.opacity = '0';
+                overlay.style.transition = 'opacity 2s';
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }, 1500);
         }
 
         // ============================================
-        // RUN COMMAND
+        // THREE.JS CRT EFFECT
         // ============================================
-        
-        function runCommand() {
-            const input = document.getElementById('run-input');
-            const cmd = input.value.toLowerCase().trim();
+        function initThreeJS() {
+            const container = document.getElementById('three-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
 
-            switch(cmd) {
-                case 'help':
-                case 'cmd':
-                    windowMgr.openWindow('win-cmd', 'Command Prompt');
-                    break;
-                case 'notepad':
-                case 'contact':
-                    windowMgr.openWindow('win-contact', 'Contact Me - Notepad');
-                    break;
-                case 'projects':
-                    windowMgr.openWindow('win-projects', 'My Projects');
-                    break;
-                case 'skills':
-                    windowMgr.openWindow('win-skills', 'Technical Skills');
-                    break;
-                case 'about':
-                    windowMgr.openWindow('win-about', 'About Me');
-                    break;
-                default:
-                    alert(`Cannot find '${cmd}' or similar command.`);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particleCount = 500;
+            const posArray = new Float32Array(particleCount * 3);
+
+            for(let i = 0; i < particleCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
             }
 
-            input.value = '';
-        }
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.02,
+                color: 0x88ccff,
+                transparent: true,
+                opacity: 0.3
+            });
 
-        // ============================================
-        // COMMAND PROMPT INPUT
-        // ============================================
-        
-        function setupCmdInput() {
-            const input = document.getElementById('cmd-input');
-            if (!input) return;
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
 
-            const output = document.getElementById('cmd-output');
+            camera.position.z = 3;
 
-            input.addEventListener('keypress', e => {
-                if (e.key === 'Enter') {
-                    const cmd = input.value.trim().toLowerCase();
+            function animate() {
+                requestAnimationFrame(animate);
+                particlesMesh.rotation.y += 0.0005;
+                particlesMesh.rotation.x += 0.0002;
+                renderer.render(scene, camera);
+            }
 
-                    const cmdLine = document.createElement('div');
-                    cmdLine.className = 'cmd-line';
-                    cmdLine.innerHTML = `<span class="cmd-prompt">C:\\Documents and Settings\\Mahmudul> </span>${cmd}`;
-                    output.insertBefore(cmdLine, input.parentElement);
+            animate();
 
-                    let response = '';
-                    switch(cmd) {
-                        case 'help':
-                            response = 'Available commands: help, clear, about, skills, projects, contact, exit';
-                            break;
-                        case 'clear':
-                            while (output.children.length > 3) output.removeChild(output.children[1]);
-                            input.value = '';
-                            return;
-                        case 'about':
-                            response = 'Mahmudul Hasan - Full-Stack Engineer & AI Specialist';
-                            break;
-                        case 'skills':
-                            response = 'Backend: Python, Laravel | Mobile: Flutter | AI: LangChain, OpenAI, Hugging Face | DevOps: Docker';
-                            break;
-                        case 'projects':
-                            response = 'Google Antigravity, SpendWise, Android Cleaner';
-                            break;
-                        case 'contact':
-                            response = 'Email: mahmudul.hasan@example.com | GitHub: github.com/mahmudulhasan';
-                            windowMgr.openWindow('win-contact', 'Contact Me - Notepad');
-                            break;
-                        case 'exit':
-                            windowMgr.closeWindow('win-cmd');
-                            return;
-                        default:
-                            response = `'${cmd}' is not recognized as an internal or external command.`;
-                    }
-
-                    if (response) {
-                        const respLine = document.createElement('div');
-                        respLine.className = 'cmd-line';
-                        respLine.textContent = response;
-                        output.insertBefore(respLine, input.parentElement);
-                    }
-
-                    input.value = '';
-                }
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
             });
         }
 
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        
-        let windowMgr;
-        let dragMgr;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Start boot sequence
-            const boot = new BootSequence();
-            boot.start();
-
-            // Initialize Three.js after boot
-            setTimeout(() => {
-                new CRTEffect();
-            }, 3500);
-
-            // Initialize managers
-            windowMgr = new WindowManager();
-            dragMgr = new DragManager(windowMgr);
-
-            // Initialize clock
-            new Clock();
-
-            // Setup CMD
-            setupCmdInput();
-
-            // Start menu toggle
-            const startBtn = document.getElementById('start-button');
-            const startMenu = document.getElementById('start-menu');
-
-            startBtn.addEventListener('click', e => {
-                e.stopPropagation();
-                startMenu.classList.toggle('visible');
-                startBtn.classList.toggle('active');
-            });
-
-            document.addEventListener('click', e => {
-                if (!startMenu.contains(e.target) && e.target !== startBtn) {
-                    startMenu.classList.remove('visible');
-                    startBtn.classList.remove('active');
-                }
-            });
-
-            // Desktop icon handling
-            document.querySelectorAll('.desktop-icon').forEach(icon => {
-                icon.addEventListener('dblclick', () => {
-                    const action = icon.dataset.action;
-                    switch(action) {
-                        case 'projects':
-                            windowMgr.openWindow('win-projects', 'My Projects');
-                            break;
-                        case 'skills':
-                            windowMgr.openWindow('win-skills', 'Technical Skills');
-                            break;
-                        case 'about':
-                            windowMgr.openWindow('win-about', 'About Me');
-                            break;
-                        case 'contact':
-                            windowMgr.openWindow('win-contact', 'Contact Me - Notepad');
-                            break;
-                        case 'run':
-                            windowMgr.openWindow('win-run', 'Run');
-                            break;
-                        case 'shutdown':
-                            shutdown();
-                            break;
-                        case 'recycle':
-                            alert('Recycle Bin is empty');
-                            break;
-                        case 'python':
-                        case 'laravel':
-                        case 'flutter':
-                        case 'langchain':
-                        case 'openai':
-                        case 'huggingface':
-                        case 'docker':
-                            windowMgr.openWindow('win-skills', 'Technical Skills');
-                            break;
-                    }
-                });
-
-                icon.addEventListener('click', () => {
-                    document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
-                    icon.classList.add('selected');
-                });
-            });
-
-            // Start menu items
-            document.querySelectorAll('.start-menu-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const action = item.dataset.action;
-                    startMenu.classList.remove('visible');
-                    startBtn.classList.remove('active');
-
-                    if (action === 'shutdown') {
-                        shutdown();
-                    } else if (action) {
-                        const windowMap = {
-                            'projects': ['win-projects', 'My Projects'],
-                            'skills': ['win-skills', 'Technical Skills'],
-                            'about': ['win-about', 'About Me'],
-                            'contact': ['win-contact', 'Contact Me - Notepad'],
-                            'run': ['win-run', 'Run']
-                        };
-                        if (windowMap[action]) {
-                            windowMgr.openWindow(...windowMap[action]);
-                        }
-                    }
-                });
-            });
-
-            // Shutdown button
-            document.querySelector('[data-action="shutdown-btn"]')?.addEventListener('click', shutdown);
-
-            // Window controls
-            document.querySelectorAll('.window').forEach(win => {
-                const id = win.id;
-
-                win.querySelector('.close').addEventListener('click', e => {
-                    e.stopPropagation();
-                    windowMgr.closeWindow(id);
-                });
-
-                win.querySelector('.minimize').addEventListener('click', e => {
-                    e.stopPropagation();
-                    windowMgr.minimizeWindow(id);
-                });
-
-                win.querySelector('.maximize').addEventListener('click', e => {
-                    e.stopPropagation();
-                    windowMgr.maximizeWindow(id);
-                });
-
-                win.querySelector('.window-titlebar').addEventListener('click', () => {
-                    windowMgr.focusWindow(id);
-                });
-            });
-
-            // Project items
-            document.querySelectorAll('.project-item').forEach(item => {
-                item.addEventListener('dblclick', () => {
-                    const project = item.dataset.project;
-                    const windowMap = {
-                        'antigravity': ['win-antigravity', 'Google Antigravity'],
-                        'spendwise': ['win-spendwise', 'SpendWise'],
-                        'cleaner': ['win-cleaner', 'Android Cleaner']
-                    };
-                    if (windowMap[project]) {
-                        windowMgr.openWindow(...windowMap[project]);
-                    }
-                });
-            });
-
-            // Run input
-            const runInput = document.getElementById('run-input');
-            runInput?.addEventListener('keypress', e => {
-                if (e.key === 'Enter') runCommand();
-            });
-        });
+        // Initialize
+        init();
     </script>
 </body>
 </html>
