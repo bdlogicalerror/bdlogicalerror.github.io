@@ -3,1511 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahmudul Hasan - Windows XP Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>Mahmudul Hasan - XP FullStack & AI</title>
     <style>
         /* ============================================
-           AUTHENTIC WINDOWS XP LUNA THEME
+           LUNA CORE & XP DESIGN SYSTEM
            ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-user-select: none; }
         :root {
-            --xp-title-blue: #245DDA;
-            --xp-title-blue-dark: #1A4AC0;
-            --xp-title-blue-darker: #103090;
-            --xp-taskbar-blue: #245DDA;
-            --xp-taskbar-gradient: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%);
-            --xp-start-green: #388E3C;
-            --xp-start-green-light: #4CAF50;
-            --xp-start-green-dark: #2E7D32;
+            --xp-blue: #245DDA;
+            --xp-taskbar: #245DDA;
             --xp-selection: #316AC5;
-            --xp-window-bg: #FFFFFF;
-            --xp-dialog-bg: #ECE9D8;
-            --xp-border-light: #FFFFFF;
-            --xp-border-dark: #0D1F5C;
-            --xp-gray: #808080;
-            --xp-gray-light: #E8E8E8;
-            --xp-gray-dark: #A0A0A0;
-            --xp-green-felt: #228B22;
+            --xp-bg: #ECE9D8;
+            --xp-start: #388E3C;
         }
-        body { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; font-size: 11px; overflow: hidden; background: #000; height: 100vh; width: 100vw; }
+        body { font-family: 'Tahoma', 'Segoe UI', sans-serif; font-size: 11px; overflow: hidden; background: #000; height: 100vh; }
 
         /* ============================================
-           BOOT SEQUENCE
+           MOBILE CRASH SCREEN (BSOD)
            ============================================ */
-        #boot-sequence { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        #boot-sequence.hidden { display: none; }
-        #bios-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: #245DDA; font-family: 'Courier New', monospace; font-size: 14px; padding: 30px; line-height: 1.6; }
-        #bios-screen.hidden { display: none; }
-        .bios-line { opacity: 0; animation: biosFadeIn 0.05s forwards; }
-        @keyframes biosFadeIn { to { opacity: 1; } }
-        #xp-loading { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #003399 0%, #000066 100%); display: none; flex-direction: column; justify-content: center; align-items: center; }
-        #xp-loading.visible { display: flex; }
-        #xp-logo { width: 300px; height: 180px; position: relative; margin-bottom: 40px; }
-        .xp-logo-img { width: 100%; height: 100%; }
-        #xp-loading-bar-container { width: 400px; height: 10px; background: #000; border-radius: 5px; overflow: hidden; border: 1px solid #666; }
-        #xp-loading-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #316AC5, #5A9CFF, #316AC5); background-size: 200% 100%; animation: loadingShimmer 1s linear infinite; }
-        @keyframes loadingShimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
-        #loading-text { color: #fff; font-size: 12px; margin-top: 15px; font-family: 'Tahoma', sans-serif; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-
-        /* ============================================
-           DESKTOP CONTAINER
-           ============================================ */
-        #desktop-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
-        #three-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        #desktop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background: url('user_input_files/bliss.jpg') no-repeat center center; background-size: cover; }
-
-        /* ============================================
-           DESKTOP ICONS
-           ============================================ */
-        .desktop-icons { position: absolute; top: 20px; left: 20px; display: flex; flex-direction: column; gap: 15px; flex-wrap: wrap; height: calc(100% - 60px); align-content: flex-start; }
-        .desktop-icon { width: 75px; display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 5px; border: 1px solid transparent; border-radius: 3px; position: relative; }
-        .desktop-icon:hover { background: rgba(49, 106, 197, 0.3); border: 1px dotted #245DDA; }
-        .desktop-icon.selected { background: rgba(49, 106, 197, 0.5); border: 1px dotted #fff; }
-        .desktop-icon-img { width: 48px; height: 48px; image-rendering: pixelated; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); transition: transform 0.1s; }
-        .desktop-icon:hover .desktop-icon-img { transform: scale(1.05); }
-        .desktop-icon-label { color: #fff; font-size: 11px; text-align: center; margin-top: 5px; text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000; max-width: 70px; word-wrap: break-word; line-height: 1.2; }
-        .desktop-icon .badge { position: absolute; top: -5px; right: 5px; background: #e80000; color: #fff; font-size: 9px; padding: 1px 4px; border-radius: 3px; display: none; }
-
-        /* ============================================
-           TASKBAR
-           ============================================ */
-        #taskbar { position: absolute; bottom: 0; left: 0; width: 100%; height: 35px; background: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%); z-index: 10000; display: flex; align-items: center; padding: 0 5px; border-top: 1px solid #5A9CFF; }
-        #start-button { display: flex; align-items: center; gap: 5px; padding: 3px 8px; background: linear-gradient(180deg, #4CAF50 0%, #388E3C 50%, #2E7D32 100%); border: 2px outset #8BC34A; cursor: pointer; margin-right: 10px; }
-        #start-button:hover { filter: brightness(1.1); }
-        #start-button:active { border-style: inset; }
-        #start-button img { width: 18px; height: 18px; }
-        #start-button span { color: #fff; font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px #000; }
-        .quick-launch { display: flex; gap: 3px; margin-right: 10px; padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.3); }
-        .quick-launch-icon { width: 22px; height: 22px; background: rgba(255,255,255,0.1); border: 1px outset rgba(255,255,255,0.2); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .quick-launch-icon:hover { background: rgba(255,255,255,0.2); }
-        .quick-launch-icon img { width: 16px; height: 16px; }
-        #taskbar-windows { flex: 1; display: flex; gap: 3px; overflow: hidden; }
-        .taskbar-window { display: flex; align-items: center; gap: 5px; padding: 2px 8px; background: linear-gradient(180deg, #7695DE 0%, #5A7AD5 50%, #4A6AC5 100%); border: 1px outset #9BB6E8; cursor: pointer; max-width: 180px; min-width: 80px; }
-        .taskbar-window:hover { filter: brightness(1.05); }
-        .taskbar-window.active { background: linear-gradient(180deg, #245DDA 0%, #1A4AC0 100%); border: 1px inset #5A9CFF; }
-        .taskbar-window-icon { width: 16px; height: 16px; }
-        .taskbar-window-title { color: #000; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .taskbar-window.active .taskbar-window-title { color: #fff; text-shadow: 1px 1px 1px #000; }
-        #system-tray { display: flex; align-items: center; gap: 10px; padding: 0 10px; background: linear-gradient(180deg, #1A4AC0 0%, #103090 100%); border-left: 1px solid #5A9CFF; height: 100%; }
-        .tray-icon { width: 16px; height: 16px; cursor: pointer; opacity: 0.9; }
-        #clock { color: #fff; font-size: 11px; text-shadow: 1px 1px 1px #000; padding: 3px 8px; background: rgba(0,0,0,0.2); border-radius: 3px; }
-
-        /* ============================================
-           START MENU
-           ============================================ */
-        #start-menu { position: absolute; bottom: 35px; left: 0; width: 400px; background: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%); z-index: 10001; display: none; border: 2px outset #5A9CFF; box-shadow: 2px -2px 10px rgba(0,0,0,0.3); }
-        #start-menu.visible { display: block; }
-        .start-menu-header { display: flex; align-items: center; gap: 10px; padding: 10px 15px; background: linear-gradient(90deg, #1A4AC0, #245DDA); border-bottom: 1px solid #103090; }
-        .user-avatar { width: 45px; height: 45px; background: linear-gradient(135deg, #4CAF50, #2E7D32); border: 2px outset #8BC34A; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff; font-weight: bold; }
-        .user-name { color: #fff; font-size: 14px; font-weight: bold; text-shadow: 1px 1px 1px #000; }
-        .start-menu-body { display: flex; }
-        .start-menu-left { width: 190px; padding: 10px 5px; background: linear-gradient(180deg, #245DDA, #1A4AC0); }
-        .start-menu-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; cursor: pointer; border: 1px solid transparent; margin-bottom: 2px; }
-        .start-menu-item:hover { background: rgba(255,255,255,0.15); border: 1px dotted #9BB6E8; }
-        .start-menu-item-icon { width: 32px; height: 32px; }
-        .start-menu-item-text { color: #fff; font-size: 11px; }
-        .start-menu-right { width: 210px; padding: 10px; background: #ECE9D8; border-left: 1px solid #A0A0A0; }
-        .start-menu-section { margin-bottom: 15px; }
-        .start-menu-section-title { color: #808080; font-size: 10px; text-transform: uppercase; margin-bottom: 5px; padding-left: 5px; }
-        .start-menu-link { display: flex; align-items: center; gap: 8px; padding: 5px 8px; cursor: pointer; color: #000; font-size: 11px; }
-        .start-menu-link:hover { background: var(--xp-selection); color: #fff; }
-        .start-menu-link-icon { width: 20px; height: 20px; }
-        .start-menu-divider { height: 1px; background: #A0A0A0; margin: 5px 0; }
-        .shut-down-btn { display: flex; align-items: center; gap: 8px; padding: 5px 8px; cursor: pointer; color: #000; font-size: 11px; background: linear-gradient(180deg, #ECE9D8, #D5D0C0); border: 1px outset #fff; }
-        .shut-down-btn:hover { background: linear-gradient(180deg, #D5D0C0, #C5C0B0); }
-        .shut-down-btn img { width: 20px; height: 20px; }
-
-        /* ============================================
-           WINDOWS
-           ============================================ */
-        .window { position: absolute; background: #ECE9D8; border: 3px outset #fff; box-shadow: 3px 3px 15px rgba(0,0,0,0.4); display: none; flex-direction: column; min-width: 200px; min-height: 150px; }
-        .window.visible { display: flex; }
-        .window-header { display: flex; align-items: center; justify-content: space-between; padding: 3px 5px; background: linear-gradient(180deg, #245DDA, #1A4AC0); cursor: move; }
-        .window-header.inactive { background: linear-gradient(180deg, #7695DE, #5A7AD5); }
-        .window-title { display: flex; align-items: center; gap: 5px; color: #fff; font-size: 12px; font-weight: bold; text-shadow: 1px 1px 1px #000; }
-        .window-title-icon { width: 16px; height: 16px; }
-        .window-controls { display: flex; gap: 2px; }
-        .window-btn { width: 21px; height: 21px; background: linear-gradient(180deg, #ECE9D8, #C5C0B0); border: 1px outset #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; font-weight: bold; color: #000; }
-        .window-btn:hover { filter: brightness(1.1); }
-        .window-btn:active { border-style: inset; }
-        .window-btn-close { background: linear-gradient(180deg, #FF6B6B, #E53935); color: #fff; }
-        .window-btn-close:hover { background: linear-gradient(180deg, #FF8A80, #EF5350); }
-        .window-menu { display: flex; background: #ECE9D8; border-bottom: 1px solid #A0A0A0; padding: 2px 5px; }
-        .window-menu-item { padding: 2px 8px; cursor: pointer; color: #000; font-size: 11px; }
-        .window-menu-item:hover { background: var(--xp-selection); color: #fff; }
-        .window-body { flex: 1; overflow: auto; background: #fff; position: relative; }
-        .window-statusbar { display: flex; align-items: center; padding: 2px 5px; background: #ECE9D8; border-top: 1px inset #A0A0A0; font-size: 10px; color: #808080; }
-
-        /* ============================================
-           SHUTDOWN EFFECT
-           ============================================ */
-        #shutdown-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999998; display: none; opacity: 0; transition: opacity 0.5s; }
-        #shutdown-overlay.active { display: block; opacity: 1; }
-        .crt-shutdown { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.8) 100%); animation: crtFade 2s forwards; }
-        @keyframes crtFade { 0% { opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
-
-        /* ============================================
-           ABOUT ME WINDOW CONTENT
-           ============================================ */
-        .about-container { display: flex; height: 100%; }
-        .about-sidebar { width: 180px; background: linear-gradient(180deg, #316AC5, #245DDA); padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        .about-avatar-large { width: 100px; height: 100px; background: linear-gradient(135deg, #4CAF50, #2E7D32); border: 3px outset #8BC34A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #fff; font-weight: bold; margin-bottom: 15px; }
-        .about-name { color: #fff; font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 5px; text-shadow: 1px 1px 1px #000; }
-        .about-title { color: #9BB6E8; font-size: 10px; text-align: center; }
-        .about-main { flex: 1; padding: 20px; overflow-y: auto; }
-        .about-section { margin-bottom: 20px; }
-        .about-section-title { font-size: 14px; font-weight: bold; color: #245DDA; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 2px solid #245DDA; }
-        .about-skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
-        .about-skill-tag { background: linear-gradient(180deg, #E8F5E9, #C8E6C9); border: 1px solid #4CAF50; padding: 5px 10px; border-radius: 3px; font-size: 10px; color: #2E7D32; text-align: center; }
-        .about-status { display: flex; align-items: center; gap: 8px; padding: 10px; background: #E8F5E9; border: 1px solid #4CAF50; border-radius: 5px; }
-        .status-dot { width: 10px; height: 10px; background: #4CAF50; border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .about-timeline { position: relative; padding-left: 20px; }
-        .about-timeline::before { content: ''; position: absolute; left: 5px; top: 0; bottom: 0; width: 2px; background: #245DDA; }
-        .timeline-item { position: relative; margin-bottom: 15px; padding-left: 15px; }
-        .timeline-item::before { content: ''; position: absolute; left: -17px; top: 3px; width: 10px; height: 10px; background: #4CAF50; border: 2px solid #245DDA; border-radius: 50%; }
-        .timeline-year { font-weight: bold; color: #245DDA; font-size: 11px; }
-        .timeline-desc { color: #666; font-size: 10px; margin-top: 3px; }
-
-        /* ============================================
-           RECYCLE BIN / EXPLORER
-           ============================================ */
-        .explorer-container { display: flex; height: 100%; }
-        .explorer-sidebar { width: 180px; background: linear-gradient(180deg, #7695DE, #5A7AD5); padding: 10px; }
-        .explorer-folder-tree { color: #fff; font-size: 11px; }
-        .explorer-folder { padding: 5px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-        .explorer-folder:hover { background: rgba(255,255,255,0.2); }
-        .explorer-folder-icon { width: 16px; height: 16px; }
-        .explorer-main { flex: 1; padding: 10px; background: #fff; }
-        .explorer-toolbar { display: flex; gap: 5px; padding: 5px; background: #ECE9D8; border-bottom: 1px solid #A0A0A0; margin: -10px -10px 10px -10px; }
-        .explorer-toolbar-btn { padding: 3px 8px; background: transparent; border: none; cursor: pointer; font-size: 10px; display: flex; align-items: center; gap: 3px; }
-        .explorer-toolbar-btn:hover { background: var(--xp-selection); color: #fff; }
-        .explorer-files { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px; padding: 10px; }
-        .explorer-file { display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 5px; }
-        .explorer-file:hover { background: rgba(49, 106, 197, 0.2); }
-        .explorer-file-icon { width: 48px; height: 48px; }
-        .explorer-file-name { color: #000; font-size: 10px; text-align: center; margin-top: 5px; max-width: 75px; word-wrap: break-word; }
-
-        /* ============================================
-           TERMINAL / CMD WINDOW
-           ============================================ */
-        .cmd-container { background: #000; color: #fff; font-family: 'Courier New', monospace; font-size: 13px; padding: 10px; height: 100%; overflow-y: auto; }
-        .cmd-line { margin-bottom: 5px; display: flex; flex-wrap: wrap; }
-        .cmd-prompt { color: #fff; margin-right: 8px; }
-        .cmd-input { background: transparent; border: none; color: #fff; font-family: inherit; font-size: inherit; outline: none; flex: 1; }
-        .cmd-output { color: #fff; white-space: pre-wrap; margin-bottom: 10px; }
-        .cmd-output.error { color: #FF6B6B; }
-        .cmd-output.success { color: #4CAF50; }
-        .cmd-output.info { color: #5A9CFF; }
-
-        /* ============================================
-           BROWSER WINDOW
-           ============================================ */
-        .browser-toolbar { display: flex; align-items: center; gap: 5px; padding: 5px; background: #ECE9D8; border-bottom: 1px solid #A0A0A0; }
-        .browser-back, .browser-forward { width: 25px; height: 25px; background: linear-gradient(180deg, #ECE9D8, #C5C0B0); border: 1px outset #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .browser-address { flex: 1; padding: 3px 8px; border: 1px inset #A0A0A0; font-size: 11px; }
-        .browser-go { padding: 3px 10px; background: linear-gradient(180deg, #ECE9D8, #C5C0B0); border: 1px outset #fff; cursor: pointer; font-size: 11px; }
-        .browser-content { flex: 1; background: #fff; overflow: auto; }
-
-        /* ============================================
-           MOBILE SIMULATOR
-           ============================================ */
-        .phone-simulator { display: flex; flex-direction: column; align-items: center; padding: 20px; background: #1a1a1a; height: 100%; overflow: auto; }
-        .phone-frame { position: relative; background: #000; border-radius: 30px; padding: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-        .phone-frame.iphone { border: 3px solid #333; }
-        .phone-frame.android { border: 3px solid #444; }
-        .phone-notch { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: #000; border-radius: 10px; z-index: 10; }
-        .phone-screen { width: 200px; height: 380px; background: #fff; border-radius: 20px; overflow: hidden; position: relative; }
-        .phone-screen-content { width: 100%; height: 100%; overflow: auto; }
-
-        /* ============================================
-           SKILL RESUME WINDOW
-           ============================================ */
-        .skill-resume-container { padding: 20px; height: 100%; overflow: auto; background: linear-gradient(180deg, #fff, #f5f5f5); }
-        .skill-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid var(--xp-title-blue); }
-        .skill-logo-large { width: 60px; height: 60px; }
-        .skill-title { font-size: 20px; font-weight: bold; color: var(--xp-title-blue); }
-        .skill-subtitle { font-size: 12px; color: #666; }
-        .skill-level-bar { margin-bottom: 20px; }
-        .skill-level-label { font-size: 11px; color: #666; margin-bottom: 5px; }
-        .skill-level-track { height: 20px; background: #E8E8E8; border: 1px inset #A0A0A0; border-radius: 10px; overflow: hidden; }
-        .skill-level-fill { height: 100%; background: linear-gradient(90deg, #4CAF50, #8BC34A); border-radius: 10px; }
-        .skill-topics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .skill-topic { background: #E8F5E9; border: 1px solid #4CAF50; padding: 5px 12px; border-radius: 15px; font-size: 11px; color: #2E7D32; }
-        .skill-projects { margin-top: 20px; }
-        .skill-projects-title { font-size: 14px; font-weight: bold; color: var(--xp-title-blue); margin-bottom: 10px; }
-        .skill-project { padding: 10px; background: #f9f9f9; border: 1px solid #E0E0E0; margin-bottom: 10px; border-radius: 5px; }
-        .skill-project-name { font-weight: bold; font-size: 12px; color: #333; }
-        .skill-project-desc { font-size: 10px; color: #666; margin-top: 5px; }
-
-        /* ============================================
-           MY PROJECTS WINDOW
-           ============================================ */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; padding: 15px; }
-        .project-card { display: flex; flex-direction: column; align-items: center; padding: 15px; background: #f9f9f9; border: 1px solid #E0E0E0; cursor: pointer; transition: all 0.2s; }
-        .project-card:hover { background: #E8F5E9; border-color: #4CAF50; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .project-icon { width: 48px; height: 48px; margin-bottom: 10px; }
-        .project-name { font-size: 11px; font-weight: bold; color: #333; text-align: center; }
-        .project-desc { font-size: 9px; color: #666; text-align: center; margin-top: 5px; }
-
-        /* ============================================
-           NOTEPAD WINDOW
-           ============================================ */
-        .notepad-container { display: flex; flex-direction: column; height: 100%; }
-        .notepad-toolbar { display: flex; gap: 10px; padding: 5px; background: #ECE9D8; border-bottom: 1px solid #A0A0A0; font-size: 10px; }
-        .notepad-toolbar-item { padding: 2px 5px; cursor: pointer; }
-        .notepad-toolbar-item:hover { background: var(--xp-selection); color: #fff; }
-        .notepad-content { flex: 1; padding: 10px; font-family: 'Courier New', monospace; font-size: 12px; background: #fff; color: #000; border: none; resize: none; outline: none; line-height: 1.5; }
-
-        /* ============================================
-           WELCOME SCREEN
-           ============================================ */
-        #welcome-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #003399, #000066); z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center; }
-        #welcome-screen.visible { display: flex; }
-        #welcome-screen.hidden { display: none; }
-        .welcome-user { display: flex; align-items: center; gap: 15px; padding: 20px 40px; background: linear-gradient(180deg, #7695DE, #5A7AD5); border: 2px outset #9BB6E8; cursor: pointer; margin-bottom: 30px; }
-        .welcome-user:hover { filter: brightness(1.1); }
-        .welcome-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, #4CAF50, #2E7D32); border: 2px outset #8BC34A; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #fff; font-weight: bold; }
-        .welcome-name { color: #fff; font-size: 18px; font-weight: bold; text-shadow: 1px 1px 1px #000; }
-        .welcome-hint { color: #9BB6E8; font-size: 12px; }
-
-        /* ============================================
-           THREE.JS CRT EFFECT
-           ============================================ */
-        .crt-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000; opacity: 0.15; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); }
-
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
+        #mobile-crash {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #0000AA; color: #fff; padding: 30px;
+            font-family: 'Lucida Console', Monaco, monospace; z-index: 9999999; line-height: 1.5;
+        }
+        #mobile-crash .block { background: #ccc; color: #0000AA; display: inline-block; padding: 0 5px; margin-bottom: 20px; font-weight: bold; }
         @media (max-width: 768px) {
-            .desktop-icons { flex-direction: row; flex-wrap: wrap; gap: 10px; }
-            .window { width: 95% !important; left: 2.5% !important; top: 5% !important; }
-            .about-container { flex-direction: column; }
-            .about-sidebar { width: 100%; flex-direction: row; gap: 15px; }
+            #mobile-crash { display: block; }
+            body > *:not(#mobile-crash) { display: none !important; }
         }
+
+        /* ============================================
+           WELCOME SCREEN (AUTO-CLOSE)
+           ============================================ */
+        #welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, #003399 0%, #000066 100%);
+            display: none; align-items: center; justify-content: center; z-index: 99998;
+        }
+        .welcome-center {
+            width: 100%; height: 140px; background: #5a7edc; border-top: 2px solid #fff; border-bottom: 2px solid #fff;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .welcome-left { font-size: 52px; color: #fff; font-style: italic; opacity: 0.9; margin-right: 60px; }
+        .welcome-right { border-left: 2px solid rgba(255,255,255,0.3); padding-left: 40px; display: flex; align-items: center; gap: 20px; color: #fff; }
+        .user-icon { width: 64px; height: 64px; border: 2px solid #fff; border-radius: 4px; background: #4CAF50; }
+        .welcome-msg { font-size: 28px; font-weight: bold; }
+
+        /* ============================================
+           DESKTOP & WINDOWS
+           ============================================ */
+        #desktop {
+            position: absolute; width: 100%; height: 100%;
+            background: url('https://e0.pxfuel.com/wallpapers/139/189/desktop-wallpaper-windows-xp-bliss-original-original-windows-xp-bliss.jpg') no-repeat center center;
+            background-size: cover; z-index: 2;
+        }
+        .desktop-icons { position: absolute; top: 15px; left: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .desktop-icon { width: 75px; text-align: center; cursor: pointer; color: #fff; text-shadow: 1px 1px 2px #000; }
+        .desktop-icon:hover { background: rgba(255,255,255,0.1); border: 1px dotted #fff; }
+
+        .window { position: absolute; background: var(--xp-bg); border: 3px outset #fff; box-shadow: 3px 3px 15px rgba(0,0,0,0.5); display: none; flex-direction: column; }
+        .window.active { display: flex; }
+        .window-header { background: linear-gradient(to right, #245DDA, #1A4AC0); padding: 3px 6px; color: #fff; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .win-btn { width: 21px; height: 21px; background: var(--xp-bg); border: 1px outset #fff; cursor: pointer; font-size: 10px; }
+        .win-close { background: #E53935; color: white; }
+        .window-body { flex: 1; background: #fff; overflow: auto; padding: 10px; }
+
+        /* ============================================
+           SKILLS CATEGORIES
+           ============================================ */
+        .skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .skill-box { border: 1px solid #A0A0A0; padding: 8px; background: #F9F9F9; }
+        .skill-box h4 { color: var(--xp-blue); margin-bottom: 5px; font-size: 12px; border-bottom: 1px solid #ddd; }
+        .skill-tag { display: inline-block; background: #E1E1E1; padding: 2px 6px; margin: 2px; border-radius: 3px; font-size: 10px; }
+
+        /* MSN SOCIAL CARD */
+        .msn-card { background: #F0F7FF; border: 1px solid #7192D1; padding: 15px; border-radius: 5px; }
+        .nudge-btn { display: block; width: 100%; padding: 10px; margin-top: 10px; background: #fff; border: 1px solid #A0A0A0; cursor: pointer; font-weight: bold; }
+        .nudge-btn:active { background: #FFE0B2; }
+
+        /* TASKBAR */
+        #taskbar {
+            position: fixed; bottom: 0; width: 100%; height: 30px;
+            background: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%);
+            z-index: 100000; display: flex; align-items: center;
+        }
+        #start-btn { 
+            background: linear-gradient(to bottom, #4CAF50, #2E7D32); padding: 0 15px; height: 100%; 
+            color: #fff; font-weight: bold; font-style: italic; display: flex; align-items: center; border-radius: 0 10px 10px 0; cursor: pointer;
+        }
+        #clock { margin-left: auto; color: #fff; padding: 0 15px; background: #0975e1; height: 100%; display: flex; align-items: center; }
+
+        /* CONTEXT MENU */
+        #context-menu {
+            position: fixed; background: #fff; border: 1px solid #808080; z-index: 100006; display: none; width: 150px; padding: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        .context-item { padding: 4px 15px; cursor: default; }
+        .context-item:hover { background: var(--xp-selection); color: #fff; }
     </style>
 </head>
-<body>
-    <!-- Boot Sequence -->
-    <div id="boot-sequence">
-        <div id="bios-screen"></div>
-        <div id="xp-loading">
-            <svg class="xp-logo-img" viewBox="0 0 300 180">
-                <rect x="20" y="20" width="150" height="110" fill="#245DDA" rx="5"/>
-                <text x="95" y="75" fill="#fff" font-size="28" font-weight="bold" font-style="italic">Windows</text>
-                <text x="95" y="105" fill="#fff" font-size="36" font-weight="bold" font-style="italic">XP</text>
-                <circle cx="250" cy="80" r="40" fill="#4CAF50"/>
-                <path d="M235 80 L250 50 L265 80 L250 110 Z" fill="#fff"/>
-            </svg>
-            <div id="xp-loading-bar-container">
-                <div id="xp-loading-bar"></div>
-            </div>
-            <div id="loading-text">Windows is starting up...</div>
-        </div>
+<body oncontextmenu="return openContext(event)">
+
+    <div id="mobile-crash">
+        <div class="block">Windows</div>
+        <p>A problem has been detected and Windows has been shut down to prevent damage to your device.</p>
+        <p><strong>INCOMPATIBLE_PLATFORM_ERROR</strong></p>
+        <p>The current hardware (Mobile/Tablet) is too modern for the 2001 Luna architecture. Please switch to a <strong>Desktop/Laptop</strong> to view Mahmudul's skills.</p>
+        <p>*** STOP: 0x000000ED (0xBDLOGICALERROR, 0x01912409071)</p>
     </div>
 
-    <!-- Welcome Screen -->
     <div id="welcome-screen">
-        <div class="welcome-user" onclick="enterDesktop()">
-            <div class="welcome-avatar">M</div>
-            <div>
-                <div class="welcome-name">Mahmudul Hasan</div>
-                <div class="welcome-hint">Click to log on</div>
+        <div class="welcome-center">
+            <div class="welcome-left">welcome</div>
+            <div class="welcome-right">
+                <div class="user-icon"></div>
+                <div class="welcome-msg">Mahmudul Hasan</div>
             </div>
         </div>
     </div>
 
-    <!-- Desktop Container -->
-    <div id="desktop-container">
-        <div id="three-container"></div>
-
-        <!-- Desktop -->
-        <div id="desktop" onclick="desktopClick(event)">
-            <div class="desktop-icons" id="desktop-icons"></div>
-        </div>
-
-        <!-- Taskbar -->
-        <div id="taskbar">
-            <div id="start-button" onclick="toggleStartMenu()">
-                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="2" width="9" height="9" fill="#4CAF50"/><rect x="2" y="13" width="9" height="9" fill="#2196F3"/><rect x="13" y="2" width="9" height="9" fill="#FF5722"/><rect x="13" y="13" width="9" height="9" fill="#FFC107"/></svg>
-                <span>start</span>
-            </div>
-            <div class="quick-launch">
-                <div class="quick-launch-icon" onclick="showDesktop()" title="Show Desktop">
-                    <svg viewBox="0 0 16 16" width="16" height="16"><rect x="1" y="1" width="14" height="10" fill="#7695DE" stroke="#333" stroke-width="1"/><rect x="3" y="12" width="3" height="2" fill="#333"/><rect x="7" y="12" width="3" height="2" fill="#333"/><rect x="11" y="12" width="3" height="2" fill="#333"/></svg>
-                </div>
-            </div>
-            <div id="taskbar-windows"></div>
-            <div id="system-tray">
-                <svg class="tray-icon" viewBox="0 0 16 16" title="Volume"><path d="M2 7v2h2l3 3V4L4 7H2zm13 0l-3 3v-6l3 3z" fill="#fff"/></svg>
-                <svg class="tray-icon" viewBox="0 0 16 16" title="Network"><rect x="1" y="6" width="3" height="6" fill="#4CAF50"/><rect x="5" y="3" width="3" height="9" fill="#4CAF50"/><rect x="9" y="1" width="3" height="11" fill="#4CAF50"/><rect x="13" y="4" width="2" height="8" fill="#4CAF50"/></svg>
-                <div id="clock"></div>
-            </div>
-        </div>
+    <div id="context-menu">
+        <div class="context-item" onclick="openWindow('about')">About Me</div>
+        <div class="context-item" onclick="openWindow('skills')">My Skills</div>
+        <div class="context-item" onclick="openWindow('social')">Social Card</div>
+        <div style="height:1px; background:#ccc; margin:3px 0;"></div>
+        <div class="context-item" onclick="location.reload()">Refresh</div>
     </div>
 
-    <!-- Start Menu -->
-    <div id="start-menu">
-        <div class="start-menu-header">
-            <div class="user-avatar">M</div>
-            <div class="user-name">Mahmudul Hasan</div>
-        </div>
-        <div class="start-menu-body">
-            <div class="start-menu-left">
-                <div class="start-menu-item" onclick="openWindow('about')">
-                    <svg class="start-menu-item-icon" viewBox="0 0 32 32"><rect x="2" y="2" width="28" height="28" fill="#7695DE" rx="2"/><text x="10" y="22" fill="#fff" font-size="16" font-weight="bold">?</text></svg>
-                    <span class="start-menu-item-text">About Me</span>
-                </div>
-                <div class="start-menu-item" onclick="openWindow('projects')">
-                    <svg class="start-menu-item-icon" viewBox="0 0 32 32"><path d="M4 8l12-4 12 4v16l-12 4-12-4V8z" fill="#FFA000"/><path d="M4 8l12-4 12 4v16l-12 4-12-4V8z" fill="none" stroke="#B06C00" stroke-width="1"/></svg>
-                    <span class="start-menu-item-text">My Projects</span>
-                </div>
-                <div class="start-menu-item" onclick="openWindow('skills')">
-                    <svg class="start-menu-item-icon" viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" fill="#4CAF50" rx="2"/><text x="10" y="22" fill="#fff" font-size="14" font-weight="bold">JS</text></svg>
-                    <span class="start-menu-item-text">Technical Skills</span>
-                </div>
-                <div class="start-menu-item" onclick="openWindow('contact')">
-                    <svg class="start-menu-item-icon" viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16" fill="#2196F3" rx="2"/><path d="M6 10l10 6 10-6" fill="none" stroke="#fff" stroke-width="2"/></svg>
-                    <span class="start-menu-item-text">Contact Me</span>
-                </div>
-            </div>
-            <div class="start-menu-right">
-                <div class="start-menu-section">
-                    <div class="start-menu-section-title">Freelance Status</div>
-                    <div class="about-status" style="background:#E8F5E9; padding:8px; border-radius:5px;">
-                        <div class="status-dot"></div>
-                        <span style="color:#2E7D32; font-size:11px; font-weight:bold;">Open to Projects</span>
-                    </div>
-                </div>
-                <div class="start-menu-divider"></div>
-                <div class="shut-down-btn" onclick="shutdownComputer()">
-                    <svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="8" fill="none" stroke="#333" stroke-width="2"/><line x1="10" y1="6" x2="10" y2="10" stroke="#333" stroke-width="2"/><circle cx="10" cy="10" r="2" fill="#333"/></svg>
-                    <span>Shut Down</span>
-                </div>
-            </div>
-        </div>
+    <div id="desktop" onclick="closePopups()">
+        <div class="desktop-icons" id="desktop-icons"></div>
     </div>
 
-    <!-- Shutdown Overlay -->
-    <div id="shutdown-overlay">
-        <div class="crt-shutdown"></div>
+    <div id="taskbar">
+        <div id="start-btn" onclick="openWindow('about')">start</div>
+        <div id="clock"></div>
     </div>
 
-    <!-- Windows Container -->
     <div id="windows-container"></div>
 
     <script>
-        // ============================================
-        // DATA - SKILLS & ICONS
-        // ============================================
-        const desktopIcons = [
-            { id: 'about', name: 'My Computer', type: 'system', icon: createComputerIcon() },
-            { id: 'projects', name: 'My Projects', type: 'folder', icon: createFolderIcon('#FFA000') },
-            { id: 'skills', name: 'Technical Skills', type: 'folder', icon: createSkillsIcon() },
-            { id: 'python', name: 'Python', type: 'skill', skill: 'python', icon: createPythonIcon() },
-            { id: 'laravel', name: 'Laravel', type: 'skill', skill: 'laravel', icon: createLaravelIcon() },
-            { id: 'flutter', name: 'Flutter', type: 'skill', skill: 'flutter', icon: createFlutterIcon() },
-            { id: 'react', name: 'React.js', type: 'skill', skill: 'react', icon: createReactIcon() },
-            { id: 'vue', name: 'Vue.js', type: 'skill', skill: 'vue', icon: createVueIcon() },
-            { id: 'php', name: 'PHP', type: 'skill', skill: 'php', icon: createPHPIcon() },
-            { id: 'javascript', name: 'JavaScript', type: 'skill', skill: 'javascript', icon: createJSIcon() },
-            { id: 'docker', name: 'Docker', type: 'skill', skill: 'docker', icon: createDockerIcon() },
-            { id: 'linux', name: 'Linux', type: 'skill', skill: 'linux', icon: createLinuxIcon() },
-            { id: 'mysql', name: 'MySQL', type: 'skill', skill: 'mysql', icon: createMySQLIcon() },
-            { id: 'nodejs', name: 'Node.js', type: 'skill', skill: 'nodejs', icon: createNodeIcon() },
-            { id: 'tailwind', name: 'Tailwind', type: 'skill', skill: 'tailwind', icon: createTailwindIcon() },
-            { id: 'recycle', name: 'Recycle Bin', type: 'system', icon: createRecycleIcon() }
+        const items = [
+            { id: 'about', name: 'My Computer', icon: '💻' },
+            { id: 'skills', name: 'Skills.exe', icon: '⚙️' },
+            { id: 'social', name: 'Social Card', icon: '📇' },
+            { id: 'cmd', name: 'Command Prompt', icon: '📟' },
+            { id: 'recycle', name: 'Recycle Bin', icon: '🗑️' }
         ];
 
-        const skillsData = {
-            python: {
-                name: 'Python',
-                level: 95,
-                topics: ['Django', 'Flask', 'FastAPI', 'REST APIs', 'Automation', 'Data Analysis', 'Machine Learning', 'Web Scraping', 'Scripting', 'ORM', 'Async Programming', 'Testing'],
-                projects: ['Automation Scripts', 'REST API Development', 'Data Processing Tools', 'Web Scrapers', 'CLI Applications']
-            },
-            laravel: {
-                name: 'Laravel',
-                level: 92,
-                topics: ['Eloquent ORM', 'Blade Templates', 'Laravel Mix', 'REST APIs', 'Authentication', 'Middleware', 'Queues', 'Events', 'Migrations', 'Seeders', 'Localization', 'Testing'],
-                projects: ['E-commerce Platforms', 'CRM Systems', 'API Backends', 'CMS Development', 'SaaS Applications']
-            },
-            flutter: {
-                name: 'Flutter',
-                level: 94,
-                topics: ['Dart', 'State Management', 'BLoC Pattern', 'Provider', 'REST APIs', 'Firebase', 'Local Storage', 'Animations', 'Custom Widgets', 'Platform Channels', 'Testing', 'CI/CD'],
-                projects: ['SpendWise - Expense Tracker', 'Android Cleaner App', 'E-commerce Apps', 'Social Apps', 'Utility Apps']
-            },
-            react: {
-                name: 'React.js',
-                level: 90,
-                topics: ['Hooks', 'Context API', 'Redux', 'React Router', 'Next.js', 'SSR', 'TypeScript', 'Styled Components', 'Testing', 'Performance Optimization', 'API Integration', 'Form Handling'],
-                projects: ['Single Page Applications', 'Dashboard Systems', 'E-commerce Frontends', 'Portfolio Sites', 'Admin Panels']
-            },
-            vue: {
-                name: 'Vue.js',
-                level: 88,
-                topics: ['Vue 3', 'Composition API', 'Pinia', 'Vue Router', 'Vuex', 'Nuxt.js', 'Components', 'Directives', 'Animations', 'Testing', 'TypeScript', 'SSR'],
-                projects: ['Interactive Web Apps', 'Single Page Applications', 'Progressive Web Apps', 'Landing Pages', 'Admin Dashboards']
-            },
-            php: {
-                name: 'PHP',
-                level: 90,
-                topics: ['OOP', 'PDO', 'MVC', 'Laravel', 'WordPress', 'REST APIs', 'Sessions', 'Cookies', 'File Handling', 'Security', 'Composer', 'Testing'],
-                projects: ['Custom CMS', 'E-commerce Sites', 'API Development', 'WordPress Plugins', 'Web Applications']
-            },
-            javascript: {
-                name: 'JavaScript',
-                level: 95,
-                topics: ['ES6+', 'DOM Manipulation', 'Async/Await', 'Promises', 'Closures', 'Prototypes', 'Modules', 'TypeScript', 'Node.js', 'Express', 'Testing', 'Design Patterns'],
-                projects: ['Interactive Websites', 'Web Applications', 'Browser Extensions', 'Node.js Apps', 'Games']
-            },
-            docker: {
-                name: 'Docker',
-                level: 85,
-                topics: ['Containers', 'Images', 'Dockerfile', 'Docker Compose', 'Volumes', 'Networking', 'Multi-stage Builds', 'CI/CD Integration', 'Optimization', 'Security Best Practices', 'Swarm', 'Kubernetes Basics'],
-                projects: ['Containerization', 'DevOps Pipelines', 'Microservices', 'Development Environments', 'Production Deployments']
-            },
-            linux: {
-                name: 'Linux',
-                level: 88,
-                topics: ['Bash Scripting', 'System Administration', 'Server Setup', 'Nginx', 'Apache', 'SSL/TLS', 'Firewall', 'Cron Jobs', 'User Management', 'Permissions', 'Monitoring', 'Shell Commands'],
-                projects: ['Server Configuration', 'VPS Management', 'Deployment Automation', 'Monitoring Systems', 'Security Hardening']
-            },
-            mysql: {
-                name: 'MySQL',
-                level: 90,
-                topics: ['Query Optimization', 'Indexing', 'Stored Procedures', 'Triggers', 'Replication', 'Backup/Restore', 'Normalization', 'ERD Design', 'Transactions', 'Performance Tuning', 'Security', 'Migration'],
-                projects: ['Database Design', 'API Databases', 'E-commerce Databases', 'CRM Systems', 'Analytics Databases']
-            },
-            nodejs: {
-                name: 'Node.js',
-                level: 89,
-                topics: ['Express.js', 'REST APIs', 'WebSockets', 'File Streams', 'Authentication', 'Middleware', 'npm', 'Testing', 'Performance', 'Microservices', 'GraphQL', 'TypeScript'],
-                projects: ['API Servers', 'Real-time Apps', 'CLI Tools', 'Web Servers', 'Microservices']
-            },
-            tailwind: {
-                name: 'Tailwind CSS',
-                level: 93,
-                topics: ['Utility Classes', 'Custom Configuration', 'Responsive Design', 'Dark Mode', 'Forms', 'Typography', 'Animations', 'Components', ' JIT Compiler', 'Plugins', 'Purge', 'Integration'],
-                projects: ['Modern UI', 'Landing Pages', 'Dashboards', 'Mobile-First Designs', 'Custom Themes']
-            }
-        };
+        let zIndex = 1000;
+        const openWins = {};
 
-        const obsoleteSkills = [
-            { name: 'HTML4.html', icon: 'html' },
-            { name: 'Old_CSS.css', icon: 'css' },
-            { name: 'ES3_legacy.js', icon: 'js' },
-            { name: 'jQuery_v1.js', icon: 'jquery' },
-            { name: 'Table_Layout.html', icon: 'html' },
-            { name: 'IE6_Styles.css', icon: 'css' },
-            { name: 'Flash_Actionscript.as', icon: 'flash' },
-            { name: 'XMLHttpRequest.js', icon: 'js' }
-        ];
-
-        // ============================================
-        // ICON CREATION FUNCTIONS (SVG)
-        // ============================================
-        function createComputerIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="8" width="40" height="28" fill="#7695DE" stroke="#333" stroke-width="2" rx="2"/><rect x="6" y="10" width="36" height="22" fill="#1a1a1a"/><rect x="14" y="38" width="20" height="4" fill="#666"/><rect x="8" y="42" width="32" height="3" fill="#888"/></svg>`;
-        }
-        function createFolderIcon(color) {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><path d="M6 12l18-6 18 6v28l-18 6-18-6V12z" fill="${color}"/><path d="M6 12l18-6 18 6v28l-18 6-18-6V12z" fill="none" stroke="#333" stroke-width="1"/></svg>`;
-        }
-        function createSkillsIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#4CAF50" rx="4"/><circle cx="24" cy="18" r="6" fill="#fff"/><circle cx="14" cy="30" r="4" fill="#fff"/><circle cx="34" cy="30" r="4" fill="#fff"/><line x1="24" y1="24" x2="14" y2="26" stroke="#fff" stroke-width="2"/><line x1="24" y1="24" x2="34" y2="26" stroke="#fff" stroke-width="2"/></svg>`;
-        }
-        function createPythonIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><ellipse cx="24" cy="20" rx="14" ry="10" fill="#306998"/><ellipse cx="24" cy="28" rx="14" ry="10" fill="#FFD43B"/><path d="M15 20c2-4 8-5 9-5s7 1 9 5c2 4-2 7-4 7s-5-1-5-1s-1 2-4 2c-4 0-5-4-5-8z" fill="#306998"/><path d="M15 28c-2 4-8 5-9 5s-7-1-9-5c-2-4 2-7 4-7s5 1 5 1s1-2 4-2c4 0 5 4 5 8z" fill="#FFE873"/><text x="12" y="25" fill="#fff" font-size="8" font-weight="bold">Py</text></svg>`;
-        }
-        function createLaravelIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#FF5722" rx="8"/><text x="24" y="32" fill="#fff" font-size="20" font-weight="bold" text-anchor="middle">L</text></svg>`;
-        }
-        function createFlutterIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#02569B"/><circle cx="24" cy="24" r="16" fill="#0175C2"/><path d="M24 8 L24 40 M8 24 L40 24" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="8" fill="#40C4FF"/></svg>`;
-        }
-        function createReactIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#61DAFB"/><circle cx="12" cy="24" r="5" fill="#000"/><circle cx="36" cy="24" r="5" fill="#000"/><circle cx="24" cy="12" r="5" fill="#000"/><circle cx="24" cy="36" r="5" fill="#000"/><circle cx="17" cy="17" r="3" fill="#61DAFB"/><circle cx="31" cy="17" r="3" fill="#61DAFB"/><circle cx="17" cy="31" r="3" fill="#61DAFB"/><circle cx="31" cy="31" r="3" fill="#61DAFB"/></svg>`;
-        }
-        function createVueIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><path d="M24 4L4 24l10 20 10-16 10 16 10-20L24 4z" fill="#42B883"/><path d="M24 4l10 16-10 4-10-4L24 4z" fill="#35495E"/></svg>`;
-        }
-        function createPHPIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#777BB4" rx="4"/><text x="24" y="32" fill="#fff" font-size="24" font-weight="bold" text-anchor="middle">PHP</text></svg>`;
-        }
-        function createJSIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#F7DF1E" rx="4"/><text x="24" y="32" fill="#000" font-size="20" font-weight="bold" text-anchor="middle">JS</text></svg>`;
-        }
-        function createDockerIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#2496ED"/><path d="M24 8c-2 4-4 8-4 12s2 8 4 12c2-4 4-8 4-12s-2-8-4-12z" fill="#fff"/><path d="M18 14c2 2 4 4 4 6s-2 4-4 6c-2-2-4-4-4-6s2-4 4-6z" fill="#2496ED"/><path d="M30 14c-2 2-4 4-4 6s2 4 4 6c2-2 4-4 4-6s-2-4-4-6z" fill="#2496ED"/><circle cx="24" cy="24" r="4" fill="#fff"/></svg>`;
-        }
-        function createLinuxIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#FCC624"/><text x="24" y="30" fill="#333" font-size="16" font-weight="bold" text-anchor="middle">LIN</text></svg>`;
-        }
-        function createMySQLIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#00758F" rx="4"/><text x="24" y="32" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">MySQL</text></svg>`;
-        }
-        function createNodeIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><circle cx="24" cy="24" r="20" fill="#339933"/><text x="24" y="30" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">Node</text></svg>`;
-        }
-        function createTailwindIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="4" y="4" width="40" height="40" fill="#06B6D4" rx="4"/><path d="M12 36l8-12 8 12M20 24l8-12M28 24v12" stroke="#fff" stroke-width="3" fill="none"/></svg>`;
-        }
-        function createRecycleIcon() {
-            return `<svg viewBox="0 0 48 48" class="desktop-icon-img"><path d="M12 42c0-4 4-6 8-6h8c4 0 8 2 8 6H12z" fill="#888"/><path d="M16 38V20c0-2 2-4 4-4h8c2 0 4 2 4 4v18" fill="#666"/><rect x="20" y="12" width="8" height="6" fill="#aaa"/><path d="M10 18l4-8M24 18l4-8M38 18l-4-8" stroke="#888" stroke-width="2"/></svg>`;
-        }
-
-        function createFileIcon(type) {
-            const icons = {
-                html: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#E44D26" rx="2"/><text x="24" y="32" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">HTML</text></svg>`,
-                css: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#264DE4" rx="2"/><text x="24" y="32" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">CSS</text></svg>`,
-                js: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#F7DF1E" rx="2"/><text x="24" y="32" fill="#000" font-size="14" font-weight="bold" text-anchor="middle">JS</text></svg>`,
-                jquery: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#0769AD" rx="2"/><text x="24" y="32" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">jQ</text></svg>`,
-                flash: `<svg viewBox="0 0 48 48" class="desktop-icon-img"><rect x="8" y="4" width="32" height="40" fill="#FF0000" rx="2"/><path d="M16 14l16 10-16 10V14z" fill="#fff"/></svg>`
-            };
-            return icons[type] || icons['html'];
-        }
-
-        // ============================================
-        // STATE MANAGEMENT
-        // ============================================
-        let windowZIndex = 1000;
-        let activeWindowId = null;
-        let windows = {};
-        let dragState = { isDragging: false, windowId: null, offsetX: 0, offsetY: 0 };
-
-        // ============================================
-        // INITIALIZATION
-        // ============================================
         function init() {
-            renderDesktopIcons();
-            startBootSequence();
-            updateClock();
-            setInterval(updateClock, 1000);
-            initThreeJS();
+            renderIcons();
+            runWelcome();
+            startTime();
         }
 
-        function renderDesktopIcons() {
-            const container = document.getElementById('desktop-icons');
-            container.innerHTML = '';
-            desktopIcons.forEach((icon, index) => {
-                const div = document.createElement('div');
-                div.className = 'desktop-icon';
-                div.id = `icon-${icon.id}`;
-                div.style.position = 'relative';
-                div.style.left = '0';
-                div.style.top = '0';
-                div.innerHTML = `${icon.icon}<div class="desktop-icon-label">${icon.name}</div>`;
-                div.ondblclick = () => openWindow(icon.id);
-                div.onclick = (e) => selectIcon(icon.id, e);
-                container.appendChild(div);
-            });
-            makeIconsDraggable();
-        }
-
-        function makeIconsDraggable() {
-            const icons = document.querySelectorAll('.desktop-icon');
-            icons.forEach(icon => {
-                let isDragging = false;
-                let startX, startY, initialX, initialY;
-
-                icon.onmousedown = (e) => {
-                    if (e.button !== 0) return;
-                    isDragging = true;
-                    startX = e.clientX;
-                    startY = e.clientY;
-                    initialX = icon.offsetLeft;
-                    initialY = icon.offsetTop;
-                    icon.style.zIndex = 1000;
-                };
-
-                document.onmousemove = (e) => {
-                    if (!isDragging) return;
-                    const dx = e.clientX - startX;
-                    const dy = e.clientY - startY;
-                    icon.style.left = `${Math.max(0, initialX + dx)}px`;
-                    icon.style.top = `${Math.max(0, initialY + dy)}px`;
-                };
-
-                document.onmouseup = () => {
-                    isDragging = false;
-                };
-            });
-        }
-
-        // ============================================
-        // BOOT SEQUENCE
-        // ============================================
-        async function startBootSequence() {
-            const biosScreen = document.getElementById('bios-screen');
-            const biosLines = [
-                'PhoenixBIOS 4.0 Release 6.0.5',
-                'Copyright 1985-2001 Phoenix Technologies Ltd.',
-                '',
-                'CPU: AMD Ryzen 9 5900X @ 3.0GHz',
-                'Memory Test: 16384MB OK',
-                '',
-                'Detecting hardware...',
-                '... Found CD-ROM',
-                '... Found Keyboard',
-                '... Found Mouse',
-                '',
-                'Press DEL to enter SETUP',
-                '01/15/2026-MCP78-6A61AG0EC-00',
-                '',
-                'Award Plug and Play BIOS Extension v1.0',
-                'Copyright (C) 1995-2001, Award Software, Inc.',
-                '',
-                'Starting Windows XP...'
-            ];
-
-            for (const line of biosLines) {
-                const p = document.createElement('div');
-                p.className = 'bios-line';
-                p.textContent = line;
-                biosScreen.appendChild(p);
-                await sleep(100);
-            }
-
-            await sleep(1000);
-            biosScreen.classList.add('hidden');
-            document.getElementById('xp-loading').classList.add('visible');
-
-            const loadingBar = document.getElementById('xp-loading-bar');
-            for (let i = 0; i <= 100; i += 2) {
-                loadingBar.style.width = i + '%';
-                await sleep(30);
-            }
-
-            await sleep(500);
-            document.getElementById('boot-sequence').classList.add('hidden');
-            document.getElementById('welcome-screen').classList.add('visible');
-        }
-
-        function enterDesktop() {
-            document.getElementById('welcome-screen').classList.add('hidden');
-            document.getElementById('welcome-screen').classList.remove('visible');
-        }
-
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // ============================================
-        // CLOCK
-        // ============================================
-        function updateClock() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            const displayHours = hours % 12 || 12;
-            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('clock').textContent = `${displayHours}:${displayMinutes} ${ampm}`;
-        }
-
-        // ============================================
-        // DESKTOP & START MENU
-        // ============================================
-        function desktopClick(e) {
-            if (e.target.id === 'desktop') {
-                document.querySelectorAll('.desktop-icon').forEach(icon => icon.classList.remove('selected'));
-                closeStartMenu();
-            }
-        }
-
-        function selectIcon(id, e) {
-            e.stopPropagation();
-            document.querySelectorAll('.desktop-icon').forEach(icon => icon.classList.remove('selected'));
-            document.getElementById(`icon-${id}`).classList.add('selected');
-        }
-
-        function toggleStartMenu() {
-            const menu = document.getElementById('start-menu');
-            menu.classList.toggle('visible');
-        }
-
-        function closeStartMenu() {
-            document.getElementById('start-menu').classList.remove('visible');
-        }
-
-        function showDesktop() {
-            Object.values(windows).forEach(w => {
-                if (w) w.style.display = 'none';
-            });
-            document.querySelectorAll('.taskbar-window').forEach(tw => tw.classList.remove('active'));
-            activeWindowId = null;
-        }
-
-        // ============================================
-        // WINDOW MANAGEMENT
-        // ============================================
-        function createWindow(id, title, width, height, contentFn) {
-            if (windows[id]) {
-                focusWindow(id);
-                return;
-            }
-
-            const zIndex = ++windowZIndex;
-            const win = document.createElement('div');
-            win.className = 'window';
-            win.id = `window-${id}`;
-            win.style.width = width + 'px';
-            win.style.height = height + 'px';
-            win.style.left = 100 + (Object.keys(windows).length * 30) + 'px';
-            win.style.top = 50 + (Object.keys(windows).length * 30) + 'px';
-            win.style.zIndex = zIndex;
-
-            const iconSvg = getWindowIcon(id);
-
-            win.innerHTML = `
-                <div class="window-header" onmousedown="startDrag(event, '${id}')">
-                    <div class="window-title">
-                        <span class="window-title-icon">${iconSvg}</span>
-                        <span>${title}</span>
-                    </div>
-                    <div class="window-controls">
-                        <div class="window-btn" onclick="minimizeWindow('${id}')">_</div>
-                        <div class="window-btn" onclick="maximizeWindow('${id}')">□</div>
-                        <div class="window-btn window-btn-close" onclick="closeWindow('${id}')">X</div>
-                    </div>
-                </div>
-                <div class="window-body" id="window-body-${id}"></div>
-            `;
-
-            document.getElementById('windows-container').appendChild(win);
-            windows[id] = win;
-
-            const body = document.getElementById(`window-body-${id}`);
-            contentFn(body);
-
-            win.style.display = 'flex';
-            activeWindowId = id;
-            updateTaskbar(id);
-            closeStartMenu();
-        }
-
-        function getWindowIcon(id) {
-            const iconMap = {
-                'about': createComputerIcon(),
-                'projects': createFolderIcon('#FFA000'),
-                'skills': createSkillsIcon(),
-                'python': createPythonIcon(),
-                'laravel': createLaravelIcon(),
-                'flutter': createFlutterIcon(),
-                'react': createReactIcon(),
-                'vue': createVueIcon(),
-                'php': createPHPIcon(),
-                'javascript': createJSIcon(),
-                'docker': createDockerIcon(),
-                'linux': createLinuxIcon(),
-                'mysql': createMySQLIcon(),
-                'nodejs': createNodeIcon(),
-                'tailwind': createTailwindIcon(),
-                'recycle': createRecycleIcon(),
-                'contact': `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="2" y="4" width="12" height="8" fill="#2196F3" rx="1"/><path d="M3 5l5 3 5-3" fill="none" stroke="#fff" stroke-width="1"/></svg>`
-            };
-            return iconMap[id] || iconMap['about'];
-        }
-
-        function focusWindow(id) {
-            const win = windows[id];
-            if (!win) return;
-
-            win.style.zIndex = ++windowZIndex;
-            win.querySelector('.window-header').classList.remove('inactive');
-
-            Object.keys(windows).forEach(key => {
-                if (key !== id && windows[key]) {
-                    windows[key].querySelector('.window-header').classList.add('inactive');
-                }
-            });
-
-            activeWindowId = id;
-            document.querySelectorAll('.taskbar-window').forEach(tw => tw.classList.remove('active'));
-            document.getElementById(`taskbar-${id}`)?.classList.add('active');
-        }
-
-        function closeWindow(id) {
-            const win = windows[id];
-            if (win) {
-                win.remove();
-                delete windows[id];
-                document.getElementById(`taskbar-${id}`)?.remove();
-
-                if (activeWindowId === id) {
-                    activeWindowId = null;
-                }
-            }
-        }
-
-        function minimizeWindow(id) {
-            const win = windows[id];
-            if (win) {
-                win.style.display = 'none';
-                document.getElementById(`taskbar-${id}`)?.classList.remove('active');
-            }
-        }
-
-        function maximizeWindow(id) {
-            const win = windows[id];
-            if (win) {
-                if (win.dataset.maximized === 'true') {
-                    win.style.width = win.dataset.prevWidth;
-                    win.style.height = win.dataset.prevHeight;
-                    win.style.left = win.dataset.prevLeft;
-                    win.style.top = win.dataset.prevTop;
-                    win.dataset.maximized = 'false';
-                } else {
-                    win.dataset.prevWidth = win.style.width;
-                    win.dataset.prevHeight = win.style.height;
-                    win.dataset.prevLeft = win.style.left;
-                    win.dataset.prevTop = win.style.top;
-                    win.style.width = '100%';
-                    win.style.height = 'calc(100% - 35px)';
-                    win.style.left = '0';
-                    win.style.top = '0';
-                    win.dataset.maximized = 'true';
-                }
-            }
-        }
-
-        function updateTaskbar(id) {
-            const taskbar = document.getElementById('taskbar-windows');
-            const existing = document.getElementById(`taskbar-${id}`);
-            if (existing) return;
-
-            const tab = document.createElement('div');
-            tab.className = 'taskbar-window active';
-            tab.id = `taskbar-${id}`;
-            tab.innerHTML = `
-                <span class="taskbar-window-icon">${getWindowIcon(id)}</span>
-                <span class="taskbar-window-title">${getWindowTitle(id)}</span>
-            `;
-            tab.onclick = () => {
-                const win = windows[id];
-                if (win.style.display === 'none') {
-                    win.style.display = 'flex';
-                    focusWindow(id);
-                } else if (activeWindowId === id) {
-                    minimizeWindow(id);
-                } else {
-                    focusWindow(id);
-                }
-            };
-            taskbar.appendChild(tab);
-        }
-
-        function getWindowTitle(id) {
-            const titles = {
-                'about': 'My Computer',
-                'projects': 'My Projects',
-                'skills': 'Technical Skills',
-                'python': 'Python - Advanced',
-                'laravel': 'Laravel - Expert',
-                'flutter': 'Flutter - Mobile Apps',
-                'react': 'React.js - Frontend',
-                'vue': 'Vue.js - Frontend',
-                'php': 'PHP - Backend',
-                'javascript': 'JavaScript - Full Stack',
-                'docker': 'Docker - DevOps',
-                'linux': 'Linux - Server Admin',
-                'mysql': 'MySQL - Database',
-                'nodejs': 'Node.js - Backend',
-                'tailwind': 'Tailwind CSS - Styling',
-                'recycle': 'Recycle Bin',
-                'contact': 'Contact Me'
-            };
-            return titles[id] || 'Window';
-        }
-
-        // ============================================
-        // DRAG FUNCTIONALITY
-        // ============================================
-        function startDrag(e, id) {
-            if (e.target.classList.contains('window-btn')) return;
-            focusWindow(id);
-
-            const win = windows[id];
-            const rect = win.getBoundingClientRect();
-
-            dragState = {
-                isDragging: true,
-                windowId: id,
-                offsetX: e.clientX - rect.left,
-                offsetY: e.clientY - rect.top
-            };
-        }
-
-        document.addEventListener('mousemove', (e) => {
-            if (!dragState.isDragging) return;
-            const win = windows[dragState.windowId];
-            if (!win || win.dataset.maximized === 'true') return;
-
-            let x = e.clientX - dragState.offsetX;
-            let y = e.clientY - dragState.offsetY;
-
-            win.style.left = x + 'px';
-            win.style.top = y + 'px';
-        });
-
-        document.addEventListener('mouseup', () => {
-            dragState.isDragging = false;
-        });
-
-        // ============================================
-        // WINDOW CONTENT FUNCTIONS
-        // ============================================
-        function openWindow(id) {
-            switch(id) {
-                case 'about':
-                    createWindow('about', 'My Computer', 700, 500, renderAboutMe);
-                    break;
-                case 'projects':
-                    createWindow('projects', 'My Projects', 600, 450, renderProjects);
-                    break;
-                case 'skills':
-                    createWindow('skills', 'Technical Skills', 650, 500, renderSkillsMenu);
-                    break;
-                case 'python':
-                    createWindow('python', 'Python - Senior Developer', 650, 550, (body) => renderSkillResume(body, 'python'));
-                    break;
-                case 'laravel':
-                    createWindow('laravel', 'Laravel - Expert', 650, 550, (body) => renderSkillResume(body, 'laravel'));
-                    break;
-                case 'flutter':
-                    createWindow('flutter', 'Flutter - Mobile Development', 900, 650, renderFlutterSimulator);
-                    break;
-                case 'react':
-                    createWindow('react', 'React.js - Frontend Expert', 700, 550, (body) => renderSkillResume(body, 'react'));
-                    break;
-                case 'vue':
-                    createWindow('vue', 'Vue.js - Frontend Developer', 650, 550, (body) => renderSkillResume(body, 'vue'));
-                    break;
-                case 'php':
-                    createWindow('php', 'PHP - Backend Developer', 650, 550, (body) => renderSkillResume(body, 'php'));
-                    break;
-                case 'javascript':
-                    createWindow('javascript', 'JavaScript - Full Stack', 650, 550, (body) => renderSkillResume(body, 'javascript'));
-                    break;
-                case 'docker':
-                    createWindow('docker', 'Docker - DevOps', 700, 500, renderDockerTerminal);
-                    break;
-                case 'linux':
-                    createWindow('linux', 'Linux Server Administration', 700, 500, renderLinuxTerminal);
-                    break;
-                case 'mysql':
-                    createWindow('mysql', 'MySQL - Database Expert', 650, 550, (body) => renderSkillResume(body, 'mysql'));
-                    break;
-                case 'nodejs':
-                    createWindow('nodejs', 'Node.js - Backend Developer', 650, 550, (body) => renderSkillResume(body, 'nodejs'));
-                    break;
-                case 'tailwind':
-                    createWindow('tailwind', 'Tailwind CSS - Styling', 650, 550, (body) => renderSkillResume(body, 'tailwind'));
-                    break;
-                case 'recycle':
-                    createWindow('recycle', 'Recycle Bin', 700, 450, renderRecycleBin);
-                    break;
-                case 'contact':
-                    createWindow('contact', 'Contact Me - Notepad', 500, 400, renderContact);
-                    break;
-            }
-        }
-
-        // ============================================
-        // CONTENT RENDERERS
-        // ============================================
-        function renderAboutMe(body) {
-            body.innerHTML = `
-                <div class="about-container">
-                    <div class="about-sidebar">
-                        <div class="about-avatar-large">M</div>
-                        <div class="about-name">Mahmudul Hasan</div>
-                        <div class="about-title">Senior Full Stack Developer</div>
-                        <div style="margin-top:15px;">
-                            <div class="about-status">
-                                <div class="status-dot"></div>
-                                <span>Open to Projects</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-main">
-                        <div class="about-section">
-                            <div class="about-section-title">Professional Summary</div>
-                            <p style="font-size:12px; line-height:1.6; color:#333;">
-                                Senior Full Stack Developer with extensive experience in building scalable web and mobile applications.
-                                Passionate about DSA, clean architecture, and delivering high-quality solutions.
-                                Specialized in Flutter for mobile, Laravel/Python for backend, and modern JavaScript frameworks.
-                            </p>
-                        </div>
-                        <div class="about-section">
-                            <div class="about-section-title">Core Skills</div>
-                            <div class="about-skills-grid">
-                                <div class="about-skill-tag">Flutter</div>
-                                <div class="about-skill-tag">Dart</div>
-                                <div class="about-skill-tag">PHP</div>
-                                <div class="about-skill-tag">JavaScript</div>
-                                <div class="about-skill-tag">Alpine.js</div>
-                                <div class="about-skill-tag">Vue.js</div>
-                                <div class="about-skill-tag">React.js</div>
-                                <div class="about-skill-tag">Laravel</div>
-                                <div class="about-skill-tag">Tailwind CSS</div>
-                                <div class="about-skill-tag">API Dev</div>
-                                <div class="about-skill-tag">MySQL</div>
-                                <div class="about-skill-tag">System Architecture</div>
-                            </div>
-                        </div>
-                        <div class="about-section">
-                            <div class="about-section-title">Experience Timeline</div>
-                            <div class="about-timeline">
-                                <div class="timeline-item">
-                                    <div class="timeline-year">2009 - 2012</div>
-                                    <div class="timeline-desc">Started with VB6, developed desktop applications</div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-year">2013 - 2015</div>
-                                    <div class="timeline-desc">Transitioned to PHP & MySQL web development</div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-year">2016 - 2018</div>
-                                    <div class="timeline-desc">Learned Laravel framework, built enterprise apps</div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-year">2019 - 2021</div>
-                                    <div class="timeline-desc">Mastered JavaScript, React.js, Vue.js</div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-year">2022 - Present</div>
-                                    <div class="timeline-desc">Flutter mobile development, AI integration</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderProjects(body) {
-            const projects = [
-                { name: 'Google Antigravity', desc: 'Specialized automation project', icon: '🚀' },
-                { name: 'SpendWise', desc: 'Mobile expense tracker', icon: '💰' },
-                { name: 'Android Cleaner', desc: 'Utility application', icon: '🧹' },
-                { name: 'VB6 Inventory System', desc: 'Legacy desktop app (2009)', icon: '📦' },
-                { name: 'E-Commerce Platform', desc: 'Laravel + React', icon: '🛒' },
-                { name: 'AI Chatbot', desc: 'LangChain + OpenAI', icon: '🤖' }
-            ];
-
-            body.innerHTML = `
-                <div class="projects-grid">
-                    ${projects.map(p => `
-                        <div class="project-card" onclick="alert('Opening ${p.name}...')">
-                            <div class="project-icon" style="font-size:36px;">${p.icon}</div>
-                            <div class="project-name">${p.name}</div>
-                            <div class="project-desc">${p.desc}</div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        function renderSkillsMenu(body) {
-            const skills = Object.keys(skillsData);
-            body.innerHTML = `
-                <div style="padding:20px;">
-                    <h3 style="color:#245DDA; margin-bottom:15px;">Select a Skill to View Details</h3>
-                    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:15px;">
-                        ${skills.map(s => `
-                            <div style="background:#f5f5f5; padding:15px; border:1px solid #ddd; cursor:pointer; text-align:center; border-radius:8px; transition:all 0.2s;"
-                                onmouseover="this.style.background='#E8F5E9'; this.style.borderColor='#4CAF50';"
-                                onmouseout="this.style.background='#f5f5f5'; this.style.borderColor='#ddd';"
-                                onclick="openWindow('${s}')">
-                                <div style="width:50px; height:50px; margin:0 auto 10px;">${getSkillIcon(s)}</div>
-                                <div style="font-weight:bold; color:#333; font-size:12px;">${skillsData[s].name}</div>
-                                <div style="color:#666; font-size:10px; margin-top:5px;">Level: ${skillsData[s].level}%</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function getSkillIcon(skill) {
-            const icons = {
-                python: createPythonIcon(),
-                laravel: createLaravelIcon(),
-                flutter: createFlutterIcon(),
-                react: createReactIcon(),
-                vue: createVueIcon(),
-                php: createPHPIcon(),
-                javascript: createJSIcon(),
-                docker: createDockerIcon(),
-                linux: createLinuxIcon(),
-                mysql: createMySQLIcon(),
-                nodejs: createNodeIcon(),
-                tailwind: createTailwindIcon()
-            };
-            return icons[skill] || '';
-        }
-
-        function renderSkillResume(body, skill) {
-            const data = skillsData[skill];
-            if (!data) return;
-
-            body.innerHTML = `
-                <div class="skill-resume-container">
-                    <div class="skill-header">
-                        ${getSkillIcon(skill)}
-                        <div>
-                            <div class="skill-title">${data.name} Developer</div>
-                            <div class="skill-subtitle">Senior Level - ${data.level}% Proficiency</div>
-                        </div>
-                    </div>
-                    <div class="skill-level-bar">
-                        <div class="skill-level-label">Skill Proficiency</div>
-                        <div class="skill-level-track">
-                            <div class="skill-level-fill" style="width:${data.level}%"></div>
-                        </div>
-                    </div>
-                    <div class="about-section">
-                        <div class="about-section-title">In-Depth Topics</div>
-                        <div class="skill-topics">
-                            ${data.topics.map(t => `<span class="skill-topic">${t}</span>`).join('')}
-                        </div>
-                    </div>
-                    <div class="skill-projects">
-                        <div class="skill-projects-title">Related Projects</div>
-                        ${data.projects.map(p => `
-                            <div class="skill-project">
-                                <div class="skill-project-name">${p}</div>
-                                <div class="skill-project-desc">Built using ${data.name}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderFlutterSimulator(body) {
-            body.innerHTML = `
-                <div style="display:flex; gap:30px; padding:20px; background:#2d2d2d; height:100%; overflow:auto; justify-content:center;">
-                    <div class="phone-simulator">
-                        <div style="color:#fff; margin-bottom:10px; font-size:12px;">Android Simulator</div>
-                        <div class="phone-frame android">
-                            <div class="phone-notch"></div>
-                            <div class="phone-screen">
-                                <div class="phone-screen-content" id="android-screen">
-                                    <div style="background:linear-gradient(135deg, #02569B, #0175C2); height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; padding:20px;">
-                                        <svg width="60" height="60" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#fff"/><path d="M24 8 L24 40 M8 24 L40 24" stroke="#02569B" stroke-width="3"/></svg>
-                                        <div style="font-size:14px; font-weight:bold; margin-top:10px;">Flutter Portfolio</div>
-                                        <div style="font-size:10px; opacity:0.8;">By Mahmudul Hasan</div>
-                                        <div style="margin-top:30px; font-size:10px;">Loading...</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="phone-simulator">
-                        <div style="color:#fff; margin-bottom:10px; font-size:12px;">iPhone Simulator</div>
-                        <div class="phone-frame iphone">
-                            <div class="phone-notch" style="width:60px;"></div>
-                            <div class="phone-screen">
-                                <div class="phone-screen-content" id="iphone-screen">
-                                    <div style="background:linear-gradient(135deg, #000, #333); height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; padding:20px;">
-                                        <svg width="60" height="60" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#fff"/><path d="M24 8 L24 40 M8 24 L40 24" stroke="#000" stroke-width="3"/></svg>
-                                        <div style="font-size:14px; font-weight:bold; margin-top:10px;">Flutter Portfolio</div>
-                                        <div style="font-size:10px; opacity:0.8;">By Mahmudul Hasan</div>
-                                        <div style="margin-top:30px; font-size:10px;">Loading...</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
+        function runWelcome() {
+            const welcome = document.getElementById('welcome-screen');
+            welcome.style.display = 'flex';
             setTimeout(() => {
-                document.getElementById('android-screen').innerHTML = renderFlutterApp();
-                document.getElementById('iphone-screen').innerHTML = renderFlutterApp();
+                welcome.style.opacity = '0';
+                welcome.style.transition = 'opacity 1s';
+                setTimeout(() => welcome.style.display = 'none', 1000);
             }, 2000);
         }
 
-        function renderFlutterApp() {
-            return `
-                <div style="background:#fff; height:100%; padding:15px;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-                        <div style="width:40px; height:40px; background:linear-gradient(135deg, #02569B, #0175C2); border-radius:10px; display:flex; align-items:center; justify-content:center;">
-                            <span style="color:#fff; font-weight:bold;">M</span>
-                        </div>
-                        <div>
-                            <div style="font-weight:bold; font-size:14px;">Mahmudul Hasan</div>
-                            <div style="color:#666; font-size:10px;">Senior Developer</div>
-                        </div>
-                    </div>
-                    <div style="font-size:12px; color:#333; line-height:1.6;">
-                        <p><strong>Skills:</strong></p>
-                        <p>• Flutter & Dart</p>
-                        <p>• State Management (BLoC, Provider)</p>
-                        <p>• REST APIs & Firebase</p>
-                        <p>• Custom Widgets</p>
-                        <p style="margin-top:15px;"><strong>Projects:</strong></p>
-                        <p>• SpendWise - Expense Tracker</p>
-                        <p>• Android Cleaner</p>
-                        <p>• E-commerce Apps</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderDockerTerminal(body) {
-            body.innerHTML = `
-                <div class="cmd-container" id="docker-cmd">
-                    <div class="cmd-output">Docker version 24.0.7</div>
-                    <div class="cmd-output">Starting Mahmudul's Development Environment...</div>
-                    <div class="cmd-output">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
-                    <div class="cmd-output">CONTAINER LIST:</div>
-                    <div class="cmd-output info">  CONTAINER ID  IMAGE          STATUS       PORTS</div>
-                    <div class="cmd-output">  abc123def   laravel-app    Running      80->8000</div>
-                    <div class="cmd-output">  def456ghi   mysql:8.0      Running      3306->3306</div>
-                    <div class="cmd-output">  ghi789jkl   redis:alpine   Running      6379->6379</div>
-                    <div class="cmd-output">  jkl012mno   nginx:alpine   Running      443->443</div>
-                    <div class="cmd-output">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
-                    <div class="cmd-output">Type 'help' for available commands</div>
-                    <div class="cmd-line">
-                        <span class="cmd-prompt">root@mahmudul:~$ </span>
-                        <input type="text" class="cmd-input" id="docker-input" placeholder="Type command..." autofocus>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('docker-input').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    const cmd = e.target.value;
-                    const output = document.getElementById('docker-cmd');
-                    output.innerHTML += `<div class="cmd-line"><span class="cmd-prompt">root@mahmudul:~$ </span>${cmd}</div>`;
-                    output.innerHTML += `<div class="cmd-output">${executeDockerCommand(cmd)}</div>`;
-                    output.innerHTML += `<div class="cmd-line"><span class="cmd-prompt">root@mahmudul:~$ </span><input type="text" class="cmd-input" id="docker-input" placeholder="Type command..." autofocus></div>`;
-                    document.getElementById('docker-input').addEventListener('keypress', arguments.callee);
-                    output.scrollTop = output.scrollHeight;
-                }
+        function renderIcons() {
+            const container = document.getElementById('desktop-icons');
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'desktop-icon';
+                div.innerHTML = `<div style="font-size:32px">${item.icon}</div><div>${item.name}</div>`;
+                div.ondblclick = () => openWindow(item.id);
+                container.appendChild(div);
             });
         }
 
-        function executeDockerCommand(cmd) {
-            const commands = {
-                'help': 'Available: docker ps, docker images, docker-compose up, docker exec, docker logs',
-                'docker ps': 'CONTAINER ID  IMAGE          STATUS\nabc123def   laravel-app    Running',
-                'docker images': 'REPOSITORY    TAG      SIZE\nlaravel      latest   1.2GB\nmysql        8.0      500MB',
-                'ls': 'app/  database/  docker/  tests/',
-                'pwd': '/home/mahmudul/projects',
-                'whoami': 'mahmudul-hasan'
-            };
-            return commands[cmd] || `bash: ${cmd}: command not found`;
-        }
+        function openWindow(id) {
+            if (openWins[id]) return;
+            const win = document.createElement('div');
+            win.className = 'window active';
+            win.id = `win-${id}`;
+            win.style.width = '480px';
+            win.style.height = '400px';
+            win.style.left = (120 + (zIndex % 60)) + 'px';
+            win.style.top = (120 + (zIndex % 60)) + 'px';
+            win.style.zIndex = ++zIndex;
 
-        function renderLinuxTerminal(body) {
-            body.innerHTML = `
-                <div class="cmd-container" id="linux-cmd">
-                    <div class="cmd-output">Linux mahmudul-server 5.15.0-generic</div>
-                    <div class="cmd-output">Welcome to Ubuntu 22.04 LTS</div>
-                    <div class="cmd-output">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
-                    <div class="cmd-output info">System Information:</div>
-                    <div class="cmd-output">  OS: Ubuntu 22.04 LTS</div>
-                    <div class="cmd-output">  CPU: AMD Ryzen 9</div>
-                    <div class="cmd-output">  RAM: 32GB</div>
-                    <div class="cmd-output">  Uptime: 45 days, 3 hours</div>
-                    <div class="cmd-output">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
-                    <div class="cmd-output">Services Running:</div>
-                    <div class="cmd-output success">  ✓ Nginx - Web Server</div>
-                    <div class="cmd-output success">  ✓ MySQL 8.0 - Database</div>
-                    <div class="cmd-output success">  ✓ PHP-FPM 8.2</div>
-                    <div class="cmd-output success">  ✓ Redis - Cache</div>
-                    <div class="cmd-line">
-                        <span class="cmd-prompt">mahmudul@server:~$ </span>
-                        <input type="text" class="cmd-input" id="linux-input" placeholder="Type command..." autofocus>
-                    </div>
+            win.innerHTML = `
+                <div class="window-header">
+                    <span>${id.toUpperCase()}</span>
+                    <button class="win-btn win-close" onclick="closeWindow('${id}')">X</button>
                 </div>
+                <div class="window-body">${getContent(id)}</div>
             `;
-
-            document.getElementById('linux-input').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    const cmd = e.target.value;
-                    const output = document.getElementById('linux-cmd');
-                    output.innerHTML += `<div class="cmd-line"><span class="cmd-prompt">mahmudul@server:~$ </span>${cmd}</div>`;
-                    output.innerHTML += `<div class="cmd-output">${executeLinuxCommand(cmd)}</div>`;
-                    output.innerHTML += `<div class="cmd-line"><span class="cmd-prompt">mahmudul@server:~$ </span><input type="text" class="cmd-input" id="linux-input" placeholder="Type command..." autofocus></div>`;
-                    document.getElementById('linux-input').addEventListener('keypress', arguments.callee);
-                    output.scrollTop = output.scrollHeight;
-                }
-            });
+            document.getElementById('windows-container').appendChild(win);
+            openWins[id] = win;
+            closePopups();
         }
 
-        function executeLinuxCommand(cmd) {
-            const commands = {
-                'help': 'Available: ls, pwd, whoami, uname, top, df, free, systemctl status',
-                'ls': 'projects/  backups/  config/  logs/',
-                'pwd': '/home/mahmudul',
-                'whoami': 'mahmudul',
-                'uname -a': 'Linux mahmudul-server 5.15.0-generic #1 SMP x86_64 GNU/Linux',
-                'df -h': 'Filesystem      Size  Used  Avail  Use%\n/dev/sda1       100G   45G   55G  45%',
-                'free -h': '              total  used  free\nMem:            32Gi  12Gi  20Gi',
-                'uptime': ' 12:30:20 up 45 days, 3:22, 2 users'
-            };
-            return commands[cmd] || `bash: ${cmd}: command not found`;
-        }
-
-        function renderRecycleBin(body) {
-            body.innerHTML = `
-                <div class="explorer-container">
-                    <div class="explorer-sidebar">
-                        <div class="explorer-folder-tree">
-                            <div class="explorer-folder">
-                                <svg class="explorer-folder-icon" viewBox="0 0 16 16"><path d="M1 4v8c0 1 1 2 2 2h10c1 0 2-1 2-2V4" fill="#FFA000"/></svg>
-                                <span>Desktop</span>
+        function getContent(id) {
+            switch(id) {
+                case 'skills':
+                    return `
+                        <h3 style="margin-bottom:10px;">Full-Stack & AI Stack 2026</h3>
+                        <div class="skill-grid">
+                            <div class="skill-box">
+                                <h4>🤖 AI & LLM</h4>
+                                <span class="skill-tag">LangChain</span><span class="skill-tag">OpenAI</span>
+                                <span class="skill-tag">RAG</span><span class="skill-tag">HuggingFace</span>
+                                <span class="skill-tag">Vector DB (Pinecone)</span>
                             </div>
-                            <div class="explorer-folder" style="background:rgba(255,255,255,0.2);">
-                                <svg class="explorer-folder-icon" viewBox="0 0 16 16"><path d="M1 4v8c0 1 1 2 2 2h10c1 0 2-1 2-2V4" fill="#888"/></svg>
-                                <span>Recycle Bin</span>
+                            <div class="skill-box">
+                                <h4>📱 Mobile Development</h4>
+                                <span class="skill-tag">Flutter</span><span class="skill-tag">React Native</span>
+                                <span class="skill-tag">Dart</span><span class="skill-tag">Kotlin/Swift</span>
+                                <span class="skill-tag">Firebase</span>
+                            </div>
+                            <div class="skill-box">
+                                <h4>🌐 Web Full-Stack</h4>
+                                <span class="skill-tag">Next.js 15</span><span class="skill-tag">Laravel</span>
+                                <span class="skill-tag">React</span><span class="skill-tag">TypeScript</span>
+                                <span class="skill-tag">Tailwind CSS</span>
+                            </div>
+                            <div class="skill-box">
+                                <h4>♾️ DevOps & Cloud</h4>
+                                <span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span>
+                                <span class="skill-tag">AWS</span><span class="skill-tag">CI/CD</span>
+                                <span class="skill-tag">GitHub Actions</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="explorer-main">
-                        <div style="font-size:12px; color:#666; margin-bottom:15px; padding:10px; background:#f5f5f5; border-radius:5px;">
-                            <strong>Legacy/Obsolete Skills</strong><br>
-                            <span style="font-size:10px;">These technologies are outdated and no longer in active use</span>
-                        </div>
-                        <div class="explorer-files">
-                            ${obsoleteSkills.map(s => `
-                                <div class="explorer-file" onclick="alert('Opening ${s.name}...')">
-                                    ${createFileIcon(s.icon)}
-                                    <div class="explorer-file-name">${s.name}</div>
+                        <p style="margin-top:10px; font-size:10px; color:#666;">*All modules are updated to latest stable releases.</p>
+                    `;
+                case 'social':
+                    return `
+                        <div class="msn-card">
+                            <div style="display:flex; gap:10px; align-items:center; margin-bottom:15px;">
+                                <div style="width:50px; height:50px; background:#4CAF50; border:2px solid #fff;"></div>
+                                <div>
+                                    <div style="font-weight:bold;">Mahmudul Hasan</div>
+                                    <div style="font-size:10px; color:#4CAF50;">● Available for Projects</div>
                                 </div>
-                            `).join('')}
+                            </div>
+                            <p style="font-style:italic; margin-bottom:10px;">"Logic will get you from A to B. Imagination will take you everywhere."</p>
+                            <a href="https://github.com/bdlogicalerror" target="_blank" style="display:block; padding:8px; background:#fff; border:1px solid #ccc; text-align:center; text-decoration:none; color:#333; margin-bottom:5px;">GitHub: bdlogicalerror</a>
+                            <a href="https://wa.me/8801912409071" style="display:block; padding:8px; background:#fff; border:1px solid #ccc; text-align:center; text-decoration:none; color:#333; margin-bottom:5px;">WhatsApp Contact</a>
+                            <button class="nudge-btn" onclick="triggerNudge()">SEND NUDGE</button>
                         </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderContact(body) {
-            body.innerHTML = `
-                <div class="notepad-container">
-                    <div class="notepad-toolbar">
-                        <div class="notepad-toolbar-item">File</div>
-                        <div class="notepad-toolbar-item">Edit</div>
-                        <div class="notepad-toolbar-item">Format</div>
-                        <div class="notepad-toolbar-item">View</div>
-                        <div class="notepad-toolbar-item">Help</div>
-                    </div>
-                    <textarea class="notepad-content" readonly>
-CONTACT INFORMATION
-====================
-
-Name: Mahmudul Hasan
-Title: Senior Full Stack Developer
-Location: Available Globally (Remote)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-TECHNICAL SKILLS:
-• Frontend: Flutter, React.js, Vue.js, JavaScript, Tailwind CSS
-• Backend: Python, PHP, Laravel, Node.js
-• Database: MySQL, PostgreSQL
-• DevOps: Docker, Linux, AWS
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-CURRENT STATUS: Open to New Projects
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-CONTACT METHODS:
-• Email: Contact via GitHub
-• GitHub: github.com/mahmudul-hasan
-• LinkedIn: Available on Request
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Feel free to reach out for:
-• Freelance Projects
-• Full-time Opportunities
-• Contract Work
-• Technical Consulting
-
-Thank you for viewing my portfolio!
-                    </textarea>
-                </div>
-            `;
-        }
-
-        // ============================================
-        // SHUTDOWN
-        // ============================================
-        function shutdownComputer() {
-            closeStartMenu();
-            const overlay = document.getElementById('shutdown-overlay');
-            overlay.classList.add('active');
-
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-                overlay.style.transition = 'opacity 2s';
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-            }, 1500);
-        }
-
-        // ============================================
-        // THREE.JS CRT EFFECT
-        // ============================================
-        function initThreeJS() {
-            const container = document.getElementById('three-container');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true });
-
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            container.appendChild(renderer.domElement);
-
-            // Create particles
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particleCount = 500;
-            const posArray = new Float32Array(particleCount * 3);
-
-            for(let i = 0; i < particleCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 10;
+                    `;
+                case 'cmd':
+                    return `
+                        <div style="background:#000; color:#0f0; font-family:monospace; padding:10px; height:100%;">
+                            <p>Microsoft Windows XP [Version 5.1.2600]</p>
+                            <p>(C) Copyright 1985-2001 Microsoft Corp.</p><br>
+                            <p>C:\\Documents and Settings\\Mahmudul> <strong>get-skills</strong></p>
+                            <p>> Loading environment variables...</p>
+                            <p>> AI_ENG: ACTIVE</p>
+                            <p>> FULLSTACK_DEV: ACTIVE</p>
+                            <p>> DEVOPS_KNOWLEDGE: HIGH</p>
+                            <p>> MOBILE_CAPABILITY: NATIVE/CROSS</p><br>
+                            <p>C:\\Documents and Settings\\Mahmudul> _</p>
+                        </div>
+                    `;
+                case 'recycle':
+                    return `<div style="text-align:center; padding:40px; color:#888;"><p>🗑️ Bin contains legacy items: jQuery, IE6, Flash.</p><br><button onclick="alert('Legacy technology purged!')" class="win-btn" style="width:100px;">Empty Bin</button></div>`;
+                case 'about':
+                    return `<p><strong>Engineer:</strong> Mahmudul Hasan</p><p><strong>Focus:</strong> Scaling AI Automation & High-performance Web/Mobile Apps.</p><br><p>I bridge the gap between complex AI logic and intuitive user experiences.</p>`;
             }
-
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.02,
-                color: 0x88ccff,
-                transparent: true,
-                opacity: 0.3
-            });
-
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
-
-            camera.position.z = 3;
-
-            function animate() {
-                requestAnimationFrame(animate);
-                particlesMesh.rotation.y += 0.0005;
-                particlesMesh.rotation.x += 0.0002;
-                renderer.render(scene, camera);
-            }
-
-            animate();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
         }
 
-        // Initialize
+        function closeWindow(id) {
+            openWins[id].remove();
+            delete openWins[id];
+        }
+
+        function triggerNudge() {
+            const win = openWins['social'];
+            let count = 0;
+            const interval = setInterval(() => {
+                win.style.transform = `translate(${Math.random()*10}px, ${Math.random()*10}px)`;
+                count++;
+                if(count > 10) {
+                    clearInterval(interval);
+                    win.style.transform = 'translate(0,0)';
+                }
+            }, 50);
+        }
+
+        function openContext(e) {
+            e.preventDefault();
+            const m = document.getElementById('context-menu');
+            m.style.display = 'block';
+            m.style.left = e.pageX + 'px';
+            m.style.top = e.pageY + 'px';
+            return false;
+        }
+
+        function closePopups() {
+            document.getElementById('context-menu').style.display = 'none';
+        }
+
+        function startTime() {
+            const clock = document.getElementById('clock');
+            setInterval(() => {
+                clock.innerText = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            }, 1000);
+        }
+
         init();
     </script>
 </body>
