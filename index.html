@@ -3,199 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahmudul Hasan - XP FullStack & AI</title>
+    <title>Mahmudul Hasan - Windows XP Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         /* ============================================
-           LUNA CORE & XP DESIGN SYSTEM
+           CORE THEME & MOBILE CRASH (BSOD)
            ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-user-select: none; }
         :root {
             --xp-blue: #245DDA;
-            --xp-taskbar: #245DDA;
+            --xp-taskbar: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%);
+            --xp-start: linear-gradient(180deg, #4CAF50 0%, #388E3C 50%, #2E7D32 100%);
             --xp-selection: #316AC5;
             --xp-bg: #ECE9D8;
-            --xp-start: #388E3C;
         }
-        body { font-family: 'Tahoma', 'Segoe UI', sans-serif; font-size: 11px; overflow: hidden; background: #000; height: 100vh; }
+        body { font-family: 'Tahoma', 'Segoe UI', sans-serif; font-size: 11px; overflow: hidden; background: #000; height: 100vh; width: 100vw; }
 
-        /* ============================================
-           MOBILE CRASH SCREEN (BSOD)
-           ============================================ */
         #mobile-crash {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #0000AA; color: #fff; padding: 30px;
-            font-family: 'Lucida Console', Monaco, monospace; z-index: 9999999; line-height: 1.5;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0000AA; color: #fff; padding: 40px; font-family: 'Lucida Console', Monaco, monospace; z-index: 9999999;
         }
-        #mobile-crash .block { background: #ccc; color: #0000AA; display: inline-block; padding: 0 5px; margin-bottom: 20px; font-weight: bold; }
-        @media (max-width: 768px) {
-            #mobile-crash { display: block; }
-            body > *:not(#mobile-crash) { display: none !important; }
-        }
+        #mobile-crash .error-block { background: #ccc; color: #0000AA; display: inline-block; padding: 0 10px; margin-bottom: 20px; font-weight: bold; }
+        @media (max-width: 768px) { #mobile-crash { display: block; } body > *:not(#mobile-crash) { display: none !important; } }
 
         /* ============================================
-           WELCOME SCREEN (AUTO-CLOSE)
+           BOOT & WELCOME SCREEN
            ============================================ */
+        #boot-sequence { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999999; }
+        #bios-screen { color: #245DDA; font-family: 'Courier New', monospace; font-size: 14px; padding: 30px; line-height: 1.6; }
+        #xp-loading { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; justify-content: center; align-items: center; background: #000; }
+        #xp-loading-bar-container { width: 200px; height: 15px; border: 2px solid #666; padding: 2px; }
+        #xp-loading-bar { height: 100%; background: linear-gradient(90deg, #316AC5, #5A9CFF, #316AC5); width: 0%; }
+
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, #003399 0%, #000066 100%);
-            display: none; align-items: center; justify-content: center; z-index: 99998;
+            display: none; align-items: center; z-index: 999998;
         }
-        .welcome-center {
+        .welcome-bar {
             width: 100%; height: 140px; background: #5a7edc; border-top: 2px solid #fff; border-bottom: 2px solid #fff;
             display: flex; align-items: center; justify-content: center;
         }
-        .welcome-left { font-size: 52px; color: #fff; font-style: italic; opacity: 0.9; margin-right: 60px; }
+        .welcome-left { font-size: 50px; color: #fff; font-style: italic; margin-right: 50px; opacity: 0.8; }
         .welcome-right { border-left: 2px solid rgba(255,255,255,0.3); padding-left: 40px; display: flex; align-items: center; gap: 20px; color: #fff; }
-        .user-icon { width: 64px; height: 64px; border: 2px solid #fff; border-radius: 4px; background: #4CAF50; }
+        .welcome-avatar { width: 64px; height: 64px; border: 2px solid #fff; border-radius: 4px; background: #4CAF50; }
         .welcome-msg { font-size: 28px; font-weight: bold; }
 
         /* ============================================
            DESKTOP & WINDOWS
            ============================================ */
-        #desktop {
-            position: absolute; width: 100%; height: 100%;
-            background: url('https://e0.pxfuel.com/wallpapers/139/189/desktop-wallpaper-windows-xp-bliss-original-original-windows-xp-bliss.jpg') no-repeat center center;
-            background-size: cover; z-index: 2;
+        #desktop-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; }
+        #three-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        #desktop { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
+            /* YOUR WALLPAPER */
+            background: url('uploaded_file_image_aaec26') no-repeat center center;
+            background-size: cover; 
         }
-        .desktop-icons { position: absolute; top: 15px; left: 15px; display: flex; flex-direction: column; gap: 15px; }
-        .desktop-icon { width: 75px; text-align: center; cursor: pointer; color: #fff; text-shadow: 1px 1px 2px #000; }
+        
+        .desktop-icons { position: absolute; top: 20px; left: 20px; display: flex; flex-direction: column; gap: 15px; flex-wrap: wrap; height: calc(100% - 60px); }
+        .desktop-icon { width: 75px; text-align: center; cursor: pointer; color: #fff; text-shadow: 1px 1px 2px #000; padding: 5px; }
         .desktop-icon:hover { background: rgba(255,255,255,0.1); border: 1px dotted #fff; }
+        .icon-img { font-size: 32px; margin-bottom: 5px; }
 
-        .window { position: absolute; background: var(--xp-bg); border: 3px outset #fff; box-shadow: 3px 3px 15px rgba(0,0,0,0.5); display: none; flex-direction: column; }
+        .window { position: absolute; background: var(--xp-bg); border: 3px outset #fff; box-shadow: 3px 3px 15px rgba(0,0,0,0.4); display: none; flex-direction: column; }
         .window.active { display: flex; }
-        .window-header { background: linear-gradient(to right, #245DDA, #1A4AC0); padding: 3px 6px; color: #fff; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        .win-btn { width: 21px; height: 21px; background: var(--xp-bg); border: 1px outset #fff; cursor: pointer; font-size: 10px; }
+        .window-header { display: flex; align-items: center; justify-content: space-between; padding: 3px 6px; background: linear-gradient(to right, #245DDA, #1A4AC0); color: #fff; cursor: move; font-weight: bold; }
+        .window-body { flex: 1; overflow: auto; background: #fff; padding: 15px; }
+        .win-btn { width: 21px; height: 21px; background: var(--xp-bg); border: 1px outset #fff; cursor: pointer; font-weight: bold; }
         .win-close { background: #E53935; color: white; }
-        .window-body { flex: 1; background: #fff; overflow: auto; padding: 10px; }
 
         /* ============================================
-           SKILLS CATEGORIES
+           UI COMPONENTS: CONTEXT MENU & SOCIAL CARD
            ============================================ */
-        .skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .skill-box { border: 1px solid #A0A0A0; padding: 8px; background: #F9F9F9; }
-        .skill-box h4 { color: var(--xp-blue); margin-bottom: 5px; font-size: 12px; border-bottom: 1px solid #ddd; }
-        .skill-tag { display: inline-block; background: #E1E1E1; padding: 2px 6px; margin: 2px; border-radius: 3px; font-size: 10px; }
+        #context-menu {
+            position: fixed; background: #FFF; border: 1px solid #808080; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3); z-index: 1000000; display: none; width: 170px; padding: 2px;
+        }
+        .context-item { padding: 5px 15px; color: #000; cursor: default; }
+        .context-item:hover { background: var(--xp-selection); color: #fff; }
 
-        /* MSN SOCIAL CARD */
-        .msn-card { background: #F0F7FF; border: 1px solid #7192D1; padding: 15px; border-radius: 5px; }
-        .nudge-btn { display: block; width: 100%; padding: 10px; margin-top: 10px; background: #fff; border: 1px solid #A0A0A0; cursor: pointer; font-weight: bold; }
-        .nudge-btn:active { background: #FFE0B2; }
+        .social-card { background: #F0F7FF; border: 1px solid #7192D1; padding: 15px; border-radius: 5px; }
+        .skill-item { margin-bottom: 12px; padding: 8px; border: 1px solid #ddd; background: #F9F9F9; }
+        .skill-item h4 { color: var(--xp-blue); border-bottom: 1px solid #ddd; margin-bottom: 5px; }
 
-        /* TASKBAR */
         #taskbar {
             position: fixed; bottom: 0; width: 100%; height: 30px;
-            background: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%);
-            z-index: 100000; display: flex; align-items: center;
+            background: var(--xp-taskbar); z-index: 100000; display: flex; align-items: center; border-top: 1px solid #5A9CFF;
         }
         #start-btn { 
-            background: linear-gradient(to bottom, #4CAF50, #2E7D32); padding: 0 15px; height: 100%; 
+            background: var(--xp-start); padding: 0 15px; height: 100%; 
             color: #fff; font-weight: bold; font-style: italic; display: flex; align-items: center; border-radius: 0 10px 10px 0; cursor: pointer;
         }
         #clock { margin-left: auto; color: #fff; padding: 0 15px; background: #0975e1; height: 100%; display: flex; align-items: center; }
-
-        /* CONTEXT MENU */
-        #context-menu {
-            position: fixed; background: #fff; border: 1px solid #808080; z-index: 100006; display: none; width: 150px; padding: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        }
-        .context-item { padding: 4px 15px; cursor: default; }
-        .context-item:hover { background: var(--xp-selection); color: #fff; }
     </style>
 </head>
-<body oncontextmenu="return openContext(event)">
+<body oncontextmenu="return handleRightClick(event)">
 
     <div id="mobile-crash">
-        <div class="block">Windows</div>
-        <p>A problem has been detected and Windows has been shut down to prevent damage to your device.</p>
-        <p><strong>INCOMPATIBLE_PLATFORM_ERROR</strong></p>
-        <p>The current hardware (Mobile/Tablet) is too modern for the 2001 Luna architecture. Please switch to a <strong>Desktop/Laptop</strong> to view Mahmudul's skills.</p>
-        <p>*** STOP: 0x000000ED (0xBDLOGICALERROR, 0x01912409071)</p>
+        <div class="error-block">Windows</div>
+        <p>A problem has been detected and Windows has been shut down to prevent damage to your mobile device.</p>
+        <p><strong>INCOMPATIBLE_DISPLAY_ERROR</strong></p>
+        <p>This portfolio requires a <strong>Desktop/Laptop</strong> display to render correctly. Mobile browsers do not support the Luna subsystem.</p>
+        <p>*** STOP: 0x000000D1 (0xBDLOGICALERROR, 0x8801912409071)</p>
+    </div>
+
+    <div id="boot-sequence">
+        <div id="bios-screen"></div>
+        <div id="xp-loading">
+            <div style="color:white; font-size:24px; margin-bottom:20px;">Windows XP</div>
+            <div id="xp-loading-bar-container"><div id="xp-loading-bar"></div></div>
+        </div>
     </div>
 
     <div id="welcome-screen">
-        <div class="welcome-center">
+        <div class="welcome-bar">
             <div class="welcome-left">welcome</div>
             <div class="welcome-right">
-                <div class="user-icon"></div>
+                <div class="welcome-avatar"></div>
                 <div class="welcome-msg">Mahmudul Hasan</div>
             </div>
         </div>
     </div>
 
     <div id="context-menu">
-        <div class="context-item" onclick="openWindow('about')">About Me</div>
-        <div class="context-item" onclick="openWindow('skills')">My Skills</div>
-        <div class="context-item" onclick="openWindow('social')">Social Card</div>
+        <div class="context-item" onclick="openWindow('about')">About Mahmudul</div>
+        <div class="context-item" onclick="openWindow('social')">My MSN Social Card</div>
+        <div class="context-item" onclick="alert('Checking for hardware... All systems functional.')">Skill Explorer</div>
         <div style="height:1px; background:#ccc; margin:3px 0;"></div>
-        <div class="context-item" onclick="location.reload()">Refresh</div>
+        <div class="context-item" onclick="location.reload()">Refresh Desktop</div>
     </div>
 
-    <div id="desktop" onclick="closePopups()">
-        <div class="desktop-icons" id="desktop-icons"></div>
-    </div>
-
-    <div id="taskbar">
-        <div id="start-btn" onclick="openWindow('about')">start</div>
-        <div id="clock"></div>
+    <div id="desktop-container">
+        <div id="three-container"></div>
+        <div id="desktop" onclick="closePopups()">
+            <div class="desktop-icons" id="desktop-icons"></div>
+        </div>
+        <div id="taskbar">
+            <div id="start-btn" onclick="openWindow('about')">start</div>
+            <div id="clock"></div>
+        </div>
     </div>
 
     <div id="windows-container"></div>
 
     <script>
-        const items = [
+        // ============================================
+        // DATA: SKILLS & TOPICS
+        // ============================================
+        const skillData = {
+            'ai': { name: 'AI Engineering', icon: '🧠', topics: ['LangChain Agents', 'RAG Architectures', 'LLM Fine-tuning', 'Vector DBs (Pinecone)', 'OpenAI API', 'Hugging Face'] },
+            'python': { name: 'Python Core', icon: '🐍', topics: ['FastAPI Backend', 'Automation Scripting', 'Data Processing', 'Async Programming', 'Advanced Scraping'] },
+            'laravel': { name: 'Laravel Expert', icon: '🔴', topics: ['Eloquent ORM', 'Blade Templates', 'API Authentication', 'PHP 8.x Features', 'Job Queues'] },
+            'flutter': { name: 'Mobile Dev', icon: '📱', topics: ['Flutter & Dart', 'State Management (BLoC)', 'Firebase Integration', 'Offline-first Apps', 'Native Bridges'] },
+            'web': { name: 'Modern Web', icon: '⚡', topics: ['Next.js 15 (App Router)', 'TypeScript', 'React 19', 'Tailwind CSS', 'SSR & ISR Patterns'] },
+            'devops': { name: 'DevOps & Cloud', icon: '🐳', topics: ['Docker Containerization', 'Kubernetes Orchestration', 'AWS Lambda', 'GitHub Actions CI/CD', 'Linux Admin'] },
+            'db': { name: 'Databases', icon: '💽', topics: ['MySQL / PostgreSQL', 'Redis Caching', 'NoSQL Architectures', 'Schema Normalization'] }
+        };
+
+        const staticItems = [
             { id: 'about', name: 'My Computer', icon: '💻' },
-            { id: 'skills', name: 'Skills.exe', icon: '⚙️' },
             { id: 'social', name: 'Social Card', icon: '📇' },
-            { id: 'cmd', name: 'Command Prompt', icon: '📟' },
             { id: 'recycle', name: 'Recycle Bin', icon: '🗑️' }
         ];
 
         let zIndex = 1000;
         const openWins = {};
 
+        // ============================================
+        // INITIALIZATION & BOOT LOGIC
+        // ============================================
         function init() {
-            renderIcons();
+            renderDesktop();
+            runBoot();
+            initThree();
+            setInterval(updateClock, 1000);
+            updateClock();
+        }
+
+        async function runBoot() {
+            const bios = document.getElementById('bios-screen');
+            const lines = ['PhoenixBIOS 4.0 Release 6.0', 'Copyright 1985-2026', 'CPU: AMD Ryzen 9 5900X', 'Memory Test: 32768MB OK', 'Detecting HDD... Done', 'Loading Windows XP...'];
+            for (let line of lines) {
+                const div = document.createElement('div');
+                div.textContent = line;
+                bios.appendChild(div);
+                await new Promise(r => setTimeout(r, 150));
+            }
+            document.getElementById('xp-loading').style.display = 'flex';
+            const bar = document.getElementById('xp-loading-bar');
+            for(let i=0; i<=100; i+=10) {
+                bar.style.width = i + '%';
+                await new Promise(r => setTimeout(r, 80));
+            }
+            document.getElementById('boot-sequence').style.display = 'none';
             runWelcome();
-            startTime();
         }
 
         function runWelcome() {
-            const welcome = document.getElementById('welcome-screen');
-            welcome.style.display = 'flex';
+            const screen = document.getElementById('welcome-screen');
+            screen.style.display = 'flex';
             setTimeout(() => {
-                welcome.style.opacity = '0';
-                welcome.style.transition = 'opacity 1s';
-                setTimeout(() => welcome.style.display = 'none', 1000);
-            }, 2000);
+                screen.style.opacity = '0';
+                screen.style.transition = 'opacity 1s';
+                setTimeout(() => screen.style.display = 'none', 1000);
+            }, 2500);
         }
 
-        function renderIcons() {
+        function renderDesktop() {
             const container = document.getElementById('desktop-icons');
-            items.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'desktop-icon';
-                div.innerHTML = `<div style="font-size:32px">${item.icon}</div><div>${item.name}</div>`;
-                div.ondblclick = () => openWindow(item.id);
-                container.appendChild(div);
-            });
+            // Static Icons
+            staticItems.forEach(item => createIcon(container, item.id, item.name, item.icon, false));
+            // Individual Skill Icons
+            Object.keys(skillData).forEach(key => createIcon(container, key, skillData[key].name, skillData[key].icon, true));
         }
 
-        function openWindow(id) {
-            if (openWins[id]) return;
+        function createIcon(container, id, name, icon, isSkill) {
+            const div = document.createElement('div');
+            div.className = 'desktop-icon';
+            div.innerHTML = `<div class="icon-img">${icon}</div><div>${name}</div>`;
+            div.ondblclick = () => isSkill ? openSkillWindow(id) : openWindow(id);
+            container.appendChild(div);
+        }
+
+        // ============================================
+        // WINDOW MANAGEMENT
+        // ============================================
+        function openSkillWindow(key) {
+            const skill = skillData[key];
+            openWindow(key, `
+                <div class="skill-item">
+                    <h4>${skill.name} - In Depth</h4>
+                    <ul style="padding-left:15px; line-height:1.6;">
+                        ${skill.topics.map(t => `<li>${t}</li>`).join('')}
+                    </ul>
+                </div>
+                <p style="margin-top:15px; font-size:10px; color:#666;">Status: Senior Expert Module Loaded.</p>
+            `);
+        }
+
+        function openWindow(id, customContent = null) {
+            if (openWins[id]) { focusWin(id); return; }
             const win = document.createElement('div');
             win.className = 'window active';
             win.id = `win-${id}`;
-            win.style.width = '480px';
-            win.style.height = '400px';
-            win.style.left = (120 + (zIndex % 60)) + 'px';
-            win.style.top = (120 + (zIndex % 60)) + 'px';
+            win.style.width = '420px';
+            win.style.height = '350px';
+            win.style.left = (100 + (zIndex % 50)) + 'px';
+            win.style.top = (80 + (zIndex % 50)) + 'px';
             win.style.zIndex = ++zIndex;
 
             win.innerHTML = `
-                <div class="window-header">
+                <div class="window-header" onmousedown="drag(event, '${id}')">
                     <span>${id.toUpperCase()}</span>
                     <button class="win-btn win-close" onclick="closeWindow('${id}')">X</button>
                 </div>
-                <div class="window-body">${getContent(id)}</div>
+                <div class="window-body">${customContent || getContent(id)}</div>
             `;
             document.getElementById('windows-container').appendChild(win);
             openWins[id] = win;
@@ -204,110 +267,77 @@
 
         function getContent(id) {
             switch(id) {
-                case 'skills':
-                    return `
-                        <h3 style="margin-bottom:10px;">Full-Stack & AI Stack 2026</h3>
-                        <div class="skill-grid">
-                            <div class="skill-box">
-                                <h4>🤖 AI & LLM</h4>
-                                <span class="skill-tag">LangChain</span><span class="skill-tag">OpenAI</span>
-                                <span class="skill-tag">RAG</span><span class="skill-tag">HuggingFace</span>
-                                <span class="skill-tag">Vector DB (Pinecone)</span>
-                            </div>
-                            <div class="skill-box">
-                                <h4>📱 Mobile Development</h4>
-                                <span class="skill-tag">Flutter</span><span class="skill-tag">React Native</span>
-                                <span class="skill-tag">Dart</span><span class="skill-tag">Kotlin/Swift</span>
-                                <span class="skill-tag">Firebase</span>
-                            </div>
-                            <div class="skill-box">
-                                <h4>🌐 Web Full-Stack</h4>
-                                <span class="skill-tag">Next.js 15</span><span class="skill-tag">Laravel</span>
-                                <span class="skill-tag">React</span><span class="skill-tag">TypeScript</span>
-                                <span class="skill-tag">Tailwind CSS</span>
-                            </div>
-                            <div class="skill-box">
-                                <h4>♾️ DevOps & Cloud</h4>
-                                <span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span>
-                                <span class="skill-tag">AWS</span><span class="skill-tag">CI/CD</span>
-                                <span class="skill-tag">GitHub Actions</span>
-                            </div>
-                        </div>
-                        <p style="margin-top:10px; font-size:10px; color:#666;">*All modules are updated to latest stable releases.</p>
-                    `;
                 case 'social':
                     return `
-                        <div class="msn-card">
-                            <div style="display:flex; gap:10px; align-items:center; margin-bottom:15px;">
-                                <div style="width:50px; height:50px; background:#4CAF50; border:2px solid #fff;"></div>
-                                <div>
-                                    <div style="font-weight:bold;">Mahmudul Hasan</div>
-                                    <div style="font-size:10px; color:#4CAF50;">● Available for Projects</div>
-                                </div>
+                        <div class="social-card">
+                            <div style="display:flex; gap:15px; align-items:center; margin-bottom:15px;">
+                                <div style="width:50px; height:50px; background:#4CAF50; border:1px solid #fff;"></div>
+                                <div><h3 style="color:#245DDA;">Mahmudul Hasan</h3><p style="color:#4CAF50;">● Online</p></div>
                             </div>
-                            <p style="font-style:italic; margin-bottom:10px;">"Logic will get you from A to B. Imagination will take you everywhere."</p>
-                            <a href="https://github.com/bdlogicalerror" target="_blank" style="display:block; padding:8px; background:#fff; border:1px solid #ccc; text-align:center; text-decoration:none; color:#333; margin-bottom:5px;">GitHub: bdlogicalerror</a>
-                            <a href="https://wa.me/8801912409071" style="display:block; padding:8px; background:#fff; border:1px solid #ccc; text-align:center; text-decoration:none; color:#333; margin-bottom:5px;">WhatsApp Contact</a>
-                            <button class="nudge-btn" onclick="triggerNudge()">SEND NUDGE</button>
+                            <button style="width:100%; padding:8px; margin-bottom:10px;" onclick="nudge('${id}')">SEND NUDGE</button>
+                            <div style="font-size:11px; line-height:1.5;">
+                                <p>GitHub: <a href="https://github.com/bdlogicalerror" target="_blank">bdlogicalerror</a></p>
+                                <p>WhatsApp: <a href="https://wa.me/8801912409071" target="_blank">+8801912409071</a></p>
+                                <p>FB: <a href="http://facebook.com/mahmudul.mk" target="_blank">mahmudul.mk</a></p>
+                            </div>
                         </div>
                     `;
-                case 'cmd':
-                    return `
-                        <div style="background:#000; color:#0f0; font-family:monospace; padding:10px; height:100%;">
-                            <p>Microsoft Windows XP [Version 5.1.2600]</p>
-                            <p>(C) Copyright 1985-2001 Microsoft Corp.</p><br>
-                            <p>C:\\Documents and Settings\\Mahmudul> <strong>get-skills</strong></p>
-                            <p>> Loading environment variables...</p>
-                            <p>> AI_ENG: ACTIVE</p>
-                            <p>> FULLSTACK_DEV: ACTIVE</p>
-                            <p>> DEVOPS_KNOWLEDGE: HIGH</p>
-                            <p>> MOBILE_CAPABILITY: NATIVE/CROSS</p><br>
-                            <p>C:\\Documents and Settings\\Mahmudul> _</p>
-                        </div>
-                    `;
-                case 'recycle':
-                    return `<div style="text-align:center; padding:40px; color:#888;"><p>🗑️ Bin contains legacy items: jQuery, IE6, Flash.</p><br><button onclick="alert('Legacy technology purged!')" class="win-btn" style="width:100px;">Empty Bin</button></div>`;
                 case 'about':
-                    return `<p><strong>Engineer:</strong> Mahmudul Hasan</p><p><strong>Focus:</strong> Scaling AI Automation & High-performance Web/Mobile Apps.</p><br><p>I bridge the gap between complex AI logic and intuitive user experiences.</p>`;
+                    return `<p><strong>Mahmudul Hasan</strong></p><p>Senior Full-Stack Engineer specializing in AI & Automation.</p><br><p>I build autonomous RAG systems, complex mobile apps, and scalable web architectures.</p>`;
+                case 'recycle':
+                    return `<div style="text-align:center; padding:40px; color:#888;">🗑️ Trash contains: legacy_jquery.js, flash_player.exe</div>`;
+                default: return `<p>System module active.</p>`;
             }
         }
 
-        function closeWindow(id) {
-            openWins[id].remove();
-            delete openWins[id];
-        }
+        function closeWindow(id) { if (openWins[id]) { openWins[id].remove(); delete openWins[id]; } }
+        function focusWin(id) { openWins[id].style.zIndex = ++zIndex; }
 
-        function triggerNudge() {
-            const win = openWins['social'];
-            let count = 0;
+        function nudge(id) {
+            const win = openWins[id];
+            let i = 0;
             const interval = setInterval(() => {
-                win.style.transform = `translate(${Math.random()*10}px, ${Math.random()*10}px)`;
-                count++;
-                if(count > 10) {
-                    clearInterval(interval);
-                    win.style.transform = 'translate(0,0)';
-                }
+                win.style.transform = `translate(${Math.random()*8}px, ${Math.random()*8}px)`;
+                if(++i > 10) { clearInterval(interval); win.style.transform = 'translate(0,0)'; }
             }, 50);
         }
 
-        function openContext(e) {
+        // ============================================
+        // UTILITIES: MOUSE & THREE.JS
+        // ============================================
+        function handleRightClick(e) {
             e.preventDefault();
-            const m = document.getElementById('context-menu');
-            m.style.display = 'block';
-            m.style.left = e.pageX + 'px';
-            m.style.top = e.pageY + 'px';
+            const menu = document.getElementById('context-menu');
+            menu.style.display = 'block';
+            menu.style.left = e.pageX + 'px';
+            menu.style.top = e.pageY + 'px';
             return false;
         }
 
-        function closePopups() {
-            document.getElementById('context-menu').style.display = 'none';
+        function closePopups() { document.getElementById('context-menu').style.display = 'none'; }
+        function updateClock() { document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+
+        function drag(e, id) {
+            const win = openWins[id];
+            focusWin(id);
+            let ox = e.clientX - win.offsetLeft, oy = e.clientY - win.offsetTop;
+            function move(e) { win.style.left = (e.clientX - ox) + 'px'; win.style.top = (e.clientY - oy) + 'px'; }
+            window.addEventListener('mousemove', move);
+            window.addEventListener('mouseup', () => window.removeEventListener('mousemove', move), {once:true});
         }
 
-        function startTime() {
-            const clock = document.getElementById('clock');
-            setInterval(() => {
-                clock.innerText = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-            }, 1000);
+        function initThree() {
+            const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('three-container').appendChild(renderer.domElement);
+            const geo = new THREE.BufferGeometry(), count = 600, pos = new Float32Array(count * 3);
+            for(let i=0; i<count*3; i++) pos[i] = (Math.random() - 0.5) * 10;
+            geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+            const p = new THREE.Points(geo, new THREE.PointsMaterial({ size: 0.02, color: 0x88ccff, transparent: true, opacity: 0.35 }));
+            scene.add(p); camera.position.z = 5;
+            function anim() { requestAnimationFrame(anim); p.rotation.y += 0.0008; renderer.render(scene, camera); }
+            anim();
         }
 
         init();
