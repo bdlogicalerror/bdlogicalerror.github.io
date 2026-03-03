@@ -1,40 +1,2514 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahmudul Hasan - Windows XP Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* ============================================
+           AUTHENTIC WINDOWS XP LUNA THEME
+           ============================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        :root {
+            /* XP Luna Blue Theme */
+            --xp-title-blue: #245DDA;
+            --xp-title-blue-dark: #1A4AC0;
+            --xp-title-blue-darker: #103090;
+            --xp-taskbar-blue: #245DDA;
+            --xp-taskbar-gradient: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%);
+            --xp-start-green: #3C8E3C;
+            --xp-start-green-light: #4BA64B;
+            --xp-start-green-dark: #2D6B2D;
+            --xp-selection: #316AC5;
+            --xp-window-bg: #FFFFFF;
+            --xp-dialog-bg: #ECE9D8;
+            --xp-border-light: #FFFFFF;
+            --xp-border-dark: #0D1F5C;
+            --xp-gray: #808080;
+            --xp-gray-light: #E8E8E8;
+            --xp-gray-dark: #A0A0A0;
+        }
+
+        @font-face {
+            font-family: 'XPFont';
+            src: local('Tahoma'), local('Trebuchet MS'), local('Verdana'), local('Segoe UI');
+        }
+
+        body {
+            font-family: 'XPFont', Tahoma, sans-serif;
+            font-size: 11px;
+            overflow: hidden;
+            background: #000;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ============================================
+           BOOT SEQUENCE
+           ============================================ */
+        
+        #boot-sequence {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #boot-sequence.hidden {
+            display: none;
+        }
+
+        /* BIOS Text */
+        #bios-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #245DDA;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            padding: 30px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        #bios-screen.hidden {
+            display: none;
+        }
+
+        .bios-line {
+            opacity: 0;
+            animation: biosFadeIn 0.1s forwards;
+        }
+
+        @keyframes biosFadeIn {
+            to { opacity: 1; }
+        }
+
+        /* XP Loading Screen */
+        #xp-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #003399;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #xp-loading.visible {
+            display: flex;
+        }
+
+        #xp-logo {
+            width: 200px;
+            height: 120px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        #xp-logo-text {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #xp-loading-bar-container {
+            width: 400px;
+            height: 8px;
+            background: #000;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #xp-loading-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #316AC5, #5A9CFF, #316AC5);
+            background-size: 200% 100%;
+            animation: loadingShimmer 1s linear infinite;
+        }
+
+        @keyframes loadingShimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        #loading-text {
+            color: #fff;
+            font-size: 12px;
+            margin-top: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* ============================================
+           MAIN DESKTOP CONTAINER
+           ============================================ */
+        
+        #desktop-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #003399;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           THREE.JS CRT EFFECT LAYER
+           ============================================ */
+        
+        #three-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #three-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* CRT Overlay Effects */
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .scanlines {
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+        }
+
+        .vignette {
+            background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
+        }
+
+        /* ============================================
+           DESKTOP
+           ============================================ */
+        
+        #desktop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 30px);
+            background: url('https://upload.wikimedia.org/wikipedia/en/7/7d/Bliss.png') no-repeat center center;
+            background-size: cover;
+            z-index: 10;
+        }
+
+        #desktop::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,50,150,0.1) 0%, transparent 50%, rgba(0,50,150,0.15) 100%);
+        }
+
+        /* Desktop Icons Grid */
+        .desktop-icon {
+            position: absolute;
+            width: 76px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 4px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+        }
+
+        .desktop-icon:hover {
+            background: rgba(49, 106, 197, 0.25);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .desktop-icon.selected {
+            background: rgba(49, 106, 197, 0.5);
+            border: 1px dotted #fff;
+        }
+
+        .desktop-icon .icon-wrapper {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+        }
+
+        .desktop-icon .icon-img {
+            width: 48px;
+            height: 48px;
+            image-rendering: pixelated;
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+        }
+
+        .desktop-icon .icon-label {
+            color: #fff;
+            text-align: center;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.8), -1px -1px 1px rgba(0,0,0,0.8), 1px -1px 1px rgba(0,0,0,0.8), -1px 1px 1px rgba(0,0,0,0.8);
+            font-size: 11px;
+            line-height: 1.2;
+            word-wrap: break-word;
+            max-width: 72px;
+            padding: 1px 2px;
+        }
+
+        .desktop-icon.selected .icon-label {
+            background: var(--xp-selection);
+            border-radius: 2px;
+        }
+
+        /* ============================================
+           TASKBAR
+           ============================================ */
+        
+        #taskbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: var(--xp-taskbar-gradient);
+            border-top: 1px solid #5A8FD8;
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+            box-shadow: 0 -1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Start Button */
+        #start-button {
+            width: 100px;
+            height: 30px;
+            background: linear-gradient(180deg, #4BA64B 0%, #3C8E3C 50%, #2D6B2D 100%);
+            border: none;
+            border-radius: 0 12px 12px 0;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            font-style: italic;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            margin-right: 5px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        #start-button:hover {
+            background: linear-gradient(180deg, #5CB65C 0%, #4BA64B 50%, #3C8E3C 100%);
+        }
+
+        #start-button:active, #start-button.active {
+            background: linear-gradient(180deg, #3C8E3C 0%, #2D6B2D 100%);
+        }
+
+        #start-button .win-logo {
+            width: 22px;
+            height: 22px;
+            margin-right: 6px;
+        }
+
+        /* Taskbar Windows */
+        #taskbar-windows {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 100%;
+            padding: 3px 0;
+            overflow: hidden;
+        }
+
+        .taskbar-item {
+            height: 24px;
+            min-width: 140px;
+            max-width: 180px;
+            flex: 1;
+            background: linear-gradient(180deg, #3A7DD8 0%, #2563C7 100%);
+            border: 1px solid #1E4B96;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            padding: 0 6px;
+            cursor: pointer;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 0.1s;
+        }
+
+        .taskbar-item:hover {
+            background: linear-gradient(180deg, #4A8DE8 0%, #3573D7 100%);
+        }
+
+        .taskbar-item.active {
+            background: linear-gradient(180deg, #1A4AC0 0%, #103090 100%);
+            border-color: #0D1F5C;
+            box-shadow: inset 0 2px 3px rgba(0,0,0,0.3);
+        }
+
+        .taskbar-item.minimized {
+            opacity: 0.7;
+        }
+
+        .taskbar-item img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+            flex-shrink: 0;
+        }
+
+        .taskbar-item .title {
+            color: #fff;
+            font-size: 11px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* System Tray */
+        #system-tray {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 10px;
+            height: 100%;
+            background: linear-gradient(180deg, #1A4AC0 0%, #103090 100%);
+            border-left: 1px solid #0D1F5C;
+            box-shadow: inset 1px 0 0 rgba(255,255,255,0.1);
+        }
+
+        .tray-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.9;
+        }
+
+        #clock {
+            color: #fff;
+            font-size: 11px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* ============================================
+           START MENU
+           ============================================ */
+        
+        #start-menu {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 380px;
+            background: linear-gradient(180deg, #3A8DD8 0%, #2563C7 50%, #1A4AC0 100%);
+            border: 2px solid #1E4B96;
+            border-radius: 6px 6px 0 0;
+            display: none;
+            z-index: 10001;
+            box-shadow: 3px -3px 15px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        #start-menu.visible {
+            display: block;
+            animation: menuSlideIn 0.15s ease-out;
+        }
+
+        @keyframes menuSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #start-menu-header {
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            background: linear-gradient(180deg, #1A4AC0 0%, #103090 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        #user-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #5A9CFF 0%, #245DDA 50%, #1A4AC0 100%);
+            border: 2px solid #fff;
+            border-radius: 4px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        #start-menu-body {
+            display: flex;
+            min-height: 280px;
+        }
+
+        #start-menu-left {
+            width: 190px;
+            padding: 8px 0;
+            background: #fff;
+        }
+
+        #start-menu-right {
+            width: 190px;
+            padding: 8px 0;
+            background: linear-gradient(180deg, #4A8DE8 0%, #3573D7 100%);
+            border-left: 1px solid #1E4B96;
+        }
+
+        .start-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 6px 15px;
+            color: #000;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        #start-menu-right .start-menu-item {
+            color: #fff;
+        }
+
+        .start-menu-item:hover {
+            background: var(--xp-selection);
+            color: #fff;
+        }
+
+        #start-menu-right .start-menu-item:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .start-menu-item img {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+        }
+
+        #start-menu-right .start-menu-item img {
+            filter: brightness(0) invert(1);
+        }
+
+        .start-menu-item span {
+            text-shadow: none;
+        }
+
+        #start-menu-right .start-menu-item span {
+            text-shadow: 1px 1px(0,0 1px rgba,0,0.3);
+        }
+
+        .start-menu-separator {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.2), transparent);
+            margin: 4px 10px;
+        }
+
+        #start-menu-footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 8px;
+            background: linear-gradient(180deg, #D0D0D0 0%, #C0C0C0 100%);
+            border-top: 1px solid #A0A0A0;
+        }
+
+        .start-footer-btn {
+            padding: 4px 12px;
+            background: linear-gradient(180deg, #E8E8E8 0%, #D0D0D0 100%);
+            border: 1px solid #888;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
+
+        .start-footer-btn:hover {
+            background: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);
+        }
+
+        /* ============================================
+           WINDOWS
+           ============================================ */
+        
+        .window {
+            position: absolute;
+            background: var(--xp-window-bg);
+            border: 3px solid var(--xp-title-blue);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.5);
+            min-width: 320px;
+            min-height: 220px;
+            display: none;
+            overflow: hidden;
+        }
+
+        .window.visible {
+            display: block;
+            animation: windowOpen 0.2s ease-out;
+        }
+
+        @keyframes windowOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .window.maximized {
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: calc(100% - 30px) !important;
+            border-radius: 0;
+            border-width: 0;
+        }
+
+        .window.maximized .window-titlebar {
+            border-radius: 0;
+        }
+
+        /* Title Bar */
+        .window-titlebar {
+            height: 28px;
+            background: linear-gradient(180deg, #316AC5 0%, #245DDA 50%, #1A4AC0 100%);
+            padding: 0 5px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px 5px 0 0;
+            cursor: move;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .window-titlebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .window.inactive .window-titlebar {
+            background: linear-gradient(180deg, #A0A0A0 0%, #808080 50%, #606060 100%);
+        }
+
+        .window-titlebar .window-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .window-titlebar .window-title {
+            flex: 1;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Window Controls */
+        .window-controls {
+            display: flex;
+            gap: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .window-btn {
+            width: 21px;
+            height: 21px;
+            background: linear-gradient(180deg, #E8E8E8 0%, #D0D0D0 100%);
+            border: 1px solid #888;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
+
+        .window-btn:hover {
+            background: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);
+        }
+
+        .window-btn.close {
+            background: linear-gradient(180deg, #E85A5A 0%, #D03030 100%);
+            color: #fff;
+            border-color: #B02020;
+        }
+
+        .window-btn.close:hover {
+            background: linear-gradient(180deg, #FF6B6B 0%, #E84040 100%);
+        }
+
+        /* Menu Bar */
+        .window-menubar {
+            background: var(--xp-dialog-bg);
+            padding: 2px 0;
+            border-bottom: 1px solid #D4D0C8;
+            display: flex;
+        }
+
+        .menubar-item {
+            padding: 2px 10px;
+            color: #333;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .menubar-item:hover {
+            background: var(--xp-selection);
+            color: #fff;
+        }
+
+        /* Window Content */
+        .window-content {
+            padding: 0;
+            overflow: auto;
+            background: #fff;
+            height: calc(100% - 28px - 24px);
+        }
+
+        .window-content.padded {
+            padding: 15px;
+        }
+
+        /* ============================================
+           CONTENT STYLES
+           ============================================ */
+        
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 10px;
+            padding: 15px;
+        }
+
+        .project-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 3px;
+        }
+
+        .project-item:hover {
+            background: rgba(49, 106, 197, 0.15);
+            border: 1px dotted #316AC5;
+        }
+
+        .project-item .icon {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 6px;
+        }
+
+        .project-item .name {
+            text-align: center;
+            font-size: 11px;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        /* Skills List */
+        .skills-container {
+            padding: 0;
+        }
+
+        .skill-section {
+            border-bottom: 1px solid #D4D0C8;
+            padding: 12px 15px;
+        }
+
+        .skill-section:last-child {
+            border-bottom: none;
+        }
+
+        .skill-section h3 {
+            font-size: 13px;
+            color: #245DDA;
+            margin-bottom: 10px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #D4D0C8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #F5F5F5;
+            border: 1px solid #D4D0C8;
+            border-radius: 3px;
+            padding: 4px 10px;
+            font-size: 11px;
+        }
+
+        .skill-tag img {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* About Page */
+        .about-page {
+            padding: 20px;
+        }
+
+        .about-page h2 {
+            color: #245DDA;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .about-page .subtitle {
+            color: #3C8E3C;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #245DDA;
+        }
+
+        .about-page p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .about-page .highlight {
+            color: #245DDA;
+            font-weight: bold;
+        }
+
+        .about-page ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .about-page li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .about-page li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #245DDA;
+            font-size: 8px;
+            top: 8px;
+        }
+
+        /* Notepad Style */
+        .notepad-content {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            padding: 15px;
+            white-space: pre-wrap;
+            background: #fff;
+            color: #000;
+            min-height: 100%;
+        }
+
+        .notepad-content a {
+            color: #0000FF;
+            text-decoration: underline;
+        }
+
+        /* Command Prompt */
+        .cmd-content {
+            background: #000;
+            color: #CCC;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            padding: 10px;
+            min-height: 100%;
+        }
+
+        .cmd-line {
+            margin-bottom: 3px;
+        }
+
+        .cmd-prompt {
+            color: #FFF;
+            margin-right: 8px;
+        }
+
+        .cmd-input {
+            background: transparent;
+            border: none;
+            color: #FFF;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            width: 300px;
+        }
+
+        /* Run Dialog */
+        .run-dialog {
+            width: 420px;
+            height: 140px;
+        }
+
+        .run-dialog .window-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 15px;
+            background: var(--xp-dialog-bg);
+        }
+
+        .run-dialog label {
+            font-size: 11px;
+            color: #333;
+        }
+
+        .run-dialog input[type="text"] {
+            width: 100%;
+            padding: 4px 8px;
+            border: 2px solid #7F9DB9;
+            border-radius: 2px;
+            font-family: Tahoma, sans-serif;
+            font-size: 12px;
+        }
+
+        .run-dialog input[type="text"]:focus {
+            outline: none;
+            border-color: #316AC5;
+        }
+
+        .run-dialog .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .run-dialog button {
+            padding: 4px 20px;
+            background: linear-gradient(180deg, #E8E8E8 0%, #D0D0D0 100%);
+            border: 1px solid #888;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .run-dialog button:hover {
+            background: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);
+        }
+
+        .run-dialog button.primary {
+            background: linear-gradient(180deg, #3A8DD8 0%, #2563C7 100%);
+            color: #fff;
+            border-color: #1A4AC0;
+        }
+
+        .run-dialog button.primary:hover {
+            background: linear-gradient(180deg, #4A9DE8 0%, #3573D7 100%);
+        }
+
+        /* ============================================
+           SHUTDOWN SCREEN
+           ============================================ */
+        
+        #shutdown-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 999998;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #shutdown-screen.visible {
+            display: flex;
+            animation: shutdownSequence 3.5s forwards;
+        }
+
+        @keyframes shutdownSequence {
+            0% { background: #000; }
+            20% { background: #003399; }
+            60% { background: #003399; }
+            100% { background: #000; opacity: 0; }
+        }
+
+        #shutdown-screen img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 30px;
+            animation: shutdownPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes shutdownPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.95); }
+        }
+
+        #shutdown-message {
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        
+        @media (max-width: 768px) {
+            #desktop {
+                background-size: cover;
+            }
+
+            .desktop-icon {
+                width: 65px;
+            }
+
+            .desktop-icon .icon-img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .desktop-icon .icon-label {
+                font-size: 10px;
+                max-width: 62px;
+            }
+
+            #start-menu {
+                width: 100%;
+                left: 0;
+            }
+
+            #start-menu-body {
+                flex-direction: column;
+            }
+
+            #start-menu-left, #start-menu-right {
+                width: 100%;
+            }
+
+            #start-menu-right {
+                border-left: none;
+                border-top: 1px solid #1E4B96;
+            }
+
+            .window {
+                width: 95% !important;
+                left: 2.5% !important;
+                top: 2% !important;
+                height: 94% !important;
+            }
+
+            .window.maximized {
+                width: 100% !important;
+                left: 0 !important;
+                top: 0 !important;
+                height: calc(100% - 30px) !important;
+            }
+
+            #taskbar-windows {
+                display: none;
+            }
+
+            #three-container {
+                display: none;
+            }
+
+            .crt-overlay {
+                display: none;
+            }
+        }
+
+        /* ============================================
+           SCROLLBAR STYLING
+           ============================================ */
+        
+        ::-webkit-scrollbar {
+            width: 16px;
+            height: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #EFEFEF;
+            border: 1px solid #D4D0C8;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #D4D0C8 0%, #E8E8E8 50%, #D4D0C8 100%);
+            border: 1px solid #A0A0A0;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, #C0C0C0 0%, #D8D8D8 50%, #C0C0C0 100%);
+        }
+
+        ::-webkit-scrollbar-button {
+            background: #D4D0C8;
+            border: 1px solid #A0A0A0;
+        }
+    </style>
 </head>
 <body>
-<h1 id="msg">Hello</h1>
-<button onclick="search()">Search</button>
-<script>
-    let msg = document.getElementById('msg');
+    <!-- ============================================
+         BOOT SEQUENCE
+         ============================================ -->
+    
+    <div id="boot-sequence">
+        <!-- BIOS Screen -->
+        <div id="bios-screen"></div>
+        
+        <!-- XP Loading Screen -->
+        <div id="xp-loading">
+            <div id="xp-logo">
+                <svg viewBox="0 0 200 120">
+                    <rect x="20" y="30" width="60" height="60" rx="5" fill="#F35325"/>
+                    <rect x="90" y="30" width="60" height="60" rx="5" fill="#81BC06"/>
+                    <rect x="20" y="70" width="60" height="30" rx="5" fill="#05A6F0"/>
+                    <rect x="90" y="70" width="60" height="30" rx="5" fill="#FFBA08"/>
+                </svg>
+                <span id="xp-logo-text">Windows XP</span>
+            </div>
+            <div id="xp-loading-bar-container">
+                <div id="xp-loading-bar"></div>
+            </div>
+            <div id="loading-text">Windows is starting up...</div>
+        </div>
+    </div>
 
-    function search() {
-        navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
-            .then(device => device.gatt.connect())
-            .then(server => {
-                // Getting Battery Service...
-                return server.getPrimaryService('battery_service');
-            })
-            .then(service => {
-                // Getting Battery Level Characteristic...
-                return service.getCharacteristic('battery_level');
-            })
-            .then(characteristic => {
-                // Reading Battery Level...
-                return characteristic.readValue();
-            })
-            .then(value => {
-                console.log('Battery percentage is ' + value.getUint8(0));
-            })
-            .catch(error => { console.log(error); });
-    }
+    <!-- ============================================
+         SHUTDOWN SCREEN
+         ============================================ -->
+    
+    <div id="shutdown-screen">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="#245DDA">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+        <div id="shutdown-message">Windows is shutting down...</div>
+    </div>
 
+    <!-- ============================================
+         MAIN DESKTOP CONTAINER
+         ============================================ -->
+    
+    <div id="desktop-container">
+        <!-- Three.js Canvas -->
+        <div id="three-container">
+            <canvas id="three-canvas"></canvas>
+        </div>
 
-</script>
+        <!-- CRT Overlay Effects -->
+        <div class="crt-overlay scanlines"></div>
+        <div class="crt-overlay vignette"></div>
+
+        <!-- Desktop -->
+        <div id="desktop">
+            <!-- My Projects Icon -->
+            <div class="desktop-icon" data-action="projects" data-icon="folder" style="top: 20px; left: 20px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <defs>
+                            <linearGradient id="folderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FFE082"/>
+                                <stop offset="100%" style="stop-color:#F0C95C"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#folderGrad)" d="M4 10v30h40V18l-8-8H4z"/>
+                        <path fill="#E8B838" d="M36 18l-8-8v4l6 4h2v24h8V18h-8z"/>
+                    </svg>
+                </div>
+                <span class="icon-label">My Projects</span>
+            </div>
+
+            <!-- Technical Skills Icon -->
+            <div class="desktop-icon" data-action="skills" data-icon="computer" style="top: 110px; left: 20px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <rect fill="#7F9DB9" x="4" y="8" width="40" height="28" rx="2"/>
+                        <rect fill="#5B7A99" x="6" y="10" width="36" height="24"/>
+                        <rect fill="#1E3A5F" x="10" y="14" width="28" height="16"/>
+                        <rect fill="#7F9DB9" x="2" y="36" width="44" height="4" rx="1"/>
+                        <rect fill="#5B7A99" x="18" y="40" width="12" height="4"/>
+                    </svg>
+                </div>
+                <span class="icon-label">Technical Skills</span>
+            </div>
+
+            <!-- About Me Icon -->
+            <div class="desktop-icon" data-action="about" data-icon="user" style="top: 200px; left: 20px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <circle fill="#245DDA" cx="24" cy="16" r="12"/>
+                        <path fill="#1A4AC0" d="M24 4c-6.63 0-12 5.37-12 12s5.37 12 12 12 12-5.37 12-12S30.63 4 24 4zm0 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9z"/>
+                        <path fill="#F0C95C" d="M8 40c0 8.84 7.16 16 16 16s16-7.16 16-16h-4c0 6.63-5.37 12-12 12s-12-5.37-12-12H8z"/>
+                    </svg>
+                </div>
+                <span class="icon-label">About Me</span>
+            </div>
+
+            <!-- Recycle Bin Icon -->
+            <div class="desktop-icon" data-action="recycle" data-icon="trash" style="top: 290px; left: 20px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <path fill="#888" d="M12 8v4h2v28c0 1.66 1.34 3 3 3h16c1.66 0 3-1.34 3-3V12h2V8H12z"/>
+                        <path fill="#666" d="M14 4h20v2h-2v2h-2V6h-2v2h-2V6h-2v2h-2V6h-2v2h-2V6h-2v2h-2V4z"/>
+                        <path fill="#AAA" d="M15 15h18v26c0 1.1-.9 2-2 2H17c-1.1 0-2-.9-2-2V15z"/>
+                    </svg>
+                </div>
+                <span class="icon-label">Recycle Bin</span>
+            </div>
+
+            <!-- Skill Icons - Row 1 -->
+            <div class="desktop-icon" data-action="python" data-icon="skill" style="top: 20px; left: 120px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <circle fill="#3776AB" cx="24" cy="24" r="22"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">PY</text>
+                    </svg>
+                </div>
+                <span class="icon-label">Python</span>
+            </div>
+
+            <div class="desktop-icon" data-action="laravel" data-icon="skill" style="top: 110px; left: 120px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <circle fill="#FF2D20" cx="24" cy="24" r="22"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">L</text>
+                    </svg>
+                </div>
+                <span class="icon-label">Laravel</span>
+            </div>
+
+            <div class="desktop-icon" data-action="flutter" data-icon="skill" style="top: 200px; left: 120px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <circle fill="#02569B" cx="24" cy="24" r="22"/>
+                        <path fill="#fff" d="M12 15l12 9-12 9 12 6-12-6 0-12z"/>
+                    </svg>
+                </div>
+                <span class="icon-label">Flutter</span>
+            </div>
+
+            <!-- Skill Icons - Row 2 -->
+            <div class="desktop-icon" data-action="langchain" data-icon="skill" style="top: 20px; left: 220px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <circle fill="#1A1A2E" cx="24" cy="24" r="22"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">LC</text>
+                    </svg>
+                </div>
+                <span class="icon-label">LangChain</span>
+            </div>
+
+            <div class="desktop-icon" data-action="openai" data-icon="skill" style="top: 110px; left: 220px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <circle fill="#10A37F" cx="24" cy="24" r="22"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">GPT</text>
+                    </svg>
+                </div>
+                <span class="icon-label">OpenAI</span>
+            </div>
+
+            <div class="desktop-icon" data-action="huggingface" data-icon="skill" style="top: 200px; left: 220px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <circle fill="#FFD700" cx="24" cy="24" r="22"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#333" font-size="10" font-weight="bold">HF</text>
+                    </svg>
+                </div>
+                <span class="icon-label">Hugging Face</span>
+            </div>
+
+            <!-- Docker -->
+            <div class="desktop-icon" data-action="docker" data-icon="skill" style="top: 290px; left: 120px;">
+                <div class="icon-wrapper">
+                    <svg class="icon-img" viewBox="0 0 48 48">
+                        <circle fill="#2496ED" cx="24" cy="24" r="22"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">D</text>
+                    </svg>
+                </div>
+                <span class="icon-label">Docker</span>
+            </div>
+        </div>
+
+        <!-- ============================================
+             TASKBAR
+             ============================================ -->
+        
+        <div id="taskbar">
+            <button id="start-button">
+                <svg class="win-logo" viewBox="0 0 20 20">
+                    <rect fill="#F35325" width="9" height="9"/>
+                    <rect x="11" fill="#81BC06" width="9" height="9"/>
+                    <rect y="11" fill="#05A6F0" width="9" height="9"/>
+                    <rect x="11" y="11" fill="#FFBA08" width="9" height="9"/>
+                </svg>
+                start
+            </button>
+
+            <div id="taskbar-windows"></div>
+
+            <div id="system-tray">
+                <svg class="tray-icon" viewBox="0 0 16 16" fill="#fff">
+                    <rect x="2" y="5" width="12" height="8" rx="1"/>
+                    <path d="M4 5V4a4 4 0 118 0v1" fill="none" stroke="#fff" stroke-width="1.5"/>
+                </svg>
+                <div id="clock">12:00 PM</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             START MENU
+             ============================================ -->
+        
+        <div id="start-menu">
+            <div id="start-menu-header">
+                <div id="user-avatar">👨‍💻</div>
+                <span>Mahmudul Hasan</span>
+            </div>
+            <div id="start-menu-body">
+                <div id="start-menu-left">
+                    <div class="start-menu-item" data-action="projects">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <path fill="#F0C95C" d="M3 5v22h26V9l-6-4H3z"/>
+                        </svg>
+                        <span>My Projects</span>
+                    </div>
+                    <div class="start-menu-item" data-action="skills">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <circle fill="#7F9DB9" cx="16" cy="14" r="10"/>
+                        </svg>
+                        <span>Technical Skills</span>
+                    </div>
+                    <div class="start-menu-item" data-action="about">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <circle fill="#245DDA" cx="16" cy="11" r="8"/>
+                            <path fill="#F0C95C" d="M8 23c0 4.42 3.58 8 8 8s8-3.58 8-8H8z"/>
+                        </svg>
+                        <span>About Me</span>
+                    </div>
+                    <div class="start-menu-separator"></div>
+                    <div class="start-menu-item" data-action="run">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <rect fill="#333" x="4" y="4" width="24" height="24" rx="2"/>
+                            <text x="16" y="20" text-anchor="middle" fill="#0f0" font-size="11">&gt;_</text>
+                        </svg>
+                        <span>Run...</span>
+                    </div>
+                </div>
+                <div id="start-menu-right">
+                    <div class="start-menu-item" data-action="contact">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <rect fill="#245DDA" x="4" y="8" width="24" height="16" rx="2"/>
+                            <path fill="#fff" d="M6 10l10 6 10-6H6z"/>
+                        </svg>
+                        <span>Contact Me</span>
+                    </div>
+                    <div class="start-menu-separator"></div>
+                    <div class="start-menu-item">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <circle fill="#333" cx="16" cy="16" r="10"/>
+                            <text x="16" y="20" text-anchor="middle" fill="#fff" font-size="12">?</text>
+                        </svg>
+                        <span>Help and Support</span>
+                    </div>
+                    <div class="start-menu-item">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <rect fill="#245DDA" x="6" y="6" width="20" height="20" rx="2"/>
+                        </svg>
+                        <span>Security</span>
+                    </div>
+                    <div class="start-menu-separator"></div>
+                    <div class="start-menu-item" data-action="shutdown">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <circle fill="#888" cx="16" cy="16" r="12"/>
+                            <path fill="#888" d="M16 6v10l6 3"/>
+                        </svg>
+                        <span>Shut Down</span>
+                    </div>
+                </div>
+            </div>
+            <div id="start-menu-footer">
+                <button class="start-footer-btn">Log Off</button>
+                <button class="start-footer-btn" data-action="shutdown-btn">Turn Off Computer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         WINDOWS
+         ============================================ -->
+
+    <!-- My Projects Window -->
+    <div class="window" id="win-projects" data-title="My Projects" style="width: 520px; height: 420px; top: 50px; left: 150px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <path fill="#F0C95C" d="M3 5v22h26V9l-6-4H3z"/>
+            </svg>
+            <span class="window-title">My Projects</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-menubar">
+            <span class="menubar-item">File</span>
+            <span class="menubar-item">Edit</span>
+            <span class="menubar-item">View</span>
+            <span class="menubar-item">Help</span>
+        </div>
+        <div class="window-content">
+            <div class="project-grid">
+                <div class="project-item" data-project="antigravity">
+                    <svg class="icon" viewBox="0 0 56 56">
+                        <circle fill="#EA4335" cx="28" cy="28" r="24"/>
+                        <text x="28" y="35" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">G</text>
+                    </svg>
+                    <span class="name">Google Antigravity</span>
+                </div>
+                <div class="project-item" data-project="spendwise">
+                    <svg class="icon" viewBox="0 0 56 56">
+                        <circle fill="#4CAF50" cx="28" cy="28" r="24"/>
+                        <text x="28" y="35" text-anchor="middle" fill="#fff" font-size="22" font-weight="bold">$</text>
+                    </svg>
+                    <span class="name">SpendWise</span>
+                </div>
+                <div class="project-item" data-project="cleaner">
+                    <svg class="icon" viewBox="0 0 56 56">
+                        <circle fill="#9C27B0" cx="28" cy="28" r="24"/>
+                        <text x="28" y="35" text-anchor="middle" fill="#fff" font-size="18">🧹</text>
+                    </svg>
+                    <span class="name">Android Cleaner</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technical Skills Window -->
+    <div class="window" id="win-skills" data-title="Technical Skills - System Properties" style="width: 560px; height: 480px; top: 70px; left: 200px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <circle fill="#7F9DB9" cx="16" cy="14" r="10"/>
+            </svg>
+            <span class="window-title">Technical Skills - System Properties</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-menubar">
+            <span class="menubar-item">File</span>
+            <span class="menubar-item">Edit</span>
+            <span class="menubar-item">View</span>
+            <span class="menubar-item">Help</span>
+        </div>
+        <div class="window-content">
+            <div class="skills-container">
+                <div class="skill-section">
+                    <h3>
+                        <svg viewBox="0 0 20 20" width="18" height="18">
+                            <circle fill="#3776AB" cx="10" cy="10" r="9"/>
+                            <text x="10" y="14" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">PY</text>
+                        </svg>
+                        Backend Development
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-tag">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle fill="#3776AB" cx="12" cy="12" r="10"/>
+                            </svg>
+                            Python (Django, Flask, FastAPI)
+                        </div>
+                        <div class="skill-tag">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle fill="#FF2D20" cx="12" cy="12" r="10"/>
+                            </svg>
+                            Laravel (PHP)
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-section">
+                    <h3>
+                        <svg viewBox="0 0 20 20" width="18" height="18">
+                            <circle fill="#02569B" cx="10" cy="10" r="9"/>
+                            <path fill="#fff" d="M5 7l5 3-5 3 5 3-5-2.5 0-5z"/>
+                        </svg>
+                        Mobile Development
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-tag">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle fill="#02569B" cx="12" cy="12" r="10"/>
+                            </svg>
+                            Flutter (with FVM)
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-section">
+                    <h3>
+                        <svg viewBox="0 0 20 20" width="18" height="18">
+                            <circle fill="#10A37F" cx="10" cy="10" r="9"/>
+                        </svg>
+                        AI & LLMs
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-tag">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle fill="#1A1A2E" cx="12" cy="12" r="10"/>
+                            </svg>
+                            LangChain
+                        </div>
+                        <div class="skill-tag">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle fill="#10A37F" cx="12" cy="12" r="10"/>
+                            </svg>
+                            OpenAI (GPT-4)
+                        </div>
+                        <div class="skill-tag">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle fill="#FFD700" cx="12" cy="12" r="10"/>
+                            </svg>
+                            Hugging Face
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-section">
+                    <h3>
+                        <svg viewBox="0 0 20 20" width="18" height="18">
+                            <circle fill="#2496ED" cx="10" cy="10" r="9"/>
+                        </svg>
+                        DevOps
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-tag">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle fill="#2496ED" cx="12" cy="12" r="10"/>
+                            </svg>
+                            Docker
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Me Window -->
+    <div class="window" id="win-about" data-title="About Me" style="width: 500px; height: 420px; top: 90px; left: 250px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <circle fill="#245DDA" cx="16" cy="11" r="8"/>
+            </svg>
+            <span class="window-title">About Me</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-menubar">
+            <span class="menubar-item">File</span>
+            <span class="menubar-item">Edit</span>
+            <span class="menubar-item">View</span>
+            <span class="menubar-item">Help</span>
+        </div>
+        <div class="window-content padded">
+            <div class="about-page">
+                <h2>Mahmudul Hasan</h2>
+                <p class="subtitle">Full-Stack Engineer & AI & Automation Specialist</p>
+                
+                <p>Welcome to my portfolio! I'm a passionate developer with expertise in building scalable web applications and intelligent automation solutions that push the boundaries of technology.</p>
+                
+                <p><span class="highlight">What I Do:</span></p>
+                <ul>
+                    <li>Build robust backend systems with <strong>Python</strong> and <strong>Laravel</strong></li>
+                    <li>Create beautiful cross-platform mobile apps with <strong>Flutter</strong></li>
+                    <li>Develop AI-powered applications using <strong>LangChain</strong> and <strong>OpenAI</strong></li>
+                    <li>Deploy containerized applications with <strong>Docker</strong></li>
+                    <li>Leverage <strong>Hugging Face</strong> models for cutting-edge ML solutions</li>
+                </ul>
+                
+                <p>I'm always excited to work on innovative projects that combine modern technology with creative solutions. Let's build something amazing together!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Me - Notepad Window -->
+    <div class="window" id="win-contact" data-title="Contact Me - Notepad" style="width: 560px; height: 420px; top: 110px; left: 280px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <rect fill="#fff" x="4" y="4" width="24" height="24" stroke="#000" stroke-width="2"/>
+            </svg>
+            <span class="window-title">Contact Me - Notepad</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-menubar">
+            <span class="menubar-item">File</span>
+            <span class="menubar-item">Edit</span>
+            <span class="menubar-item">Format</span>
+            <span class="menubar-item">View</span>
+            <span class="menubar-item">Help</span>
+        </div>
+        <div class="window-content" style="padding: 0;">
+            <div class="notepad-content">════════════════════════════════════════
+    MAHMUDUL HASAN - CONTACT INFO
+════════════════════════════════════════
+
+📧 Email: mahmudul.hasan@example.com
+💻 GitHub: github.com/mahmudulhasan
+🔗 LinkedIn: linkedin.com/in/mahmudulhasan
+
+─────────────────────────────────────────────
+        ABOUT THIS PORTFOLIO
+─────────────────────────────────────────────
+
+This Windows XP themed portfolio showcases
+my work as a Full-Stack Engineer and
+AI & Automation Specialist.
+
+Skills:
+• Backend: Python, Laravel
+• Mobile: Flutter (FVM)  
+• AI/LLMs: LangChain, OpenAI, Hugging Face
+• DevOps: Docker
+
+Projects:
+• Google Antigravity - Automation Project
+• SpendWise - Expense Tracker App
+• Android Cleaner - Utility App
+
+─────────────────────────────────────────────
+       FEEL FREE TO REACH OUT!
+─────────────────────────────────────────────
+
+Let's collaborate on exciting projects! 🚀</div>
+        </div>
+    </div>
+
+    <!-- Run Dialog -->
+    <div class="window run-dialog" id="win-run" data-title="Run" style="width: 400px; height: 130px; top: 200px; left: 350px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <rect fill="#333" x="4" y="4" width="24" height="24" rx="2"/>
+            </svg>
+            <span class="window-title">Run</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <label>Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.</label>
+            <input type="text" id="run-input" placeholder="Open:">
+            <div class="buttons">
+                <button onclick="windowMgr.closeWindow('win-run')">Cancel</button>
+                <button class="primary" onclick="runCommand()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Prompt -->
+    <div class="window" id="win-cmd" data-title="Command Prompt" style="width: 600px; height: 400px; top: 150px; left: 300px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <rect fill="#000" x="4" y="4" width="24" height="24" rx="2"/>
+            </svg>
+            <span class="window-title">Command Prompt</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-content" style="padding: 0;">
+            <div class="cmd-content" id="cmd-output">
+                <div class="cmd-line">Microsoft Windows XP [Version 5.1.2600]</div>
+                <div class="cmd-line">(C) Copyright 1985-2001 Microsoft Corp.</div>
+                <br>
+                <div class="cmd-line">
+                    <span class="cmd-prompt">C:\Documents and Settings\Mahmudul></span>
+                    <input type="text" class="cmd-input" id="cmd-input" autofocus>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Detail Windows -->
+    <div class="window" id="win-antigravity" data-title="Google Antigravity" style="width: 480px; height: 380px; top: 100px; left: 200px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <circle fill="#EA4335" cx="16" cy="16" r="12"/>
+            </svg>
+            <span class="window-title">Google Antigravity</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-menubar">
+            <span class="menubar-item">File</span>
+            <span class="menubar-item">Edit</span>
+            <span class="menubar-item">View</span>
+            <span class="menubar-item">Help</span>
+        </div>
+        <div class="window-content padded">
+            <div class="about-page">
+                <h2>Google Antigravity</h2>
+                <p class="subtitle">Specialized Coding & Automation Project</p>
+                
+                <p>A cutting-edge automation project leveraging Google's APIs and advanced AI techniques to create intelligent workflows that revolutionize data processing.</p>
+                
+                <p><span class="highlight">Technologies Used:</span></p>
+                <ul>
+                    <li>Python (LangChain, OpenAI API)</li>
+                    <li>Google Cloud Platform</li>
+                    <li>Docker for deployment</li>
+                    <li>FastAPI for REST APIs</li>
+                </ul>
+                
+                <p><span class="highlight">Key Features:</span></p>
+                <ul>
+                    <li>Automated data processing pipelines</li>
+                    <li>AI-powered decision making</li>
+                    <li>Scalable microservices architecture</li>
+                    <li>Real-time analytics dashboard</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="window" id="win-spendwise" data-title="SpendWise" style="width: 480px; height: 380px; top: 120px; left: 220px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <circle fill="#4CAF50" cx="16" cy="16" r="12"/>
+            </svg>
+            <span class="window-title">SpendWise</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-menubar">
+            <span class="menubar-item">File</span>
+            <span class="menubar-item">Edit</span>
+            <span class="menubar-item">View</span>
+            <span class="menubar-item">Help</span>
+        </div>
+        <div class="window-content padded">
+            <div class="about-page">
+                <h2>SpendWise</h2>
+                <p class="subtitle">Mobile Expense Tracker</p>
+                
+                <p>A beautiful and intuitive mobile expense tracking application built with Flutter that helps users manage their finances effectively.</p>
+                
+                <p><span class="highlight">Technologies Used:</span></p>
+                <ul>
+                    <li>Flutter with FVM (Flutter Version Manager)</li>
+                    <li>SQLite for local storage</li>
+                    <li>Beautiful Material Design 3 UI</li>
+                    <li>Charts for data visualization</li>
+                </ul>
+                
+                <p><span class="highlight">Key Features:</span></p>
+                <ul>
+                    <li>Track daily expenses easily</li>
+                    <li>Visual analytics and pie charts</li>
+                    <li>Category-based organization</li>
+                    <li>Export to CSV for reports</li>
+                    <li>Budget tracking and alerts</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="window" id="win-cleaner" data-title="Android Cleaner" style="width: 480px; height: 380px; top: 140px; left: 240px;">
+        <div class="window-titlebar">
+            <svg class="window-icon" viewBox="0 0 32 32">
+                <circle fill="#9C27B0" cx="16" cy="16" r="12"/>
+            </svg>
+            <span class="window-title">Android Cleaner</span>
+            <div class="window-controls">
+                <button class="window-btn minimize">_</button>
+                <button class="window-btn maximize">□</button>
+                <button class="window-btn close">×</button>
+            </div>
+        </div>
+        <div class="window-menubar">
+            <span class="menubar-item">File</span>
+            <span class="menubar-item">Edit</span>
+            <span class="menubar-item">View</span>
+            <span class="menubar-item">Help</span>
+        </div>
+        <div class="window-content padded">
+            <div class="about-page">
+                <h2>Android Cleaner</h2>
+                <p class="subtitle">Utility Application</p>
+                
+                <p>A powerful Android utility application for cleaning junk files, optimizing performance, and managing storage on Android devices.</p>
+                
+                <p><span class="highlight">Technologies Used:</span></p>
+                <ul>
+                    <li>Android (Kotlin)</li>
+                    <li>Native Android APIs</li>
+                    <li>Material Design</li>
+                    <li>Background services</li>
+                </ul>
+                
+                <p><span class="highlight">Key Features:</span></p>
+                <ul>
+                    <li>Cache and junk file cleaning</li>
+                    <li>Storage analysis and management</li>
+                    <li>App manager (install/uninstall)</li>
+                    <li>Battery optimization tools</li>
+                    <li>Device information scanner</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // WINDOW MANAGER CLASS
+        // ============================================
+        
+        class WindowManager {
+            constructor() {
+                this.windows = [];
+                this.zIndex = 1000;
+                this.activeWindow = null;
+            }
+
+            openWindow(windowId, title = null) {
+                const windowEl = document.getElementById(windowId);
+                if (!windowEl) return;
+
+                // Check if already open
+                if (!this.windows.includes(windowId)) {
+                    this.windows.push(windowId);
+                }
+
+                // Show and focus
+                windowEl.classList.add('visible');
+                windowEl.classList.remove('maximized');
+                this.focusWindow(windowId);
+
+                // Add to taskbar
+                this.addToTaskbar(windowId, title || windowEl.dataset.title || windowId);
+            }
+
+            closeWindow(windowId) {
+                const windowEl = document.getElementById(windowId);
+                if (!windowEl) return;
+
+                windowEl.classList.remove('visible');
+                windowEl.classList.remove('maximized');
+
+                const index = this.windows.indexOf(windowId);
+                if (index > -1) this.windows.splice(index, 1);
+
+                this.removeFromTaskbar(windowId);
+
+                if (this.activeWindow === windowId) {
+                    this.activeWindow = this.windows.length > 0 ? this.windows[this.windows.length - 1] : null;
+                    if (this.activeWindow) this.focusWindow(this.activeWindow);
+                }
+            }
+
+            focusWindow(windowId) {
+                const windowEl = document.getElementById(windowId);
+                if (!windowEl) return;
+
+                this.zIndex++;
+                windowEl.style.zIndex = this.zIndex;
+
+                // Update all windows
+                document.querySelectorAll('.window').forEach(win => {
+                    win.classList.remove('active');
+                });
+                windowEl.classList.add('active');
+
+                // Update taskbar
+                document.querySelectorAll('.taskbar-item').forEach(item => {
+                    item.classList.remove('active', 'minimized');
+                    if (item.dataset.window === windowId) {
+                        item.classList.add('active');
+                    }
+                });
+
+                this.activeWindow = windowId;
+            }
+
+            minimizeWindow(windowId) {
+                const windowEl = document.getElementById(windowId);
+                if (!windowEl) return;
+
+                windowEl.classList.remove('visible');
+
+                document.querySelectorAll('.taskbar-item').forEach(item => {
+                    if (item.dataset.window === windowId) {
+                        item.classList.add('minimized');
+                        item.classList.remove('active');
+                    }
+                });
+            }
+
+            restoreWindow(windowId) {
+                const windowEl = document.getElementById(windowId);
+                if (!windowEl) return;
+
+                windowEl.classList.add('visible');
+                this.focusWindow(windowId);
+
+                document.querySelectorAll('.taskbar-item').forEach(item => {
+                    if (item.dataset.window === windowId) {
+                        item.classList.remove('minimized');
+                        item.classList.add('active');
+                    }
+                });
+            }
+
+            toggleWindow(windowId) {
+                const windowEl = document.getElementById(windowId);
+                if (!windowEl) return;
+
+                if (windowEl.classList.contains('visible') && this.activeWindow === windowId) {
+                    this.minimizeWindow(windowId);
+                } else if (windowEl.classList.contains('visible')) {
+                    this.focusWindow(windowId);
+                } else {
+                    this.openWindow(windowId);
+                }
+            }
+
+            maximizeWindow(windowId) {
+                const windowEl = document.getElementById(windowId);
+                if (!windowEl) return;
+                windowEl.classList.toggle('maximized');
+            }
+
+            addToTaskbar(windowId, title) {
+                const container = document.getElementById('taskbar-windows');
+                if (document.querySelector(`.taskbar-item[data-window="${windowId}"]`)) return;
+
+                const windowEl = document.getElementById(windowId);
+                const iconSvg = windowEl.querySelector('.window-icon')?.outerHTML || '';
+
+                const item = document.createElement('div');
+                item.className = 'taskbar-item active';
+                item.dataset.window = windowId;
+                item.innerHTML = iconSvg + `<span class="title">${title}</span>`;
+
+                item.addEventListener('click', () => this.toggleWindow(windowId));
+
+                container.appendChild(item);
+            }
+
+            removeFromTaskbar(windowId) {
+                const item = document.querySelector(`.taskbar-item[data-window="${windowId}"]`);
+                if (item) item.remove();
+            }
+        }
+
+        // ============================================
+        // DRAG MANAGER
+        // ============================================
+        
+        class DragManager {
+            constructor(windowManager) {
+                this.wm = windowManager;
+                this.draggedWindow = null;
+                this.dragOffsetX = 0;
+                this.dragOffsetY = 0;
+                this.init();
+            }
+
+            init() {
+                document.addEventListener('mousedown', e => this.onMouseDown(e));
+                document.addEventListener('mousemove', e => this.onMouseMove(e));
+                document.addEventListener('mouseup', e => this.onMouseUp(e));
+            }
+
+            onMouseDown(e) {
+                const titlebar = e.target.closest('.window-titlebar');
+                if (!titlebar) return;
+
+                const windowEl = titlebar.closest('.window');
+                if (!windowEl || !windowEl.classList.contains('visible')) return;
+                if (windowEl.classList.contains('maximized')) return;
+
+                this.wm.focusWindow(windowEl.id);
+
+                const rect = windowEl.getBoundingClientRect();
+                this.draggedWindow = windowEl;
+                this.dragOffsetX = e.clientX - rect.left;
+                this.dragOffsetY = e.clientY - rect.top;
+            }
+
+            onMouseMove(e) {
+                if (!this.draggedWindow) return;
+                e.preventDefault();
+
+                const x = e.clientX - this.dragOffsetX;
+                const y = e.clientY - this.dragOffsetY;
+                const maxX = window.innerWidth - 100;
+                const maxY = window.innerHeight - 50;
+
+                this.draggedWindow.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
+                this.draggedWindow.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+            }
+
+            onMouseUp() {
+                this.draggedWindow = null;
+            }
+        }
+
+        // ============================================
+        // BOOT SEQUENCE
+        // ============================================
+        
+        class BootSequence {
+            constructor() {
+                this.biosScreen = document.getElementById('bios-screen');
+                this.xpLoading = document.getElementById('xp-loading');
+                this.bootSequence = document.getElementById('boot-sequence');
+                this.messages = [
+                    'BIOS Date 01/15/01 14:22:51 Ver: 08.00.12',
+                    'CPU: Intel(R) Pentium(R) III Processor 800MHz',
+                    'Memory Test: 262144K OK',
+                    'Detecting HDD Primary Master... ST340014A',
+                    'Detecting HDD Primary Slave... None',
+                    'Detecting HDD Secondary Master... None',
+                    'Detecting HDD Secondary Slave... CD-ROM',
+                    '',
+                    'Press DEL to enter SETUP',
+                    '05/15/2021-MSI-7519-6A81VG4C-00',
+                    '',
+                    'Loading Windows XP...'
+                ];
+            }
+
+            async start() {
+                // BIOS sequence
+                for (const msg of this.messages) {
+                    const line = document.createElement('div');
+                    line.className = 'bios-line';
+                    line.textContent = msg;
+                    this.biosScreen.appendChild(line);
+                    await this.delay(msg ? 200 : 100);
+                }
+
+                await this.delay(500);
+
+                // Switch to XP loading
+                this.biosScreen.classList.add('hidden');
+                this.xpLoading.classList.add('visible');
+
+                // Animate loading bar
+                const loadingBar = document.getElementById('xp-loading-bar');
+                loadingBar.style.width = '100%';
+
+                await this.delay(2500);
+
+                // Hide boot sequence
+                this.bootSequence.classList.add('hidden');
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // ============================================
+        // THREE.JS CRT EFFECT
+        // ============================================
+        
+        class CRTEffect {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                const canvas = document.getElementById('three-canvas');
+                const container = document.getElementById('three-container');
+                
+                // Check mobile
+                if (window.innerWidth <= 768) {
+                    canvas.style.display = 'none';
+                    return;
+                }
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 5;
+
+                const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+                // Create floating particles
+                const geometry = new THREE.BufferGeometry();
+                const count = 80;
+                const positions = new Float32Array(count * 3);
+
+                for (let i = 0; i < count * 3; i += 3) {
+                    positions[i] = (Math.random() - 0.5) * 12;
+                    positions[i + 1] = (Math.random() - 0.5) * 12;
+                    positions[i + 2] = (Math.random() - 0.5) * 8;
+                }
+
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+                const material = new THREE.PointsMaterial({
+                    color: 0x245DDA,
+                    size: 0.03,
+                    transparent: true,
+                    opacity: 0.5,
+                    sizeAttenuation: true
+                });
+
+                const particles = new THREE.Points(geometry, material);
+                scene.add(particles);
+
+                // Add subtle glow
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+                scene.add(ambientLight);
+
+                const animate = () => {
+                    if (window.innerWidth <= 768) return;
+                    requestAnimationFrame(animate);
+
+                    particles.rotation.x += 0.0003;
+                    particles.rotation.y += 0.0005;
+
+                    renderer.render(scene, camera);
+                };
+
+                animate();
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth <= 768) {
+                        canvas.style.display = 'none';
+                        return;
+                    }
+                    canvas.style.display = 'block';
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+        }
+
+        // ============================================
+        // CLOCK
+        // ============================================
+        
+        class Clock {
+            constructor() {
+                this.element = document.getElementById('clock');
+                this.update();
+                setInterval(() => this.update(), 1000);
+            }
+
+            update() {
+                const now = new Date();
+                let hours = now.getHours();
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12 || 12;
+                this.element.textContent = `${hours}:${minutes} ${ampm}`;
+            }
+        }
+
+        // ============================================
+        // SHUTDOWN
+        // ============================================
+        
+        function shutdown() {
+            const screen = document.getElementById('shutdown-screen');
+            screen.classList.add('visible');
+            
+            setTimeout(() => {
+                location.reload();
+            }, 4000);
+        }
+
+        // ============================================
+        // RUN COMMAND
+        // ============================================
+        
+        function runCommand() {
+            const input = document.getElementById('run-input');
+            const cmd = input.value.toLowerCase().trim();
+
+            switch(cmd) {
+                case 'help':
+                case 'cmd':
+                    windowMgr.openWindow('win-cmd', 'Command Prompt');
+                    break;
+                case 'notepad':
+                case 'contact':
+                    windowMgr.openWindow('win-contact', 'Contact Me - Notepad');
+                    break;
+                case 'projects':
+                    windowMgr.openWindow('win-projects', 'My Projects');
+                    break;
+                case 'skills':
+                    windowMgr.openWindow('win-skills', 'Technical Skills');
+                    break;
+                case 'about':
+                    windowMgr.openWindow('win-about', 'About Me');
+                    break;
+                default:
+                    alert(`Cannot find '${cmd}' or similar command.`);
+            }
+
+            input.value = '';
+        }
+
+        // ============================================
+        // COMMAND PROMPT INPUT
+        // ============================================
+        
+        function setupCmdInput() {
+            const input = document.getElementById('cmd-input');
+            if (!input) return;
+
+            const output = document.getElementById('cmd-output');
+
+            input.addEventListener('keypress', e => {
+                if (e.key === 'Enter') {
+                    const cmd = input.value.trim().toLowerCase();
+
+                    const cmdLine = document.createElement('div');
+                    cmdLine.className = 'cmd-line';
+                    cmdLine.innerHTML = `<span class="cmd-prompt">C:\\Documents and Settings\\Mahmudul> </span>${cmd}`;
+                    output.insertBefore(cmdLine, input.parentElement);
+
+                    let response = '';
+                    switch(cmd) {
+                        case 'help':
+                            response = 'Available commands: help, clear, about, skills, projects, contact, exit';
+                            break;
+                        case 'clear':
+                            while (output.children.length > 3) output.removeChild(output.children[1]);
+                            input.value = '';
+                            return;
+                        case 'about':
+                            response = 'Mahmudul Hasan - Full-Stack Engineer & AI Specialist';
+                            break;
+                        case 'skills':
+                            response = 'Backend: Python, Laravel | Mobile: Flutter | AI: LangChain, OpenAI, Hugging Face | DevOps: Docker';
+                            break;
+                        case 'projects':
+                            response = 'Google Antigravity, SpendWise, Android Cleaner';
+                            break;
+                        case 'contact':
+                            response = 'Email: mahmudul.hasan@example.com | GitHub: github.com/mahmudulhasan';
+                            windowMgr.openWindow('win-contact', 'Contact Me - Notepad');
+                            break;
+                        case 'exit':
+                            windowMgr.closeWindow('win-cmd');
+                            return;
+                        default:
+                            response = `'${cmd}' is not recognized as an internal or external command.`;
+                    }
+
+                    if (response) {
+                        const respLine = document.createElement('div');
+                        respLine.className = 'cmd-line';
+                        respLine.textContent = response;
+                        output.insertBefore(respLine, input.parentElement);
+                    }
+
+                    input.value = '';
+                }
+            });
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        
+        let windowMgr;
+        let dragMgr;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start boot sequence
+            const boot = new BootSequence();
+            boot.start();
+
+            // Initialize Three.js after boot
+            setTimeout(() => {
+                new CRTEffect();
+            }, 3500);
+
+            // Initialize managers
+            windowMgr = new WindowManager();
+            dragMgr = new DragManager(windowMgr);
+
+            // Initialize clock
+            new Clock();
+
+            // Setup CMD
+            setupCmdInput();
+
+            // Start menu toggle
+            const startBtn = document.getElementById('start-button');
+            const startMenu = document.getElementById('start-menu');
+
+            startBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                startMenu.classList.toggle('visible');
+                startBtn.classList.toggle('active');
+            });
+
+            document.addEventListener('click', e => {
+                if (!startMenu.contains(e.target) && e.target !== startBtn) {
+                    startMenu.classList.remove('visible');
+                    startBtn.classList.remove('active');
+                }
+            });
+
+            // Desktop icon handling
+            document.querySelectorAll('.desktop-icon').forEach(icon => {
+                icon.addEventListener('dblclick', () => {
+                    const action = icon.dataset.action;
+                    switch(action) {
+                        case 'projects':
+                            windowMgr.openWindow('win-projects', 'My Projects');
+                            break;
+                        case 'skills':
+                            windowMgr.openWindow('win-skills', 'Technical Skills');
+                            break;
+                        case 'about':
+                            windowMgr.openWindow('win-about', 'About Me');
+                            break;
+                        case 'contact':
+                            windowMgr.openWindow('win-contact', 'Contact Me - Notepad');
+                            break;
+                        case 'run':
+                            windowMgr.openWindow('win-run', 'Run');
+                            break;
+                        case 'shutdown':
+                            shutdown();
+                            break;
+                        case 'recycle':
+                            alert('Recycle Bin is empty');
+                            break;
+                        case 'python':
+                        case 'laravel':
+                        case 'flutter':
+                        case 'langchain':
+                        case 'openai':
+                        case 'huggingface':
+                        case 'docker':
+                            windowMgr.openWindow('win-skills', 'Technical Skills');
+                            break;
+                    }
+                });
+
+                icon.addEventListener('click', () => {
+                    document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
+                    icon.classList.add('selected');
+                });
+            });
+
+            // Start menu items
+            document.querySelectorAll('.start-menu-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const action = item.dataset.action;
+                    startMenu.classList.remove('visible');
+                    startBtn.classList.remove('active');
+
+                    if (action === 'shutdown') {
+                        shutdown();
+                    } else if (action) {
+                        const windowMap = {
+                            'projects': ['win-projects', 'My Projects'],
+                            'skills': ['win-skills', 'Technical Skills'],
+                            'about': ['win-about', 'About Me'],
+                            'contact': ['win-contact', 'Contact Me - Notepad'],
+                            'run': ['win-run', 'Run']
+                        };
+                        if (windowMap[action]) {
+                            windowMgr.openWindow(...windowMap[action]);
+                        }
+                    }
+                });
+            });
+
+            // Shutdown button
+            document.querySelector('[data-action="shutdown-btn"]')?.addEventListener('click', shutdown);
+
+            // Window controls
+            document.querySelectorAll('.window').forEach(win => {
+                const id = win.id;
+
+                win.querySelector('.close').addEventListener('click', e => {
+                    e.stopPropagation();
+                    windowMgr.closeWindow(id);
+                });
+
+                win.querySelector('.minimize').addEventListener('click', e => {
+                    e.stopPropagation();
+                    windowMgr.minimizeWindow(id);
+                });
+
+                win.querySelector('.maximize').addEventListener('click', e => {
+                    e.stopPropagation();
+                    windowMgr.maximizeWindow(id);
+                });
+
+                win.querySelector('.window-titlebar').addEventListener('click', () => {
+                    windowMgr.focusWindow(id);
+                });
+            });
+
+            // Project items
+            document.querySelectorAll('.project-item').forEach(item => {
+                item.addEventListener('dblclick', () => {
+                    const project = item.dataset.project;
+                    const windowMap = {
+                        'antigravity': ['win-antigravity', 'Google Antigravity'],
+                        'spendwise': ['win-spendwise', 'SpendWise'],
+                        'cleaner': ['win-cleaner', 'Android Cleaner']
+                    };
+                    if (windowMap[project]) {
+                        windowMgr.openWindow(...windowMap[project]);
+                    }
+                });
+            });
+
+            // Run input
+            const runInput = document.getElementById('run-input');
+            runInput?.addEventListener('keypress', e => {
+                if (e.key === 'Enter') runCommand();
+            });
+        });
+    </script>
 </body>
 </html>
