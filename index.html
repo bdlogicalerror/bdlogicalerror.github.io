@@ -221,7 +221,7 @@
       font-weight: 600;
     }
 
-    /* PILLAR ROWS (SINGLE CARD IN A ROW WITH ANIMATION) */
+    /* PILLAR ROWS (SINGLE CARD IN A ROW WITH BACKDROP SVGS & ANIMATION) */
     .pillar-rows {
       display: flex;
       flex-direction: column;
@@ -252,6 +252,44 @@
         transform: translateY(0);
       }
     }
+    /* CARD BACKDROP SVG MASK */
+    .pillar-row-card::before {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 260px;
+      background-repeat: no-repeat;
+      background-position: center right 15px;
+      background-size: contain;
+      opacity: 0.08;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      mask-image: linear-gradient(to left, rgba(0,0,0,1) 40%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 40%, transparent 100%);
+    }
+    .pillar-row-card:hover::before {
+      opacity: 0.16;
+      transform: scale(1.04);
+    }
+    .pillar-svg-1::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' stroke='%2306b6d4' stroke-width='1.5' fill='none'%3E%3Ccircle cx='100' cy='40' r='12' fill='%2306b6d4' fill-opacity='0.15'/%3E%3Ccircle cx='40' cy='120' r='12' fill='%2306b6d4' fill-opacity='0.15'/%3E%3Ccircle cx='160' cy='120' r='12' fill='%2306b6d4' fill-opacity='0.15'/%3E%3Ccircle cx='70' cy='170' r='10'/%3E%3Ccircle cx='130' cy='170' r='10'/%3E%3Cpath d='M100 52 L40 108 M100 52 L160 108 M40 132 L70 160 M160 132 L130 160 M40 120 L160 120 M70 170 L130 170' stroke-dasharray='4,3'/%3E%3Ccircle cx='100' cy='110' r='6' fill='%2306b6d4'/%3E%3C/svg%3E");
+    }
+    .pillar-svg-2::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' stroke='%2314b8a6' stroke-width='1.5' fill='none'%3E%3Cpolygon points='100,20 180,65 180,135 100,180 20,135 20,65' stroke-width='2' fill='%2314b8a6' fill-opacity='0.06'/%3E%3Cpolygon points='100,50 150,78 150,122 100,150 50,122 50,78' stroke-dasharray='3,3'/%3E%3Cline x1='100' y1='20' x2='100' y2='180'/%3E%3Cline x1='20' y1='65' x2='180' y2='135'/%3E%3Cline x1='20' y1='135' x2='180' y2='65'/%3E%3Ccircle cx='100' cy='100' r='8' fill='%2314b8a6'/%3E%3C/svg%3E");
+    }
+    .pillar-svg-3::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' stroke='%23f59e0b' stroke-width='1.5' fill='none'%3E%3Cpath d='M100 20 L170 50 v60 c0 45 -70 70 -70 70 s-70 -25 -70 -70 v-60 Z' stroke-width='2' fill='%23f59e0b' fill-opacity='0.08'/%3E%3Crect x='80' y='85' width='40' height='35' rx='4'/%3E%3Cpath d='M90 85 v-15 a10 10 0 0 1 20 0 v15' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='3' fill='%23f59e0b'/%3E%3Cline x1='100' y1='103' x2='100' y2='112' stroke-width='2'/%3E%3C/svg%3E");
+    }
+    .pillar-svg-4::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' stroke='%23a855f7' stroke-width='1.5' fill='none'%3E%3Crect x='50' y='50' width='100' height='100' rx='8' stroke-width='2' fill='%23a855f7' fill-opacity='0.06'/%3E%3Crect x='75' y='75' width='50' height='50' rx='4'/%3E%3Ccircle cx='65' cy='65' r='3' fill='%23a855f7'/%3E%3Cpath d='M20 70 h30 M20 90 h30 M20 110 h30 M20 130 h30 M150 70 h30 M150 90 h30 M150 110 h30 M150 130 h30 M70 20 v30 M90 20 v30 M110 20 v30 M130 20 v30 M70 150 v30 M90 150 v30 M110 150 v30 M130 150 v30'/%3E%3C/svg%3E");
+    }
+    .pillar-svg-5::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' stroke='%233b82f6' stroke-width='1.5' fill='none'%3E%3Cpath d='M60 60 L30 100 L60 140 M140 60 L170 100 L140 140' stroke-width='2.5'/%3E%3Cline x1='115' y1='45' x2='85' y2='155' stroke-width='2'/%3E%3Ccircle cx='30' cy='100' r='4' fill='%233b82f6'/%3E%3Ccircle cx='170' cy='100' r='4' fill='%233b82f6'/%3E%3Cpath d='M80 80 h40 M75 120 h50' stroke-dasharray='4,4'/%3E%3C/svg%3E");
+    }
+    .pillar-svg-6::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' stroke='%23ec4899' stroke-width='1.5' fill='none'%3E%3Crect x='30' y='25' width='140' height='38' rx='5' stroke-width='2' fill='%23ec4899' fill-opacity='0.06'/%3E%3Crect x='30' y='80' width='140' height='38' rx='5' stroke-width='2' fill='%23ec4899' fill-opacity='0.06'/%3E%3Crect x='30' y='135' width='140' height='38' rx='5' stroke-width='2' fill='%23ec4899' fill-opacity='0.06'/%3E%3Ccircle cx='50' cy='44' r='4' fill='%23ec4899'/%3E%3Ccircle cx='65' cy='44' r='4' fill='%23ec4899'/%3E%3Cline x1='90' y1='44' x2='150' y2='44' stroke-dasharray='3,3'/%3E%3Ccircle cx='50' cy='99' r='4' fill='%23ec4899'/%3E%3Ccircle cx='65' cy='99' r='4' fill='%23ec4899'/%3E%3Cline x1='90' y1='99' x2='150' y2='99' stroke-dasharray='3,3'/%3E%3Ccircle cx='50' cy='154' r='4' fill='%23ec4899'/%3E%3Ccircle cx='65' cy='154' r='4' fill='%23ec4899'/%3E%3Cline x1='90' y1='154' x2='150' y2='154' stroke-dasharray='3,3'/%3E%3C/svg%3E");
+    }
+
     .pillar-row-card::after {
       content: "";
       position: absolute;
@@ -271,11 +309,11 @@
     }
     .pillar-badge-box {
       flex-shrink: 0;
-      width: 58px;
-      height: 58px;
+      width: 50px;
+      height: 50px;
       background: var(--code-bg);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -290,15 +328,19 @@
       transform: scale(1.06);
     }
     .pillar-num {
-      font-size: 0.68rem;
+      font-size: 0.95rem;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--pillar-color, var(--cyan));
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .pillar-sub-label {
+      font-size: 0.55rem;
       font-family: var(--font-mono);
       font-weight: 700;
-      color: var(--pillar-color, var(--cyan));
+      color: #64748b;
       letter-spacing: 0.5px;
-    }
-    .pillar-icon {
-      font-size: 1.45rem;
-      line-height: 1;
       margin-top: 2px;
     }
     .pillar-body {
@@ -615,10 +657,10 @@
       <div class="pillar-rows">
 
         <!-- 01: Frontier AI & MCP -->
-        <article class="pillar-row-card" style="--delay: 1; --pillar-color: #06b6d4; --pillar-glow: rgba(6,182,212,0.25);">
+        <article class="pillar-row-card pillar-svg-1" style="--delay: 1; --pillar-color: #06b6d4; --pillar-glow: rgba(6,182,212,0.25);">
           <div class="pillar-badge-box">
             <span class="pillar-num">01</span>
-            <span class="pillar-icon">🤖</span>
+            <span class="pillar-sub-label">PILLAR</span>
           </div>
           <div class="pillar-body">
             <div class="pillar-header">
@@ -626,25 +668,26 @@
               <span class="pillar-tag" style="color: #22d3ee; border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.1);">Frontier AI & RLHF</span>
             </div>
             <p class="pillar-desc">
-              Comprehensive evaluation of frontier reasoning models (<strong style="color: #fff;">GPT-4o, o1, o3-mini, Claude 3.7 Sonnet, Gemini 2.0 Pro, DeepSeek R1/V3</strong>) with <strong style="color: #22d3ee;">Model Context Protocol (MCP)</strong> production servers, complex SWE-bench multi-file code auditing, and pairwise RLHF preference verification sustaining &gt;85% What/Where/Why cognitive action density under strict anti-silence standards.
+              Comprehensive evaluation of frontier reasoning models (<strong style="color: #fff;">GPT-4o, o1, o3-mini, Claude 3.7 Sonnet, Gemini 2.0 Pro, DeepSeek R1/V3, Llama 3.3</strong>) with <strong style="color: #22d3ee;">Model Context Protocol (MCP)</strong> production servers, complex SWE-bench multi-file code auditing, and pairwise RLHF preference verification sustaining &gt;85% What/Where/Why cognitive action density under strict anti-silence standards.
             </p>
             <div class="pillar-chips">
               <span class="pillar-chip">Model Context Protocol (MCP)</span>
-              <span class="pillar-chip">OpenAI (o1 / o3-mini)</span>
-              <span class="pillar-chip">Claude 3.7 Sonnet</span>
+              <span class="pillar-chip">OpenAI (o1 / o3-mini / GPT-4o)</span>
+              <span class="pillar-chip">Claude 3.7 Sonnet / Opus</span>
               <span class="pillar-chip">Gemini 2.0 Pro</span>
-              <span class="pillar-chip">DeepSeek R1</span>
-              <span class="pillar-chip">SWE-bench</span>
-              <span class="pillar-chip">RLHF Density &gt;85%</span>
+              <span class="pillar-chip">DeepSeek R1 / V3</span>
+              <span class="pillar-chip">Meta Llama 3.3</span>
+              <span class="pillar-chip">SWE-bench Evaluation</span>
+              <span class="pillar-chip">RLHF Preference (&gt;85% Action Density)</span>
             </div>
           </div>
         </article>
 
         <!-- 02: Forward Deployed Engineering (FDE) -->
-        <article class="pillar-row-card" style="--delay: 2; --pillar-color: #14b8a6; --pillar-glow: rgba(20,184,166,0.25);">
+        <article class="pillar-row-card pillar-svg-2" style="--delay: 2; --pillar-color: #14b8a6; --pillar-glow: rgba(20,184,166,0.25);">
           <div class="pillar-badge-box">
             <span class="pillar-num">02</span>
-            <span class="pillar-icon">⚡</span>
+            <span class="pillar-sub-label">PILLAR</span>
           </div>
           <div class="pillar-body">
             <div class="pillar-header">
@@ -655,21 +698,23 @@
               Turnkey Forward Deployed AI architectures bridging legacy customer hardware (<strong style="color: #fff;">CCTV/DVR/NVR systems, raw RTSP/ONVIF streams, embedded sensors</strong>) into live agentic AI workflows. Engineered <strong style="color: #2dd4bf;">DVRify</strong> (real-time video ingestion via go2rtc WebRTC + pgvector spatial search) and enterprise hybrid RAG pipelines with automated API-UI contract verification.
             </p>
             <div class="pillar-chips">
-              <span class="pillar-chip">DVRify Video AI</span>
+              <span class="pillar-chip">DVRify Video AI SaaS</span>
               <span class="pillar-chip">go2rtc WebRTC Gateway</span>
               <span class="pillar-chip">Portkey AI Gateway</span>
-              <span class="pillar-chip">Hybrid RAG (pgvector)</span>
+              <span class="pillar-chip">Hybrid RAG (pgvector 384-dim + BM25)</span>
               <span class="pillar-chip">RTSP / ONVIF Ingestion</span>
-              <span class="pillar-chip">Enterprise FDE</span>
+              <span class="pillar-chip">FastAPI Backend</span>
+              <span class="pillar-chip">Next.js 15 / 16 UI</span>
+              <span class="pillar-chip">Enterprise FDE Integration</span>
             </div>
           </div>
         </article>
 
         <!-- 03: Vulnerability Research & Red-Teaming -->
-        <article class="pillar-row-card" style="--delay: 3; --pillar-color: #f59e0b; --pillar-glow: rgba(245,158,11,0.25);">
+        <article class="pillar-row-card pillar-svg-3" style="--delay: 3; --pillar-color: #f59e0b; --pillar-glow: rgba(245,158,11,0.25);">
           <div class="pillar-badge-box">
             <span class="pillar-num">03</span>
-            <span class="pillar-icon">🛡️</span>
+            <span class="pillar-sub-label">PILLAR</span>
           </div>
           <div class="pillar-body">
             <div class="pillar-header">
@@ -680,21 +725,22 @@
               Deep binary, Android bytecode, and network protocol reverse engineering. Decompiled complex obfuscated applications (<strong style="color: #fff;">JADX, Baksmali, Ghidra</strong>), intercepted live session tokens via <strong style="color: #fbbf24;">Frida runtime hooks</strong>, decomposed legacy Triple-DES (<code style="color: #fbbf24;">DESede</code>) ciphers, executed raw 802.11 Layer-2 frame injection, and orchestrated adversarial LLM red-teaming (TAP/FlipAttack).
             </p>
             <div class="pillar-chips">
-              <span class="pillar-chip">Android Smali / JADX</span>
-              <span class="pillar-chip">Frida Dynamic Hooks</span>
-              <span class="pillar-chip">Ghidra / IDA Native Reversing</span>
-              <span class="pillar-chip">Triple-DES Cryptanalysis</span>
-              <span class="pillar-chip">802.11 Frame Injection</span>
-              <span class="pillar-chip">AI Red-Teaming (TAP)</span>
+              <span class="pillar-chip">Android Smali & JADX Decompilation</span>
+              <span class="pillar-chip">Frida Dynamic Hooks & Stalker</span>
+              <span class="pillar-chip">Ghidra / IDA Native Reversing (.so)</span>
+              <span class="pillar-chip">Triple-DES & AES Cryptanalysis</span>
+              <span class="pillar-chip">802.11 Layer-2 Frame Injection</span>
+              <span class="pillar-chip">AI Safety Red-Teaming (TAP / FlipAttack)</span>
+              <span class="pillar-chip">9Router Gateway Testbed</span>
             </div>
           </div>
         </article>
 
         <!-- 04: Embedded Systems & IoT -->
-        <article class="pillar-row-card" style="--delay: 4; --pillar-color: #a855f7; --pillar-glow: rgba(168,85,247,0.25);">
+        <article class="pillar-row-card pillar-svg-4" style="--delay: 4; --pillar-color: #a855f7; --pillar-glow: rgba(168,85,247,0.25);">
           <div class="pillar-badge-box">
             <span class="pillar-num">04</span>
-            <span class="pillar-icon">📟</span>
+            <span class="pillar-sub-label">PILLAR</span>
           </div>
           <div class="pillar-body">
             <div class="pillar-header">
@@ -707,19 +753,20 @@
             <div class="pillar-chips">
               <span class="pillar-chip">RP2040 Raspberry Pi Pico</span>
               <span class="pillar-chip">ESP32-C3 SuperMini (RISC-V)</span>
-              <span class="pillar-chip">ESP8266 lwIP NAPT</span>
-              <span class="pillar-chip">LoRa SX1278 (433MHz)</span>
-              <span class="pillar-chip">Apple Find My BLE</span>
-              <span class="pillar-chip">MPU6050 EXT0 Wake</span>
+              <span class="pillar-chip">ESP8266 lwIP NAPT Bridge</span>
+              <span class="pillar-chip">LoRa SX1278 (433MHz RF)</span>
+              <span class="pillar-chip">Apple Find My (OpenHaystack BLE)</span>
+              <span class="pillar-chip">MPU6050 EXT0 Interrupt Wake</span>
+              <span class="pillar-chip">CoreAudio HAL Darwin Daemons</span>
             </div>
           </div>
         </article>
 
         <!-- 05: Systems Programming & Polyglot Architecture -->
-        <article class="pillar-row-card" style="--delay: 5; --pillar-color: #3b82f6; --pillar-glow: rgba(59,130,246,0.25);">
+        <article class="pillar-row-card pillar-svg-5" style="--delay: 5; --pillar-color: #3b82f6; --pillar-glow: rgba(59,130,246,0.25);">
           <div class="pillar-badge-box">
             <span class="pillar-num">05</span>
-            <span class="pillar-icon">⚙️</span>
+            <span class="pillar-sub-label">PILLAR</span>
           </div>
           <div class="pillar-body">
             <div class="pillar-header">
@@ -730,23 +777,25 @@
               Multi-paradigm production engineering spanning systems and native platforms: <strong style="color: #60a5fa;">Rust</strong> (memory-safe systems, Tauri v2), <strong style="color: #60a5fa;">Go</strong> (high-concurrency networking, microservices), <strong style="color: #60a5fa;">Python</strong> (AsyncIO, FastAPI, Scikit-learn), <strong style="color: #60a5fa;">C++</strong> (11/14/17 embedded firmware), <strong style="color: #60a5fa;">Swift</strong> (iOS native CoreBluetooth/CMMotion/CoreAudio), <strong style="color: #60a5fa;">Kotlin & Java</strong> (Android persistent services/GATT/JNI), and <strong style="color: #60a5fa;">TypeScript</strong> (React 19/Next.js 15).
             </p>
             <div class="pillar-chips">
-              <span class="pillar-chip">Rust</span>
+              <span class="pillar-chip">Rust (Tauri v2)</span>
               <span class="pillar-chip">Go / Golang</span>
-              <span class="pillar-chip">Python AsyncIO</span>
-              <span class="pillar-chip">C++ (11/14/17)</span>
-              <span class="pillar-chip">Swift (iOS)</span>
-              <span class="pillar-chip">Kotlin & Java (Android)</span>
-              <span class="pillar-chip">Flutter & Dart 3.11</span>
-              <span class="pillar-chip">TypeScript / React 19</span>
+              <span class="pillar-chip">Python (AsyncIO / FastAPI / PyTorch)</span>
+              <span class="pillar-chip">C++ (11/14/17 Firmware)</span>
+              <span class="pillar-chip">Swift (iOS Native CoreBluetooth / CMMotion)</span>
+              <span class="pillar-chip">Kotlin & Java (Android Native GATT / JNI)</span>
+              <span class="pillar-chip">Flutter & Dart 3.11 (Shorebird OTA)</span>
+              <span class="pillar-chip">TypeScript & React 19 / Next.js</span>
+              <span class="pillar-chip">PHP (Laravel)</span>
+              <span class="pillar-chip">SQL (PostgreSQL / pgvector)</span>
             </div>
           </div>
         </article>
 
         <!-- 06: Distributed Bare-Metal Worker Clusters -->
-        <article class="pillar-row-card" style="--delay: 6; --pillar-color: #ec4899; --pillar-glow: rgba(236,72,153,0.25);">
+        <article class="pillar-row-card pillar-svg-6" style="--delay: 6; --pillar-color: #ec4899; --pillar-glow: rgba(236,72,153,0.25);">
           <div class="pillar-badge-box">
             <span class="pillar-num">06</span>
-            <span class="pillar-icon">🏢</span>
+            <span class="pillar-sub-label">PILLAR</span>
           </div>
           <div class="pillar-body">
             <div class="pillar-header">
@@ -758,83 +807,17 @@
             </p>
             <div class="pillar-chips">
               <span class="pillar-chip">Bare-Metal Linux Node</span>
-              <span class="pillar-chip">Docker Compose</span>
-              <span class="pillar-chip">Celery Worker Queues</span>
+              <span class="pillar-chip">Docker & Docker Compose</span>
+              <span class="pillar-chip">Celery Distributed Worker Queues</span>
+              <span class="pillar-chip">Redis & Flower Monitoring</span>
               <span class="pillar-chip">Suricata Network IDS/IPS</span>
-              <span class="pillar-chip">Cloudflare Zero-Trust</span>
-              <span class="pillar-chip">macOS launchd SSOT (57 daemons)</span>
+              <span class="pillar-chip">ntopng Real-Time Traffic</span>
+              <span class="pillar-chip">Cloudflare Zero-Trust Edge</span>
+              <span class="pillar-chip">macOS launchd SSOT (57 Daemons)</span>
             </div>
           </div>
         </article>
 
-      </div>
-    </section>
-
-    <!-- SECTION: TECHNICAL SKILLS & LANGUAGES MATRIX -->
-    <section aria-labelledby="skills-heading">
-      <div class="section-header-wrap">
-        <h2 id="skills-heading">Technical Stack & Language Inventory</h2>
-      </div>
-
-      <div class="skills-block">
-        <div class="skills-group">
-          <div class="skills-label">Systems & Core Backend Languages</div>
-          <div class="chips-wrap">
-            <span class="chip chip-highlight">Rust (Tauri v2)</span>
-            <span class="chip chip-highlight">Go / Golang</span>
-            <span class="chip chip-highlight">Python (AsyncIO / FastAPI / PyTorch)</span>
-            <span class="chip chip-highlight">C++ (11/14/17 / Firmware)</span>
-            <span class="chip">PHP (Modern 8.x / Laravel)</span>
-            <span class="chip">SQL (PostgreSQL / pgvector / MySQL / SQLite)</span>
-            <span class="chip">Shell (Zsh / Bash)</span>
-          </div>
-        </div>
-
-        <div class="skills-group">
-          <div class="skills-label">Mobile & Native Platform Bridges</div>
-          <div class="chips-wrap">
-            <span class="chip chip-highlight">Swift (iOS native / CoreBluetooth / CMMotion / CoreAudio)</span>
-            <span class="chip chip-highlight">Kotlin (Android native / Foreground Services / GATT)</span>
-            <span class="chip">Java (Android SDK / JNI / Smali)</span>
-            <span class="chip chip-highlight">Dart & Flutter 3.x (Shorebird 2.0 OTA Code Push)</span>
-            <span class="chip">On-Device DSP (Goertzel 10-50Hz)</span>
-            <span class="chip">Embedded Edge ML (onnxruntime)</span>
-          </div>
-        </div>
-
-        <div class="skills-group">
-          <div class="skills-label">Frontier AI Models & Agentic Architecture (FDE)</div>
-          <div class="chips-wrap">
-            <span class="chip chip-highlight">Model Context Protocol (MCP)</span>
-            <span class="chip chip-highlight">OpenAI (o1 / o3-mini / GPT-4o)</span>
-            <span class="chip chip-highlight">Anthropic (Claude 3.7 Sonnet / Opus)</span>
-            <span class="chip chip-highlight">Google DeepMind (Gemini 2.0 / 1.5 Pro)</span>
-            <span class="chip chip-highlight">DeepSeek (R1 / V3)</span>
-            <span class="chip">Meta Llama 3.3</span>
-            <span class="chip">Portkey AI Gateway</span>
-            <span class="chip">Hybrid RAG (pgvector 384-dim + BM25)</span>
-            <span class="chip">SWE-bench Evaluation</span>
-            <span class="chip">RLHF Pairwise Preference</span>
-          </div>
-        </div>
-
-        <div class="skills-group">
-          <div class="skills-label">Security, Microcontrollers & Distributed Infrastructure</div>
-          <div class="chips-wrap">
-            <span class="chip">ESP8266 (lwIP NAPT / 802.11)</span>
-            <span class="chip">ESP32-C3 SuperMini (RISC-V)</span>
-            <span class="chip">RP2040 Raspberry Pi Pico (USB HID Spoofing)</span>
-            <span class="chip">LoRa SX1278 (433MHz)</span>
-            <span class="chip">Apple Find My (OpenHaystack BLE)</span>
-            <span class="chip">JADX / Frida Hooks / Ghidra</span>
-            <span class="chip">Bare-Metal Linux Worker Cluster</span>
-            <span class="chip">Docker & Compose</span>
-            <span class="chip">Celery / Redis / Flower</span>
-            <span class="chip">Suricata IDS/IPS</span>
-            <span class="chip">go2rtc WebRTC Gateway</span>
-            <span class="chip">Cloudflare Zero-Trust Tunnels</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -845,7 +828,7 @@
       </div>
       <div class="lab-grid">
         <article class="lab-card bg-circuit">
-          <h3>⚡ Workstation & Local Inference</h3>
+          <h3>Workstation & Local Inference</h3>
           <dl>
             <dt>Workstation</dt>
             <dd>Apple Silicon MacBook Pro (macOS Sequoia) with calibrated multi-display matrix.</dd>
@@ -855,7 +838,7 @@
         </article>
 
         <article class="lab-card bg-server">
-          <h3>🏢 Bare-Metal Distributed Worker Cluster</h3>
+          <h3>Bare-Metal Distributed Worker Cluster</h3>
           <dl>
             <dt>Cluster Architecture</dt>
             <dd>Bare-metal high-availability Linux node hosting 30+ production containers.</dd>
@@ -865,7 +848,7 @@
         </article>
 
         <article class="lab-card bg-radio">
-          <h3>📟 Microcontrollers & Embedded IoT Lab</h3>
+          <h3>Microcontrollers & Embedded IoT Lab</h3>
           <dl>
             <dt>Microcontroller SoCs</dt>
             <dd>ESP32-C3 SuperMini (RISC-V), ESP8266 NodeMCU/D1 Mini, RP2040 Raspberry Pi Pico.</dd>
@@ -875,7 +858,7 @@
         </article>
 
         <article class="lab-card bg-audio">
-          <h3>🎙️ Studio Audio & Edge Ingress</h3>
+          <h3>Studio Audio & Edge Ingress</h3>
           <dl>
             <dt>Studio Telemetry</dt>
             <dd>GK74 Pro studio microphone with native CoreAudio HAL zero-polling hardware lock.</dd>
