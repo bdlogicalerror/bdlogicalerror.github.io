@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahmudul Hasan — Forward Deployed AI Engineer & Senior Systems Architect</title>
+  <meta name="description" content="Technical portfolio of Mahmudul Hasan: Forward Deployed AI Engineering (FDE), Frontier LLM Evaluation (MCP/RLHF), Binary Reverse Engineering, Embedded IoT (ESP8266/ESP32/RP2040), and Bare-Metal Worker Clusters.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: #0d121f;
+      --card-border: #1a2235;
+      --card-hover-border: #06b6d4;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #14b8a6;
+      --accent-glow: rgba(20, 184, 166, 0.15);
+      --cyan: #06b6d4;
+      --amber: #f59e0b;
+      --purple: #a855f7;
+      --blue: #3b82f6;
+      --emerald: #10b981;
+      --code-bg: #03060d;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 0 20px 90px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    header {
+      padding: 55px 0 35px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .header-content {
+      display: flex;
+      gap: 34px;
+      align-items: flex-start;
+    }
+    .profile-img-wrap {
+      flex-shrink: 0;
+      position: relative;
+    }
+    .profile-img {
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 20%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 30px rgba(20, 184, 166, 0.35);
+      background-color: var(--card-bg);
+    }
+    .header-text {
+      flex: 1;
+    }
+    .badge-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 9999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+    h1 {
+      font-size: 2.7rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+    .headline {
+      font-size: 1.2rem;
+      color: var(--cyan);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .bio {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+    }
+    .contact-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 7px 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .contact-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .btn-primary {
+      background: var(--accent) !important;
+      color: #042f2e !important;
+      font-weight: 700;
+      border: 1px solid var(--accent) !important;
+      box-shadow: 0 0 16px rgba(20, 184, 166, 0.25);
+    }
+    .btn-primary:hover {
+      opacity: 0.95;
+      color: #042f2e !important;
+    }
+
+    /* SECTION HEADERS */
+    section {
+      margin-top: 50px;
+    }
+    .section-header-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
+    }
+    h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    /* SKILLS CHIPS & MATRIX */
+    .skills-block {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    .skills-group {
+      margin-bottom: 16px;
+    }
+    .skills-group:last-child {
+      margin-bottom: 0;
+    }
+    .skills-label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .chip {
+      background: var(--code-bg);
+      border: 1px solid #1e293b;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: #e2e8f0;
+      transition: border-color 0.2s;
+    }
+    .chip:hover {
+      border-color: var(--accent);
+    }
+    .chip-highlight {
+      background: rgba(20, 184, 166, 0.1);
+      border-color: rgba(20, 184, 166, 0.4);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* PILLAR ROWS (SINGLE CARD IN A ROW WITH ANIMATION) */
+    .pillar-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .pillar-row-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: pillarFadeSlide 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: calc(var(--delay) * 0.08s);
+      border-left: 4px solid var(--pillar-color, var(--cyan));
+    }
+    @keyframes pillarFadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .pillar-row-card::after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: radial-gradient(circle at 8% 50%, var(--pillar-glow, rgba(6, 182, 212, 0.08)), transparent 65%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .pillar-row-card:hover {
+      transform: translateX(8px);
+      border-color: var(--pillar-color, var(--cyan));
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 22px var(--pillar-glow, rgba(6, 182, 212, 0.2));
+    }
+    .pillar-row-card:hover::after {
+      opacity: 1;
+    }
+    .pillar-badge-box {
+      flex-shrink: 0;
+      width: 58px;
+      height: 58px;
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .pillar-row-card:hover .pillar-badge-box {
+      border-color: var(--pillar-color, var(--cyan));
+      box-shadow: 0 0 16px var(--pillar-glow, rgba(6, 182, 212, 0.3));
+      transform: scale(1.06);
+    }
+    .pillar-num {
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--pillar-color, var(--cyan));
+      letter-spacing: 0.5px;
+    }
+    .pillar-icon {
+      font-size: 1.45rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .pillar-body {
+      flex: 1;
+    }
+    .pillar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pillar-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      transition: color 0.2s;
+    }
+    .pillar-row-card:hover .pillar-title {
+      color: var(--pillar-color, var(--cyan));
+    }
+    .pillar-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+    }
+    .pillar-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .pillar-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .pillar-chip {
+      background: var(--code-bg);
+      border: 1px solid #1a2335;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #cbd5e1;
+      transition: all 0.2s ease;
+    }
+    .pillar-row-card:hover .pillar-chip {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    @media (max-width: 680px) {
+      .pillar-row-card {
+        flex-direction: column;
+        gap: 14px;
+      }
+      .pillar-row-card:hover {
+        transform: translateY(-4px);
+      }
+    }
+
+    /* SEMANTIC LAB & HARDWARE WORKSTATION */
+    .lab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .lab-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .lab-card::before {
+      content: "";
+      position: absolute;
+      top: 0; right: 0;
+      width: 120px; height: 120px;
+      background-repeat: no-repeat;
+      background-position: top right;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .bg-circuit::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%2306b6d4' stroke-width='2' fill='none'%3E%3Cpath d='M10 10 h30 v30 h40 M40 10 v40 h30 M70 50 v40 M20 70 h30'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%2306b6d4'/%3E%3Ccircle cx='80' cy='40' r='3' fill='%2306b6d4'/%3E%3Ccircle cx='70' cy='90' r='3' fill='%2306b6d4'/%3E%3C/svg%3E");
+    }
+    .bg-server::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%2310b981' stroke-width='2' fill='none'%3E%3Crect x='15' y='10' width='70' height='22' rx='3'/%3E%3Crect x='15' y='38' width='70' height='22' rx='3'/%3E%3Crect x='15' y='66' width='70' height='22' rx='3'/%3E%3Ccircle cx='25' cy='21' r='2' fill='%2310b981'/%3E%3Ccircle cx='25' cy='49' r='2' fill='%2310b981'/%3E%3Ccircle cx='25' cy='77' r='2' fill='%2310b981'/%3E%3C/svg%3E");
+    }
+    .bg-radio::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%23a855f7' stroke-width='2' fill='none'%3E%3Cpath d='M50 85 v-40 M35 30 a20 20 0 0 1 30 0 M25 20 a35 35 0 0 1 50 0 M15 10 a50 50 0 0 1 70 0'/%3E%3Ccircle cx='50' cy='45' r='4' fill='%23a855f7'/%3E%3C/svg%3E");
+    }
+    .bg-audio::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%23f59e0b' stroke-width='2' fill='none'%3E%3Crect x='35' y='10' width='30' height='50' rx='15'/%3E%3Cpath d='M25 40 a25 25 0 0 0 50 0 M50 65 v20 M35 85 h30'/%3E%3C/svg%3E");
+    }
+    .lab-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lab-card dl {
+      margin: 0;
+    }
+    .lab-card dt {
+      font-size: 0.76rem;
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .lab-card dd {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-left: 0;
+    }
+
+    /* FILTER TABS */
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 7px 15px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      color: var(--text-main);
+      border-color: #3b82f6;
+    }
+    .filter-btn.active {
+      background: rgba(20, 184, 166, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* PROJECT CARDS WITH SVG BACKDROPS */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+      transform: translateY(-2px);
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0;
+      width: 140px; height: 140px;
+      background-repeat: no-repeat;
+      background-position: top right;
+      opacity: 0.05;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .card:hover::after {
+      opacity: 0.09;
+    }
+    .card-svg-ai::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%2306b6d4' stroke-width='1.5' fill='none'%3E%3Ccircle cx='50' cy='20' r='8'/%3E%3Ccircle cx='20' cy='60' r='8'/%3E%3Ccircle cx='80' cy='60' r='8'/%3E%3Ccircle cx='50' cy='85' r='8'/%3E%3Cpath d='M50 28 L20 52 M50 28 L80 52 M20 68 L50 77 M80 68 L50 77 M28 60 L72 60'/%3E%3C/svg%3E");
+    }
+    .card-svg-sec::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%23f59e0b' stroke-width='2' fill='none'%3E%3Cpath d='M50 10 L85 25 v30 c0 25 -35 35 -35 35 s-35 -10 -35 -35 v-30 Z'/%3E%3Cpath d='M40 50 l8 8 l16 -16'/%3E%3C/svg%3E");
+    }
+    .card-svg-hw::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%23a855f7' stroke-width='2' fill='none'%3E%3Crect x='25' y='25' width='50' height='50' rx='5'/%3E%3Crect x='37' y='37' width='26' height='26'/%3E%3Cpath d='M10 35 h15 M10 50 h15 M10 65 h15 M75 35 h15 M75 50 h15 M75 65 h15 M35 10 v15 M50 10 v15 M65 10 v15 M35 75 v15 M50 75 v15 M65 75 v15'/%3E%3C/svg%3E");
+    }
+    .card-svg-mob::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%233b82f6' stroke-width='2' fill='none'%3E%3Crect x='25' y='10' width='50' height='80' rx='8'/%3E%3Cline x1='40' y1='18' x2='60' y2='18'/%3E%3Ccircle cx='50' cy='80' r='3'/%3E%3C/svg%3E");
+    }
+    .card-svg-devops::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke='%23ec4899' stroke-width='2' fill='none'%3E%3Cpath d='M20 45 c0 -15 15 -25 30 -25 c15 0 25 8 28 20 c12 2 17 12 17 22 c0 12 -10 20 -22 20 h-50 c-12 0 -23 -10 -23 -22 c0 -10 7 -19 20 -15 Z'/%3E%3C/svg%3E");
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .tag-ai { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.4); }
+    .tag-sec { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .tag-hw { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+    .tag-mob { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .tag-devops { background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.4); }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+      line-height: 1.55;
+    }
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: #cbd5e1;
+    }
+    .tech-item {
+      background: var(--code-bg);
+      border: 1px solid #1e293b;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    footer {
+      margin-top: 80px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 25px;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 680px) {
+      .header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .badge-bar, .contact-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <div class="profile-img-wrap">
+          <img src="profile.jpg" alt="Mahmudul Hasan" class="profile-img">
+        </div>
+        <div class="header-text">
+          <div class="badge-bar">
+            <span class="status-badge"><span class="status-dot"></span> Available for Contracts (40+ hrs/wk)</span>
+            <span class="status-badge" style="border-color: #06b6d4; color: #22d3ee; background: rgba(6, 182, 212, 0.1);">⚡ Forward Deployed AI Engineer</span>
+            <span class="status-badge" style="border-color: #f59e0b; color: #fbbf24; background: rgba(245, 158, 11, 0.1);">🛡️ Vulnerability Researcher</span>
+          </div>
+
+          <h1>Mahmudul Hasan</h1>
+          <div class="headline">Forward Deployed AI Engineer & Senior Systems Architect</div>
+          <p class="bio">
+            10+ years of engineering across frontier AI model evaluation (OpenAI, Anthropic, Gemini, DeepSeek), binary & Android reverse engineering, embedded IoT microcontrollers (ESP8266/ESP32, RP2040), mobile architectures (Swift, Kotlin, Flutter/Shorebird), and bare-metal distributed Linux infrastructure. Bridging legacy hardware to agentic AI workflows with 100% first-pass evaluation compliance.
+          </p>
+
+          <div class="contact-links">
+            <a href="resume.pdf" class="btn-primary" target="_blank">📄 Download Resume (PDF)</a>
+            <a href="mailto:mahmudul8296@gmail.com">✉️ mahmudul8296@gmail.com</a>
+            <a href="https://github.com/bdlogicalerror" target="_blank" rel="noopener">💻 @bdlogicalerror</a>
+            <a href="https://linkedin.com/in/bdlogicalerror" target="_blank" rel="noopener">🔗 /in/bdlogicalerror</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION: CORE SPECIALIZATION PILLARS (SINGLE CARD IN A ROW WITH ANIMATION) -->
+    <section aria-labelledby="specialties-heading">
+      <div class="section-header-wrap">
+        <h2 id="specialties-heading">Core Specialization Pillars</h2>
+      </div>
+      <div class="pillar-rows">
+
+        <!-- 01: Frontier AI & MCP -->
+        <article class="pillar-row-card" style="--delay: 1; --pillar-color: #06b6d4; --pillar-glow: rgba(6,182,212,0.25);">
+          <div class="pillar-badge-box">
+            <span class="pillar-num">01</span>
+            <span class="pillar-icon">🤖</span>
+          </div>
+          <div class="pillar-body">
+            <div class="pillar-header">
+              <h3 class="pillar-title">Frontier AI Model Evaluation & Model Context Protocol (MCP)</h3>
+              <span class="pillar-tag" style="color: #22d3ee; border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.1);">Frontier AI & RLHF</span>
+            </div>
+            <p class="pillar-desc">
+              Comprehensive evaluation of frontier reasoning models (<strong style="color: #fff;">GPT-4o, o1, o3-mini, Claude 3.7 Sonnet, Gemini 2.0 Pro, DeepSeek R1/V3</strong>) with <strong style="color: #22d3ee;">Model Context Protocol (MCP)</strong> production servers, complex SWE-bench multi-file code auditing, and pairwise RLHF preference verification sustaining &gt;85% What/Where/Why cognitive action density under strict anti-silence standards.
+            </p>
+            <div class="pillar-chips">
+              <span class="pillar-chip">Model Context Protocol (MCP)</span>
+              <span class="pillar-chip">OpenAI (o1 / o3-mini)</span>
+              <span class="pillar-chip">Claude 3.7 Sonnet</span>
+              <span class="pillar-chip">Gemini 2.0 Pro</span>
+              <span class="pillar-chip">DeepSeek R1</span>
+              <span class="pillar-chip">SWE-bench</span>
+              <span class="pillar-chip">RLHF Density &gt;85%</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02: Forward Deployed Engineering (FDE) -->
+        <article class="pillar-row-card" style="--delay: 2; --pillar-color: #14b8a6; --pillar-glow: rgba(20,184,166,0.25);">
+          <div class="pillar-badge-box">
+            <span class="pillar-num">02</span>
+            <span class="pillar-icon">⚡</span>
+          </div>
+          <div class="pillar-body">
+            <div class="pillar-header">
+              <h3 class="pillar-title">Forward Deployed Engineering (FDE) & Enterprise AI Integration</h3>
+              <span class="pillar-tag" style="color: #2dd4bf; border-color: rgba(20,184,166,0.3); background: rgba(20,184,166,0.1);">Enterprise FDE</span>
+            </div>
+            <p class="pillar-desc">
+              Turnkey Forward Deployed AI architectures bridging legacy customer hardware (<strong style="color: #fff;">CCTV/DVR/NVR systems, raw RTSP/ONVIF streams, embedded sensors</strong>) into live agentic AI workflows. Engineered <strong style="color: #2dd4bf;">DVRify</strong> (real-time video ingestion via go2rtc WebRTC + pgvector spatial search) and enterprise hybrid RAG pipelines with automated API-UI contract verification.
+            </p>
+            <div class="pillar-chips">
+              <span class="pillar-chip">DVRify Video AI</span>
+              <span class="pillar-chip">go2rtc WebRTC Gateway</span>
+              <span class="pillar-chip">Portkey AI Gateway</span>
+              <span class="pillar-chip">Hybrid RAG (pgvector)</span>
+              <span class="pillar-chip">RTSP / ONVIF Ingestion</span>
+              <span class="pillar-chip">Enterprise FDE</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03: Vulnerability Research & Red-Teaming -->
+        <article class="pillar-row-card" style="--delay: 3; --pillar-color: #f59e0b; --pillar-glow: rgba(245,158,11,0.25);">
+          <div class="pillar-badge-box">
+            <span class="pillar-num">03</span>
+            <span class="pillar-icon">🛡️</span>
+          </div>
+          <div class="pillar-body">
+            <div class="pillar-header">
+              <h3 class="pillar-title">Vulnerability Research, Reverse Engineering & Adversarial AI Red-Teaming</h3>
+              <span class="pillar-tag" style="color: #fbbf24; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.1);">Security & Reversing</span>
+            </div>
+            <p class="pillar-desc">
+              Deep binary, Android bytecode, and network protocol reverse engineering. Decompiled complex obfuscated applications (<strong style="color: #fff;">JADX, Baksmali, Ghidra</strong>), intercepted live session tokens via <strong style="color: #fbbf24;">Frida runtime hooks</strong>, decomposed legacy Triple-DES (<code style="color: #fbbf24;">DESede</code>) ciphers, executed raw 802.11 Layer-2 frame injection, and orchestrated adversarial LLM red-teaming (TAP/FlipAttack).
+            </p>
+            <div class="pillar-chips">
+              <span class="pillar-chip">Android Smali / JADX</span>
+              <span class="pillar-chip">Frida Dynamic Hooks</span>
+              <span class="pillar-chip">Ghidra / IDA Native Reversing</span>
+              <span class="pillar-chip">Triple-DES Cryptanalysis</span>
+              <span class="pillar-chip">802.11 Frame Injection</span>
+              <span class="pillar-chip">AI Red-Teaming (TAP)</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04: Embedded Systems & IoT -->
+        <article class="pillar-row-card" style="--delay: 4; --pillar-color: #a855f7; --pillar-glow: rgba(168,85,247,0.25);">
+          <div class="pillar-badge-box">
+            <span class="pillar-num">04</span>
+            <span class="pillar-icon">📟</span>
+          </div>
+          <div class="pillar-body">
+            <div class="pillar-header">
+              <h3 class="pillar-title">Embedded Systems, Microcontrollers & IoT (ESP8266, ESP32-C3, RP2040 Pico, LoRa, BLE)</h3>
+              <span class="pillar-tag" style="color: #c084fc; border-color: rgba(168,85,247,0.3); background: rgba(168,85,247,0.1);">Hardware & RF</span>
+            </div>
+            <p class="pillar-desc">
+              Low-level firmware engineering across Espressif and Raspberry Pi SoCs. Built the <strong style="color: #c084fc;">RP2040 Pico USB HID Hardware Stealth Relay</strong> (synthesizing physical electrical USB bus signals with dual-Gaussian typing physics to bypass kernel event taps), <strong style="color: #c084fc;">BikeGuard</strong> (LoRa SX1278 433MHz 2-10km long-range RF + Apple Find My BLE), and custom ESP8266 lwIP NAPT network bridges.
+            </p>
+            <div class="pillar-chips">
+              <span class="pillar-chip">RP2040 Raspberry Pi Pico</span>
+              <span class="pillar-chip">ESP32-C3 SuperMini (RISC-V)</span>
+              <span class="pillar-chip">ESP8266 lwIP NAPT</span>
+              <span class="pillar-chip">LoRa SX1278 (433MHz)</span>
+              <span class="pillar-chip">Apple Find My BLE</span>
+              <span class="pillar-chip">MPU6050 EXT0 Wake</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05: Systems Programming & Polyglot Architecture -->
+        <article class="pillar-row-card" style="--delay: 5; --pillar-color: #3b82f6; --pillar-glow: rgba(59,130,246,0.25);">
+          <div class="pillar-badge-box">
+            <span class="pillar-num">05</span>
+            <span class="pillar-icon">⚙️</span>
+          </div>
+          <div class="pillar-body">
+            <div class="pillar-header">
+              <h3 class="pillar-title">Systems Programming & High-Level Languages (Rust, Go, Python, C++, Swift, Kotlin, Java, TypeScript)</h3>
+              <span class="pillar-tag" style="color: #60a5fa; border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.1);">Polyglot Systems</span>
+            </div>
+            <p class="pillar-desc">
+              Multi-paradigm production engineering spanning systems and native platforms: <strong style="color: #60a5fa;">Rust</strong> (memory-safe systems, Tauri v2), <strong style="color: #60a5fa;">Go</strong> (high-concurrency networking, microservices), <strong style="color: #60a5fa;">Python</strong> (AsyncIO, FastAPI, Scikit-learn), <strong style="color: #60a5fa;">C++</strong> (11/14/17 embedded firmware), <strong style="color: #60a5fa;">Swift</strong> (iOS native CoreBluetooth/CMMotion/CoreAudio), <strong style="color: #60a5fa;">Kotlin & Java</strong> (Android persistent services/GATT/JNI), and <strong style="color: #60a5fa;">TypeScript</strong> (React 19/Next.js 15).
+            </p>
+            <div class="pillar-chips">
+              <span class="pillar-chip">Rust</span>
+              <span class="pillar-chip">Go / Golang</span>
+              <span class="pillar-chip">Python AsyncIO</span>
+              <span class="pillar-chip">C++ (11/14/17)</span>
+              <span class="pillar-chip">Swift (iOS)</span>
+              <span class="pillar-chip">Kotlin & Java (Android)</span>
+              <span class="pillar-chip">Flutter & Dart 3.11</span>
+              <span class="pillar-chip">TypeScript / React 19</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 06: Distributed Bare-Metal Worker Clusters -->
+        <article class="pillar-row-card" style="--delay: 6; --pillar-color: #ec4899; --pillar-glow: rgba(236,72,153,0.25);">
+          <div class="pillar-badge-box">
+            <span class="pillar-num">06</span>
+            <span class="pillar-icon">🏢</span>
+          </div>
+          <div class="pillar-body">
+            <div class="pillar-header">
+              <h3 class="pillar-title">Distributed Cloud Infrastructure & Bare-Metal Worker Clusters (Docker, Celery, Suricata, go2rtc, pgvector)</h3>
+              <span class="pillar-tag" style="color: #f472b6; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.1);">Bare-Metal & Ingress</span>
+            </div>
+            <p class="pillar-desc">
+              Production bare-metal Linux infrastructure supervising <strong style="color: #fff;">30+ containerized microservices</strong>: distributed Celery background worker queues, Redis, Flower monitoring, <strong style="color: #f472b6;">Suricata Network Intrusion Detection (IDS/IPS)</strong>, ntopng traffic analysis, go2rtc streaming gateway, and Cloudflare Zero-Trust edge ingress tunnels without open firewall ports.
+            </p>
+            <div class="pillar-chips">
+              <span class="pillar-chip">Bare-Metal Linux Node</span>
+              <span class="pillar-chip">Docker Compose</span>
+              <span class="pillar-chip">Celery Worker Queues</span>
+              <span class="pillar-chip">Suricata Network IDS/IPS</span>
+              <span class="pillar-chip">Cloudflare Zero-Trust</span>
+              <span class="pillar-chip">macOS launchd SSOT (57 daemons)</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION: TECHNICAL SKILLS & LANGUAGES MATRIX -->
+    <section aria-labelledby="skills-heading">
+      <div class="section-header-wrap">
+        <h2 id="skills-heading">Technical Stack & Language Inventory</h2>
+      </div>
+
+      <div class="skills-block">
+        <div class="skills-group">
+          <div class="skills-label">Systems & Core Backend Languages</div>
+          <div class="chips-wrap">
+            <span class="chip chip-highlight">Rust (Tauri v2)</span>
+            <span class="chip chip-highlight">Go / Golang</span>
+            <span class="chip chip-highlight">Python (AsyncIO / FastAPI / PyTorch)</span>
+            <span class="chip chip-highlight">C++ (11/14/17 / Firmware)</span>
+            <span class="chip">PHP (Modern 8.x / Laravel)</span>
+            <span class="chip">SQL (PostgreSQL / pgvector / MySQL / SQLite)</span>
+            <span class="chip">Shell (Zsh / Bash)</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-label">Mobile & Native Platform Bridges</div>
+          <div class="chips-wrap">
+            <span class="chip chip-highlight">Swift (iOS native / CoreBluetooth / CMMotion / CoreAudio)</span>
+            <span class="chip chip-highlight">Kotlin (Android native / Foreground Services / GATT)</span>
+            <span class="chip">Java (Android SDK / JNI / Smali)</span>
+            <span class="chip chip-highlight">Dart & Flutter 3.x (Shorebird 2.0 OTA Code Push)</span>
+            <span class="chip">On-Device DSP (Goertzel 10-50Hz)</span>
+            <span class="chip">Embedded Edge ML (onnxruntime)</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-label">Frontier AI Models & Agentic Architecture (FDE)</div>
+          <div class="chips-wrap">
+            <span class="chip chip-highlight">Model Context Protocol (MCP)</span>
+            <span class="chip chip-highlight">OpenAI (o1 / o3-mini / GPT-4o)</span>
+            <span class="chip chip-highlight">Anthropic (Claude 3.7 Sonnet / Opus)</span>
+            <span class="chip chip-highlight">Google DeepMind (Gemini 2.0 / 1.5 Pro)</span>
+            <span class="chip chip-highlight">DeepSeek (R1 / V3)</span>
+            <span class="chip">Meta Llama 3.3</span>
+            <span class="chip">Portkey AI Gateway</span>
+            <span class="chip">Hybrid RAG (pgvector 384-dim + BM25)</span>
+            <span class="chip">SWE-bench Evaluation</span>
+            <span class="chip">RLHF Pairwise Preference</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-label">Security, Microcontrollers & Distributed Infrastructure</div>
+          <div class="chips-wrap">
+            <span class="chip">ESP8266 (lwIP NAPT / 802.11)</span>
+            <span class="chip">ESP32-C3 SuperMini (RISC-V)</span>
+            <span class="chip">RP2040 Raspberry Pi Pico (USB HID Spoofing)</span>
+            <span class="chip">LoRa SX1278 (433MHz)</span>
+            <span class="chip">Apple Find My (OpenHaystack BLE)</span>
+            <span class="chip">JADX / Frida Hooks / Ghidra</span>
+            <span class="chip">Bare-Metal Linux Worker Cluster</span>
+            <span class="chip">Docker & Compose</span>
+            <span class="chip">Celery / Redis / Flower</span>
+            <span class="chip">Suricata IDS/IPS</span>
+            <span class="chip">go2rtc WebRTC Gateway</span>
+            <span class="chip">Cloudflare Zero-Trust Tunnels</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: SEMANTIC HARDWARE & LAB WORKSTATION -->
+    <section class="lab-section" aria-labelledby="lab-heading">
+      <div class="section-header-wrap">
+        <h2 id="lab-heading">Verified Production Lab & Compute Infrastructure</h2>
+      </div>
+      <div class="lab-grid">
+        <article class="lab-card bg-circuit">
+          <h3>⚡ Workstation & Local Inference</h3>
+          <dl>
+            <dt>Workstation</dt>
+            <dd>Apple Silicon MacBook Pro (macOS Sequoia) with calibrated multi-display matrix.</dd>
+            <dt>Local AI Inference</dt>
+            <dd>vLLM, Ollama, DeepSeek R1/V3, and Qwen 2.5 local execution environments.</dd>
+          </dl>
+        </article>
+
+        <article class="lab-card bg-server">
+          <h3>🏢 Bare-Metal Distributed Worker Cluster</h3>
+          <dl>
+            <dt>Cluster Architecture</dt>
+            <dd>Bare-metal high-availability Linux node hosting 30+ production containers.</dd>
+            <dt>Worker & Media Services</dt>
+            <dd>Celery task queues, Redis, Suricata Network IDS/IPS, go2rtc WebRTC gateway, and Portkey AI gateway.</dd>
+          </dl>
+        </article>
+
+        <article class="lab-card bg-radio">
+          <h3>📟 Microcontrollers & Embedded IoT Lab</h3>
+          <dl>
+            <dt>Microcontroller SoCs</dt>
+            <dd>ESP32-C3 SuperMini (RISC-V), ESP8266 NodeMCU/D1 Mini, RP2040 Raspberry Pi Pico.</dd>
+            <dt>RF & Sensor Mesh</dt>
+            <dd>Semtech SX1278 LoRa 433MHz, MPU6050 6-DOF, Apple Find My BLE, and GPS NEO-6M.</dd>
+          </dl>
+        </article>
+
+        <article class="lab-card bg-audio">
+          <h3>🎙️ Studio Audio & Edge Ingress</h3>
+          <dl>
+            <dt>Studio Telemetry</dt>
+            <dd>GK74 Pro studio microphone with native CoreAudio HAL zero-polling hardware lock.</dd>
+            <dt>Zero-Trust Edge</dt>
+            <dd>Cloudflare Zero-Trust tunnels routing production apex domains without open ports.</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION: ALL 12 PROJECTS WITH INTERACTIVE FILTER -->
+    <section aria-labelledby="projects-heading">
+      <div class="section-header-wrap">
+        <h2 id="projects-heading">Production Systems & Engineering Deliverables</h2>
+      </div>
+
+      <!-- FILTER TABS -->
+      <nav class="filter-tabs" aria-label="Project Categories">
+        <button class="filter-btn active" onclick="filterProjects('all', this)">All Projects (12)</button>
+        <button class="filter-btn" onclick="filterProjects('ai', this)">Forward Deployed AI & FDE</button>
+        <button class="filter-btn" onclick="filterProjects('security', this)">Security & Reversing</button>
+        <button class="filter-btn" onclick="filterProjects('hardware', this)">Hardware & IoT</button>
+        <button class="filter-btn" onclick="filterProjects('mobile', this)">Mobile, Swift/Kotlin & DSP</button>
+        <button class="filter-btn" onclick="filterProjects('devops', this)">Bare-Metal Cluster & DevOps</button>
+      </nav>
+
+      <div class="grid" id="projectGrid">
+
+        <!-- 1. DVRify (FDE + AI + Video) -->
+        <article class="card card-svg-ai" data-category="ai">
+          <header class="card-header">
+            <h3 class="card-title">DVRify — AI Smart Video Surveillance SaaS</h3>
+            <span class="card-tag tag-ai">Forward Deployed AI (FDE)</span>
+          </header>
+          <p class="card-desc">
+            Turnkey Forward Deployed AI pipeline transforming any legacy CCTV/DVR/NVR hardware into an intelligent monitoring SaaS. Ingests RTSP/ONVIF streams via <strong style="color: #38bdf8;">go2rtc WebRTC gateway</strong>, executing live person/face detection, <strong style="color: #38bdf8;">PostgreSQL + pgvector</strong> spatial vector search, and automated real-time alert dispatching.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">Python FastAPI</span>
+            <span class="tech-item">go2rtc WebRTC</span>
+            <span class="tech-item">PostgreSQL / pgvector</span>
+            <span class="tech-item">RTSP / ONVIF</span>
+            <span class="tech-item">Next.js 15</span>
+            <span class="tech-item">Docker Compose</span>
+          </div>
+        </article>
+
+        <!-- 2. VeloTrack (Mobile + DSP) -->
+        <article class="card card-svg-mob" data-category="mobile">
+          <header class="card-header">
+            <h3 class="card-title">VeloTrack — IoT Telemetry & Vehicle Fleet Platform</h3>
+            <span class="card-tag tag-mob">Mobile & DSP</span>
+          </header>
+          <p class="card-desc">
+            Production offline-first vehicle telemetry platform spanning Flutter 3.x, Dart 3.11, Shorebird 2.0 OTA instant code push, and native Swift/Kotlin platform channels. Embedded a real-time <strong style="color: #38bdf8;">10-50Hz Goertzel DSP frequency classifier</strong> to differentiate motorcycle engine combustion from pedestrian movement, passing 121 unit/widget tests.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">Flutter 3.x / Dart</span>
+            <span class="tech-item">Shorebird OTA</span>
+            <span class="tech-item">Swift CoreBluetooth</span>
+            <span class="tech-item">Kotlin GATT</span>
+            <span class="tech-item">Goertzel DSP</span>
+            <span class="tech-item">PostGIS</span>
+          </div>
+        </article>
+
+        <!-- 3. Bare-Metal Cluster (DevOps) -->
+        <article class="card card-svg-devops" data-category="devops">
+          <header class="card-header">
+            <h3 class="card-title">Bare-Metal Distributed Worker Node & Ingress Mesh</h3>
+            <span class="card-tag tag-devops">Bare-Metal Cluster</span>
+          </header>
+          <p class="card-desc">
+            Self-hosted high-availability bare-metal Linux cluster hosting 30+ production containers: Celery distributed worker task queues, Redis, Flower monitoring, <strong style="color: #38bdf8;">Suricata Network IDS/IPS</strong>, Portkey AI Gateway, Model Context Protocol (MCP) servers, and zero-trust Cloudflare edge ingress tunnels.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">Bare-Metal Linux</span>
+            <span class="tech-item">Docker Compose</span>
+            <span class="tech-item">Celery / Redis / Flower</span>
+            <span class="tech-item">Suricata IDS/IPS</span>
+            <span class="tech-item">Portkey AI Gateway</span>
+            <span class="tech-item">Cloudflare Tunnels</span>
+          </div>
+        </article>
+
+        <!-- 4. RP2040 Pico HID (Hardware + Security) -->
+        <article class="card card-svg-hw" data-category="hardware security">
+          <header class="card-header">
+            <h3 class="card-title">RP2040 Pico USB HID Hardware Stealth Relay</h3>
+            <span class="card-tag tag-hw">Hardware & Anti-Detection</span>
+          </header>
+          <p class="card-desc">
+            Microcontroller hardware synthesizer (RP2040 CircuitPython/TinyUSB) spoofing Apple Magic Keyboard descriptors. Generates electrical D+/D- bus signals with dual-Gaussian neuromuscular latency (&mu;=110ms) and cubic B&eacute;zier mouse paths to bypass kernel-level synthetic automation event taps (<code style="color: #6ee7b7;">kCGEventSourceStateHIDSystemState</code>).
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">Raspberry Pi Pico (RP2040)</span>
+            <span class="tech-item">CircuitPython</span>
+            <span class="tech-item">TinyUSB</span>
+            <span class="tech-item">Gaussian Biometrics</span>
+            <span class="tech-item">macOS Kernel Taps</span>
+          </div>
+        </article>
+
+        <!-- 5. BikeGuard (Hardware + IoT) -->
+        <article class="card card-svg-hw" data-category="hardware">
+          <header class="card-header">
+            <h3 class="card-title">BikeGuard — Long-Range IoT Anti-Theft Hardware</h3>
+            <span class="card-tag tag-hw">IoT & RF Protocols</span>
+          </header>
+          <p class="card-desc">
+            Motorcycle anti-theft hardware system (ESP32-C3 SuperMini, SX1278 LoRa 433MHz, MPU6050, GPS NEO-6M). Features 2-10km long-range RF alarms without cellular subscriptions, Apple Find My OpenHaystack BLE beacons, and deep-sleep external interrupt wake drawing only 0.3-0.5mA.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">ESP32-C3 SuperMini</span>
+            <span class="tech-item">LoRa SX1278 (433MHz)</span>
+            <span class="tech-item">Apple Find My BLE</span>
+            <span class="tech-item">MPU6050 EXT0 Wake</span>
+            <span class="tech-item">Flutter Companion</span>
+          </div>
+        </article>
+
+        <!-- 6. apkLab (Security) -->
+        <article class="card card-svg-sec" data-category="security">
+          <header class="card-header">
+            <h3 class="card-title">apkLab & Binary Security Analysis Suite</h3>
+            <span class="card-tag tag-sec">Reverse Engineering</span>
+          </header>
+          <p class="card-desc">
+            8-stage automated Android reverse engineering pipeline (JADX, APKTool, Frida, Ghidra) across 39 specialized agent specifications. Audits native <code style="color: #6ee7b7;">.so</code> boundaries, decomposes legacy Triple-DES (<code style="color: #6ee7b7;">DESede</code>) ciphers, and inspects white-box crypto (KonaWbc).
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">Python 3.12</span>
+            <span class="tech-item">JADX / Baksmali</span>
+            <span class="tech-item">Frida Dynamic Hooks</span>
+            <span class="tech-item">Ghidra</span>
+            <span class="tech-item">Triple-DES Cryptanalysis</span>
+            <span class="tech-item">Smali</span>
+          </div>
+        </article>
+
+        <!-- 7. ESP8266 Pentest (Hardware + Security) -->
+        <article class="card card-svg-sec" data-category="hardware security">
+          <header class="card-header">
+            <h3 class="card-title">ESP8266 802.11 Layer-2 Pentest & lwIP NAPT Bridge</h3>
+            <span class="card-tag tag-sec">802.11 & Firmware</span>
+          </header>
+          <p class="card-desc">
+            Embedded C++ firmware for Espressif SoCs executing raw 802.11 management frame transmission (<code style="color: #6ee7b7;">wifi_send_pkt_freedom</code>, deauth, beacon floods, captive portal) alongside dual-mode lwIP NAPT routing to intercept, patch 88-byte token headers, and stream isolated IoT camera video.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">ESP8266 C++</span>
+            <span class="tech-item">lwIP NAPT</span>
+            <span class="tech-item">Raw 802.11 Injection</span>
+            <span class="tech-item">DNS Hijacking</span>
+            <span class="tech-item">RTP Streaming</span>
+          </div>
+        </article>
+
+        <!-- 8. Android Monitor (Mobile + Security) -->
+        <article class="card card-svg-mob" data-category="mobile security">
+          <header class="card-header">
+            <h3 class="card-title">Android Monitor (amon) Remote Administration</h3>
+            <span class="card-tag tag-mob">Android Internals</span>
+          </header>
+          <p class="card-desc">
+            Agentless Android remote monitoring and telemetry suite operating over ADB shell (USB, TCP/IP, SSH). Dual-engine screen streaming utilizing RFB (VNC) dirty-rectangle updates and MJPEG with automatic zero-CPU idle termination when clients disconnect.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">Python 3.9+</span>
+            <span class="tech-item">ADB Protocol</span>
+            <span class="tech-item">RFB / VNC</span>
+            <span class="tech-item">Synthetic Touch Injection</span>
+            <span class="tech-item">Device Telemetry</span>
+          </div>
+        </article>
+
+        <!-- 9. HackAgent (Security + AI) -->
+        <article class="card card-svg-sec" data-category="security ai">
+          <header class="card-header">
+            <h3 class="card-title">HackAgent AI Red-Teaming Gateway</h3>
+            <span class="card-tag tag-sec">AI Red-Teaming</span>
+          </header>
+          <p class="card-desc">
+            Adversarial evaluation gateway executing Tree of Attacks with Pruning (TAP) and semantic polarity inversion (FlipAttack) across multi-model judge pipelines to test LLM alignment and safety boundaries deterministically against enterprise gateway infrastructure.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">Python 3.12</span>
+            <span class="tech-item">Enterprise AI Gateway</span>
+            <span class="tech-item">Tree of Attacks (TAP)</span>
+            <span class="tech-item">FlipAttack</span>
+            <span class="tech-item">Jailbreak Evaluation</span>
+          </div>
+        </article>
+
+        <!-- 10. Vector Memory (AI + DevOps) -->
+        <article class="card card-svg-ai" data-category="ai devops">
+          <header class="card-header">
+            <h3 class="card-title">Hybrid Vector Memory & Semantic Retrieval Pipeline</h3>
+            <span class="card-tag tag-ai">Vector Search & RAG</span>
+          </header>
+          <p class="card-desc">
+            Sub-10ms hybrid semantic search pipeline in Python and PostgreSQL + <code style="color: #6ee7b7;">pgvector</code>. Ingests unstructured dialogue on 5-minute ticks, generating 384-dimensional dense vectors on CPU via ONNX Runtime (<code style="color: #6ee7b7;">Xenova/gte-small</code>) with a 50% vector + 30% FTS + 20% importance rank.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">PostgreSQL</span>
+            <span class="tech-item">pgvector</span>
+            <span class="tech-item">ONNX Runtime</span>
+            <span class="tech-item">FastAPI</span>
+            <span class="tech-item">Knowledge Graphs</span>
+          </div>
+        </article>
+
+        <!-- 11. Frontier AI Evaluation (AI) -->
+        <article class="card card-svg-ai" data-category="ai">
+          <header class="card-header">
+            <h3 class="card-title">Frontier Model Evaluation & Quantitative STEM Deliverables</h3>
+            <span class="card-tag tag-ai">AI Evaluation & STEM</span>
+          </header>
+          <p class="card-desc">
+            Production evaluation deliverables including Credit Default Risk Scoring (ROC-AUC 0.94), SaaS Churn Hazard Modeling ($2.92M ARR portfolio analysis), Fleet Fuel Telemetry (350 vehicles, 8.26M miles), and Kubernetes Pod Resource Optimization, maintaining >85% What/Where/Why cognitive action density.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">RLHF Pairwise</span>
+            <span class="tech-item">CoT Auditing</span>
+            <span class="tech-item">SWE-bench</span>
+            <span class="tech-item">Python Pandas</span>
+            <span class="tech-item">Scikit-learn</span>
+            <span class="tech-item">Monte Carlo VaR</span>
+          </div>
+        </article>
+
+        <!-- 12. Shikho Mobile (Mobile) -->
+        <article class="card card-svg-mob" data-category="mobile">
+          <header class="card-header">
+            <h3 class="card-title">Shikho Mobile High-Scale EdTech Platform</h3>
+            <span class="card-tag tag-mob">Cross-Platform Mobile</span>
+          </header>
+          <p class="card-desc">
+            High-scale cross-platform mobile application delivering low-latency interactive educational video streaming, student-parent code linking, and high-concurrency offline assessment sync with robust state management.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-item">Flutter</span>
+            <span class="tech-item">Dart</span>
+            <span class="tech-item">Provider</span>
+            <span class="tech-item">Video Streaming</span>
+            <span class="tech-item">Offline Sync</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Mahmudul Hasan &middot; bdlogicalerror.github.io &middot; mahmudul8296@gmail.com</p>
+    </footer>
+  </div>
+
+  <script>
+    function filterProjects(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('#projectGrid .card');
+      cards.forEach(card => {
+        const cats = card.getAttribute('data-category').split(' ');
+        if (category === 'all' || cats.includes(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
