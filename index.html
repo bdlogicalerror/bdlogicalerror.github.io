@@ -41,15 +41,34 @@
       margin: 0 auto;
     }
 
-    /* HEADER */
+    /* HEADER (STICKY ON SCROLL & MINIMAL) */
     header {
-      padding: 55px 0 35px;
+      padding: 50px 0 32px;
       border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.header-scrolled {
+      padding: 10px 18px;
+      background: rgba(7, 9, 14, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(26, 34, 53, 0.9);
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.65);
     }
     .header-content {
       display: flex;
       gap: 34px;
       align-items: flex-start;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.header-scrolled .header-content {
+      align-items: center;
+      gap: 16px;
     }
     .profile-img-wrap {
       flex-shrink: 0;
@@ -64,9 +83,38 @@
       border: 3px solid var(--accent);
       box-shadow: 0 0 30px rgba(20, 184, 166, 0.35);
       background-color: var(--card-bg);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.header-scrolled .profile-img {
+      width: 40px;
+      height: 40px;
+      border-width: 2px;
+      box-shadow: 0 0 12px rgba(20, 184, 166, 0.3);
     }
     .header-text {
       flex: 1;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.header-scrolled .header-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+    }
+    .header-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    header.header-scrolled .header-title-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+    header.header-scrolled .badge-bar,
+    header.header-scrolled .bio {
+      display: none;
     }
     .badge-bar {
       display: flex;
@@ -101,12 +149,27 @@
       line-height: 1.15;
       margin-bottom: 6px;
       color: #ffffff;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.header-scrolled h1 {
+      font-size: 1.15rem;
+      margin-bottom: 0;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .headline {
       font-size: 1.2rem;
       color: var(--cyan);
       font-weight: 600;
       margin-bottom: 12px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.header-scrolled .headline {
+      font-size: 0.76rem;
+      margin-bottom: 0;
+      color: var(--cyan);
+      white-space: nowrap;
+      line-height: 1.2;
     }
     .bio {
       font-size: 0.96rem;
@@ -121,6 +184,18 @@
       gap: 10px;
       font-family: var(--font-mono);
       font-size: 0.82rem;
+    }
+    header.header-scrolled .contact-links {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 4px 8px;
+      font-size: 0.72rem;
+    }
+    header.header-scrolled .contact-links a {
+      padding: 4px 9px;
+      font-size: 0.71rem;
+      justify-content: center;
+      white-space: nowrap;
     }
     .contact-links a {
       color: var(--text-main);
@@ -621,7 +696,7 @@
 <body>
 
   <div class="container">
-    <header>
+    <header id="mainHeader">
       <div class="header-content">
         <div class="profile-img-wrap">
           <img src="profile.jpg" alt="Mahmudul Hasan" class="profile-img">
@@ -633,8 +708,10 @@
             <span class="status-badge" style="border-color: #f59e0b; color: #fbbf24; background: rgba(245, 158, 11, 0.1);">🛡️ Vulnerability Researcher</span>
           </div>
 
-          <h1>Mahmudul Hasan</h1>
-          <div class="headline">Forward Deployed AI Engineer & Senior Systems Architect</div>
+          <div class="header-title-wrap">
+            <h1>Mahmudul Hasan</h1>
+            <div class="headline">Forward Deployed AI Engineer & Senior Systems Architect</div>
+          </div>
           <p class="bio">
             10+ years of engineering across frontier AI model evaluation (OpenAI, Anthropic, Gemini, DeepSeek), binary & Android reverse engineering, embedded IoT microcontrollers (ESP8266/ESP32, RP2040), mobile architectures (Swift, Kotlin, Flutter/Shorebird), and bare-metal distributed Linux infrastructure. Bridging legacy hardware to agentic AI workflows with 100% first-pass evaluation compliance.
           </p>
@@ -1131,6 +1208,18 @@
         }
       });
     }
+
+    // STICKY MINIMAL HEADER LISTENER ON SCROLL
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('mainHeader');
+      if (header) {
+        if (window.scrollY > 70) {
+          header.classList.add('header-scrolled');
+        } else {
+          header.classList.remove('header-scrolled');
+        }
+      }
+    }, { passive: true });
   </script>
 
 </body>
